@@ -25,7 +25,7 @@ submodules:
 	git submodule update
 
 minilibx_build:
-	@$(MAKE) -C $(MINILIBX_DIR)
+	@$(MAKE) -C $(MINILIBX_DIR) CFLAGS="$(FLAGS) -Wno-deprecated-declarations"
 
 libft_build:
 	@$(MAKE) -C $(LIBFT_DIR)
@@ -38,3 +38,7 @@ clean:
 fclean: clean
 	make -C $(LIBFT_DIR) fclean
 	rm -f $(NAME)
+
+re: clean all
+
+.PHONY: all clean fclean re
