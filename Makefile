@@ -12,7 +12,7 @@ LINKS = -I ./libft -L ./libft \
     	-I ./minilibx -L ./minilibx \
     	-l mlx -l ft -framework OpenGL -framework Appkit
 
-all: submodule libft_build minilibx_build $(NAME)
+all: submodules libft_build minilibx_build $(NAME)
 
 %.o: %.c
 	cc -c $(FLAGS) $(LINKS) $< -o $@
@@ -37,5 +37,4 @@ clean:
 	
 fclean: clean
 	make -C $(LIBFT_DIR) fclean
-	make -C $(MINILIBX_DIR) clean
 	rm -f $(NAME)
