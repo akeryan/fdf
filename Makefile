@@ -12,13 +12,17 @@ LINKS = -I ./libft -L ./libft \
     	-I ./minilibx -L ./minilibx \
     	-l mlx -l ft -framework OpenGL -framework Appkit
 
-all: libft_build minilibx_build $(NAME)
+all: submodule libft_build minilibx_build $(NAME)
 
 %.o: %.c
 	cc -c $(FLAGS) $(LINKS) $< -o $@
 
 $(NAME): $(OBJECTS)
 	cc $(SOURCES) $(FLAGS) $(LINKS) -o $(NAME) 
+
+submodules:
+	git submodule init
+	git submodule update
 
 minilibx_build:
 	@$(MAKE) -C $(MINILIBX_DIR)
