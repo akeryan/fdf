@@ -4,6 +4,7 @@ SOURCES = main.c
 LIBFT_DIR = libft
 BUILD_DIR = build
 MINILIBX_DIR = minilibx
+INCLUDE = fdf.h
 
 OBJECTS = $(subst .c,.o,$(SOURCES))
 
@@ -17,7 +18,7 @@ all: submodules libft_build minilibx_build $(NAME)
 %.o: %.c
 	cc -c $(FLAGS) $(LINKS) $< -o $@
 
-$(NAME): $(OBJECTS)
+$(NAME): $(OBJECTS) $(INCLUDE) 
 	cc $(SOURCES) $(FLAGS) $(LINKS) -o $(NAME) 
 
 submodules:
