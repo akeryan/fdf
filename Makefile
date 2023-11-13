@@ -1,25 +1,33 @@
 NAME = fdf 
 
-SOURCES = main.c   
-LIBFT_DIR = libft
-BUILD_DIR = build
-MINILIBX_DIR = minilibx
-INCLUDE = fdf.h
-
-OBJECTS = $(subst .c,.o,$(SOURCES))
-
 FLAGS = #-Wall -Wextra -Werror
 LINKS = -I ./libft -L ./libft \
     	-I ./minilibx -L ./minilibx \
     	-l mlx -l ft -framework OpenGL -framework Appkit
 
+LIBFT_DIR = libft
+BUILD_DIR = build
+SRC_DIR = src
+MINILIBX_DIR = minilibx
+INCLUDE = fdf.h
+
 all: submodules libft_build minilibx_build $(NAME)
 
-%.o: %.c
-	cc -c $(FLAGS) $(LINKS) $< -o $@
+SOURCES = $(wildcard $(SRC_DIR)/*.c)
+OBJECTS = $(patsubst $(SRC_DIR)/%.c, $(BUILD_DIR)/%.o, $(SOURCES))
 
+$(BUILD_DIR)/%.o: | $(BUILD_DIR)
+
+$(BUILD_DIR):
+	mkdir -p $(BUILD_DIR)
+
+#%.o: %.c
+#	cc -c $(FLAGS) $(LINKS) $< -o $@
 $(NAME): $(OBJECTS) $(INCLUDE) 
-	cc $(SOURCES) $(FLAGS) $(LINKS) -o $(NAME) 
+	cc $(FLAGS) $(LINKS) $(OBJECTS) -o $(NAME) 
+
+$(BUILD_DIR)/%.o: $(SRC_DIR)/%.c $(INCLUDE) | $(BUILD_DIR)
+	cc -c $(FLAGS) $(LINKS) -c -o $@ $< 
 
 submodules:
 	git submodule init
@@ -35,11 +43,12 @@ clean:
 	make -C $(LIBFT_DIR) clean
 	make -C $(MINILIBX_DIR) clean
 	rm -f $(OBJECTS)
+	rm -fr $(BUILD_DIR)
 	
 fclean: clean
 	make -C $(LIBFT_DIR) fclean
 	rm -f $(NAME)
 
-re: clean all
+re: fclean all
 
 .PHONY: all clean fclean re
