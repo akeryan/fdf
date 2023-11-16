@@ -6,32 +6,43 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 11:09:50 by akeryan           #+#    #+#             */
-/*   Updated: 2023/11/13 11:19:19 by akeryan          ###   ########.fr       */
+/*   Updated: 2023/11/16 13:59:20 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../fdf.h"
 
-int main(void)
+#include "mlx.h"
+
+int main()
 {
-    void	*mlx_ptr;
-    void	*win_ptr;
+	t_img_data i_d;
+	unsigned int color_value;
+	int color = 0xAB48EF;
 
-	//mlx_start(mlx_ptr, win_ptr);
-    mlx_ptr = mlx_init();
-	if(mlx_ptr == NULL)
+    void *mlx = mlx_init();
+    void *win = mlx_new_window(mlx, WINDOW_WIDTH, WINDOW_HEIGHT, "Tutorial Window - Create Image");
+	void *image = mlx_new_image(mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
+	char *buffer = mlx_get_data_addr(image, &i_d.pixel_bits, &i_d.line_bytes, &i_d.endian);
+	if (i_d.pixel_bits != 32)
+		color = mlx_get_color_value(mlx, color);
+
+	for(int y = 0; y < WINDOW_HEIGHT; ++y)
 	{
-		printf("ptr is NULL\n");
-        exit(MLX_ERROR);
-	}
+		for(int x = 0; x < WINDOW_WIDTH; ++x)
+		{
+			int pixel = (y * i_d.line_bytes) + (x * 4);
 
-    win_ptr = mlx_new_window(mlx_ptr, WINDOW_WIDTH, WINDOW_HEIGHT, "My first window!");
-	if(win_ptr == NULL)
-	{
-		printf("ptr is NULL\n");
-        exit(MLX_ERROR);
+			colorize_pixel(mlx, buffer, pixel, color, i_d);
+		}
 	}
+	mlx_put_image_to_window(mlx, win, image, 0, 0);
+	printf("pixel_bits: %d\n", i_d.pixel_bits);
+	printf("line_bytes: %d\n", i_d.line_bytes);
+	printf("endian: %d\n", i_d.endian);
+	printf("color: %d\n", color);
+    
+    // The following code goes here.
 
-	mlx_loop(mlx_ptr);
-	mlx_end(mlx_ptr, win_ptr);
+    mlx_loop(mlx);
 }
