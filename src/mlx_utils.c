@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 11:09:32 by akeryan           #+#    #+#             */
-/*   Updated: 2023/11/17 16:30:05 by akeryan          ###   ########.fr       */
+/*   Updated: 2023/11/17 19:12:12 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,45 @@ void	mlx_end(void *mlx_ptr, void *win_ptr)
 	free(mlx_ptr);
 }
 
-int **data_casting(int fd)
+// dynamically creates a 2-dimensional array from .fdf file
+int	**map_to_array(int fd)
 {
-	char	*line;
-	int		rows;
-	int		cols;
+	t_2dsize	*dim;
+	int			**out;
+	int			i;
 
+	dim = get_map_dimensions(fd);
+	out = new_2d_array(dim);
+
+}
+
+// dynamically creates a 2d-array of 'dim' dimansions filled with zerroes;
+int **new_2d_array(t_2dsize *dim)
+{
+	int	**out;
+	int	i;
+
+	out = (int **)ft_calloc(dim->columns, sizeof(int *));
+	if (out == NULL)
+	{
+		perror("Memory allocation failed");
+		return (NULL);
+	}
+	i = 0;
+	while (i < dim->columns)
+	{
+		out[i] = (int *)calloc(dim->rows, sizeof(int));
+		if (out[i] == NULL)
+		{
+			perror("Memory allocation failed");
+			while (--i >= 0)
+				free(out[i]);
+			free(out);
+			return (NULL);
+		}
+		i++;
+	}
+	return (out);
 }
 
 t_2dsize	*get_map_dimensions(int fd)

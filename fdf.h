@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 09:31:35 by akeryan           #+#    #+#             */
-/*   Updated: 2023/11/17 16:09:38 by akeryan          ###   ########.fr       */
+/*   Updated: 2023/11/17 19:13:27 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,5 +41,6 @@ void	check_ptr(void *ptr);
 t_2dsize	*get_map_dimensions(int fd);
 void	mlx_end(void *mlx_ptr, void *win_ptr);
 int	num_of_numbers(char *str);
+int **new_2d_array(t_2dsize *dim);
 
 #endif
