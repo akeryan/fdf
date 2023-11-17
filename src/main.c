@@ -6,17 +6,17 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 11:09:50 by akeryan           #+#    #+#             */
-/*   Updated: 2023/11/16 13:59:20 by akeryan          ###   ########.fr       */
+/*   Updated: 2023/11/17 20:36:34 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../fdf.h"
+#include <fcntl.h>
+#include <stdio.h>
 
-#include "mlx.h"
-
-int main()
+int main(int argc, char *argv[])
 {
-	t_img_data i_d;
+	t_idata	i_d;
 	unsigned int color_value;
 	int color = 0xAB48EF;
 
@@ -32,8 +32,9 @@ int main()
 		for(int x = 0; x < WINDOW_WIDTH; ++x)
 		{
 			int pixel = (y * i_d.line_bytes) + (x * 4);
-
-			colorize_pixel(mlx, buffer, pixel, color, i_d);
+			if (i_d.pixel_bits != 32)
+				color = mlx_get_color_value(mlx, color);
+			colorize_pixel(buffer, pixel, color, i_d);
 		}
 	}
 	mlx_put_image_to_window(mlx, win, image, 0, 0);
@@ -42,7 +43,28 @@ int main()
 	printf("endian: %d\n", i_d.endian);
 	printf("color: %d\n", color);
     
-    // The following code goes here.
+	int fd = open(argv[1], O_RDONLY);
+	if(!fd)
+	{
+		printf("fd is null\n");
+		return (1);
+	}
+
+	t_2dsize *dims = get_map_dimensions(fd);
+	printf("COLS: %d\n", dims->columns);
+	printf("ROWS: %d\n", dims->rows);
+	close(fd);
+	fd = open(argv[1], O_RDONLY);
+	int **out = map_to_array(fd);
+	int x = 0;
+	int y = 0;
+	while (x < dims->rows)
+	{
+		while (y < dims->columns)
+			printf("%d ", out[x][y++]);
+		x++;
+		printf("\n");
+	}
 
     mlx_loop(mlx);
 }

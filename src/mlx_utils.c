@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 11:09:32 by akeryan           #+#    #+#             */
-/*   Updated: 2023/11/17 19:12:12 by akeryan          ###   ########.fr       */
+/*   Updated: 2023/11/17 20:52:48 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,49 @@ int	**map_to_array(int fd)
 
 	dim = get_map_dimensions(fd);
 	out = new_2d_array(dim);
+	int x = 0;
+	int y = 0;
+	while (x < dim->rows)
+	{
+		while (y < dim->columns)
+			printf("%d ", out[x][y++]);
+		x++;
+		printf("\n");
+	}
+	map_to_arr(out, fd);
+	return (out);
+}
 
+void	map_to_arr(int **arr, int fd)
+{
+	char	*line;
+	int		row;
+	int		col;
+
+	row = 0;
+	col = 0;
+	while (42)
+	{
+		line = get_next_line(fd);
+		if (line == NULL)
+			break ;
+		while (*line != '\0' && *line != '\n')
+		{
+			while (*line == 32 || (*line >= 9 && *line <= 13))
+				line++;
+			if ((char)*line != '0')
+			{
+				arr[row][col++] = ft_atoi(line);
+				printf("%d ", arr[row][col - 1]);
+			}
+			else
+				col++;
+			while (ft_isdigit(*line++))
+				;
+		}
+		printf("\n");
+		row++;
+	}
 }
 
 // dynamically creates a 2d-array of 'dim' dimansions filled with zerroes;
@@ -54,7 +96,7 @@ int **new_2d_array(t_2dsize *dim)
 	i = 0;
 	while (i < dim->columns)
 	{
-		out[i] = (int *)calloc(dim->rows, sizeof(int));
+		out[i] = (int *)ft_calloc(dim->rows, sizeof(int));
 		if (out[i] == NULL)
 		{
 			perror("Memory allocation failed");
@@ -76,7 +118,7 @@ t_2dsize	*get_map_dimensions(int fd)
 
 	size = (t_2dsize *)malloc(sizeof(t_2dsize));
 	line = get_next_line(fd);
-	size->columns = num_of_numbers(line);
+	size->columns = num_of_columns(line);
 	size->rows = 0;
 	while (42)
 	{
@@ -89,7 +131,7 @@ t_2dsize	*get_map_dimensions(int fd)
 	return (size);
 }
 
-int	num_of_numbers(char *str)
+int	num_of_columns(char *str)
 {
 	int	num;
 
