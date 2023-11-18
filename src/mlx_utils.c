@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 11:09:32 by akeryan           #+#    #+#             */
-/*   Updated: 2023/11/18 13:14:12 by akeryan          ###   ########.fr       */
+/*   Updated: 2023/11/18 13:24:20 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,11 @@ int	**map_to_array(int fd)
 	int			**out;
 	int			i;
 
-	dim = get_map_dimensions(fd);
 	printf("HEERREE 1\n");
+	dim = get_map_dimensions(fd);
+	printf("HEERREE 2\n");
 	out = new_2d_array(dim);
+	printf("ARRAY MAPPING\n");
 	map_to_arr(out, fd);
 	return (out);
 }
@@ -52,6 +54,7 @@ void	map_to_arr(int **arr, int fd)
 	while (42)
 	{
 		line = get_next_line(fd);
+		printf("%s", line);
 		if (line == NULL)
 			break ;
 		row++;
