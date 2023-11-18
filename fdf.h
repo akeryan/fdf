@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 09:31:35 by akeryan           #+#    #+#             */
-/*   Updated: 2023/11/18 13:01:15 by akeryan          ###   ########.fr       */
+/*   Updated: 2023/11/18 15:14:05 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <stdlib.h>
 # include <stdio.h>
 # include <string.h>
+# include <fcntl.h>
 # include "./minilibx/mlx.h" 
 # include "../libft/libft.h"
 
@@ -38,12 +39,12 @@ typedef struct s_2darray_size
 
 void	colorize_pixel(char *buf, int pix, int color, t_idata d);
 void	check_ptr(void *ptr);
-t_2dsize	*get_map_dimensions(int fd);
+t_2dsize	*get_map_dimensions(char *file);
 void	mlx_end(void *mlx_ptr, void *win_ptr);
-int	get_num_of_columns(int fd);
-int get_num_of_rows(char fd);
+int	get_num_of_columns(char *file);
+int get_num_of_rows(char *file);
 int **new_2d_array(t_2dsize *dim);
-int	**map_to_array(int fd);
-void	map_to_arr(int **arr, int fd);
+int	**map_to_array(char *file);
+void	map_to_arr(int **arr, char *file);
 
 #endif

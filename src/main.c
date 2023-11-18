@@ -6,13 +6,11 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 11:09:50 by akeryan           #+#    #+#             */
-/*   Updated: 2023/11/18 13:27:16 by akeryan          ###   ########.fr       */
+/*   Updated: 2023/11/18 15:23:57 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../fdf.h"
-#include <fcntl.h>
-#include <stdio.h>
 
 int main(int argc, char *argv[])
 {
@@ -43,37 +41,22 @@ int main(int argc, char *argv[])
 	//printf("endian: %d\n", i_d.endian);
 	//printf("color: %d\n", color);
     
-	int fd = open(argv[1], O_RDONLY);
-	if(!fd)
-	{
-		printf("fd is null\n");
-		return (1);
-	}
-
-	t_2dsize *dims = get_map_dimensions(fd);
-	close(fd);
+	t_2dsize *dims = get_map_dimensions(argv[1]);
 	printf("COLS: %d\n", dims->columns);
 	printf("ROWS: %d\n", dims->rows);
-	fd = open(argv[1], O_RDONLY);
-	if(!fd)
-	{
-		printf("fd is null\n");
-		return (1);
-	}
-	int **ar = map_to_array(fd);
-	int j = 0;
-	int i = 0;
-	printf("AFTER MAPPING\n");
-	while(i < dims->rows)
-	{
-		j = 0;
-		while (j < dims->columns)
-		{
-			printf("%d ", ar[i][j++]);
-		}
-		i++;
-		printf("\n");
-	}
-	close(fd);
+	//int **ar = map_to_array(argv[1]);
+	//int j = 0;
+	//int i = 0;
+	//printf("AFTER MAPPING\n");
+	//while(i < dims->rows)
+	//{
+		//j = 0;
+		//while (j < dims->columns)
+		//{
+			//printf("%d ", ar[i][j++]);
+		//}
+		//i++;
+		//printf("\n");
+	//}
     mlx_loop(mlx);
 }

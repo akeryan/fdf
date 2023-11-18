@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 11:09:32 by akeryan           #+#    #+#             */
-/*   Updated: 2023/11/18 13:24:20 by akeryan          ###   ########.fr       */
+/*   Updated: 2023/11/18 15:38:38 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,29 +28,28 @@ void	mlx_end(void *mlx_ptr, void *win_ptr)
 }
 
 // dynamically creates a 2-dimensional array from .fdf file
-int	**map_to_array(int fd)
+int	**map_to_array(char *file)
 {
 	t_2dsize	*dim;
 	int			**out;
 	int			i;
 
-	printf("HEERREE 1\n");
-	dim = get_map_dimensions(fd);
-	printf("HEERREE 2\n");
+	dim = get_map_dimensions(file);
 	out = new_2d_array(dim);
-	printf("ARRAY MAPPING\n");
-	map_to_arr(out, fd);
+	map_to_arr(out, file);
 	return (out);
 }
 
-void	map_to_arr(int **arr, int fd)
+void	map_to_arr(int **arr, char *file)
 {
 	char	*line;
 	int		row;
 	int		col;
+	int		fd;
 
 	row = -1;
 	col = -1;
+	fd = open(file, O_RDONLY);
 	while (42)
 	{
 		line = get_next_line(fd);
@@ -69,6 +68,7 @@ void	map_to_arr(int **arr, int fd)
 				line++;
 		}
 	}
+	close(fd);
 }
 
 // dynamically creates a 2d-array of 'dim' dimansions filled with zerroes;
@@ -100,9 +100,10 @@ int **new_2d_array(t_2dsize *dim)
 	return (out);
 }
 
-t_2dsize	*get_map_dimensions(int fd)
+t_2dsize	*get_map_dimensions(char *file)
 {
 	t_2dsize	*size;
+	int			fd;
 
 	size = (t_2dsize *)malloc(sizeof(t_2dsize));
 	if (size == NULL)
@@ -110,17 +111,20 @@ t_2dsize	*get_map_dimensions(int fd)
 		perror("Memory allocation failed");
 		return (NULL);
 	}
-	size->columns = get_num_of_columns(fd);
-	size->rows = get_num_of_rows(fd);
+	size->columns = get_num_of_columns(file);
+	size->rows = get_num_of_rows(file);
+	close(fd);
 	return (size);
 }
 
-int	get_num_of_columns(int fd)
+int	get_num_of_columns(char *file)
 {
 	char	*str;
 	int		len;
+	int		fd;
 
 	len = 0;
+	fd = open(file, O_RDONLY);
 	str = get_next_line(fd);
 	while (*str != '\0' && *str != '\n')
 	{
@@ -131,23 +135,28 @@ int	get_num_of_columns(int fd)
 		while (ft_isdigit(*str))
 			str++;
 	}
+	close(fd);
 	return (len);
 }
 
-int	get_num_of_rows(char fd)
+int	get_num_of_rows(char *file)
 {
 	char	*str;
 	int		len;	
+	int		fd;
 
 	len = 0;
+	fd = open(file, O_RDONLY);
 	while (42)
 	{
 		str = get_next_line(fd);
+		printf("%s", str);
 		if (str == NULL)
 			break ;
 		else
 			len++;
 	}
+	close(fd);
 	return (len);
 }
 
