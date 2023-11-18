@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 11:09:32 by akeryan           #+#    #+#             */
-/*   Updated: 2023/11/18 13:24:20 by akeryan          ###   ########.fr       */
+/*   Updated: 2023/11/18 18:21:56 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,38 @@ int	**map_to_array(int fd)
 	printf("ARRAY MAPPING\n");
 	map_to_arr(out, fd);
 	return (out);
+}
+
+char **cpy_map_from_file(char *file)
+{
+	char	**map;
+	char	*str;
+	int		fd;
+	int		cols;
+
+	fd = open(file, O_RDONLY);
+	str = get_next_line(fd);
+	cols = get_num_of_columns(str);
+	map = (char **)malloc(cols)
+	//????????????????????????????
+	
+}
+
+int	get_num_of_columns(char *str)
+{
+	int		len;
+
+	len = 0;
+	while (*str != '\0' && *str != '\n')
+	{
+		while (*str == 32 || (*str >= 9 && *str <= 13))
+			str++;
+		if (ft_isdigit(*str))
+			len++;
+		while (ft_isdigit(*str))
+			str++;
+	}
+	return (len);
 }
 
 void	map_to_arr(int **arr, int fd)
@@ -115,24 +147,6 @@ t_2dsize	*get_map_dimensions(int fd)
 	return (size);
 }
 
-int	get_num_of_columns(int fd)
-{
-	char	*str;
-	int		len;
-
-	len = 0;
-	str = get_next_line(fd);
-	while (*str != '\0' && *str != '\n')
-	{
-		while (*str == 32 || (*str >= 9 && *str <= 13))
-			str++;
-		if (ft_isdigit(*str))
-			len++;
-		while (ft_isdigit(*str))
-			str++;
-	}
-	return (len);
-}
 
 int	get_num_of_rows(char fd)
 {
