@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 11:09:32 by akeryan           #+#    #+#             */
-/*   Updated: 2023/11/17 20:52:48 by akeryan          ###   ########.fr       */
+/*   Updated: 2023/11/18 13:14:12 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,16 +35,8 @@ int	**map_to_array(int fd)
 	int			i;
 
 	dim = get_map_dimensions(fd);
+	printf("HEERREE 1\n");
 	out = new_2d_array(dim);
-	int x = 0;
-	int y = 0;
-	while (x < dim->rows)
-	{
-		while (y < dim->columns)
-			printf("%d ", out[x][y++]);
-		x++;
-		printf("\n");
-	}
 	map_to_arr(out, fd);
 	return (out);
 }
@@ -55,29 +47,24 @@ void	map_to_arr(int **arr, int fd)
 	int		row;
 	int		col;
 
-	row = 0;
-	col = 0;
+	row = -1;
+	col = -1;
 	while (42)
 	{
 		line = get_next_line(fd);
 		if (line == NULL)
 			break ;
+		row++;
 		while (*line != '\0' && *line != '\n')
 		{
+			col++;
 			while (*line == 32 || (*line >= 9 && *line <= 13))
 				line++;
 			if ((char)*line != '0')
-			{
-				arr[row][col++] = ft_atoi(line);
-				printf("%d ", arr[row][col - 1]);
-			}
-			else
-				col++;
-			while (ft_isdigit(*line++))
-				;
+				arr[row][col] = ft_atoi(line);
+			while (ft_isdigit(*line))
+				line++;
 		}
-		printf("\n");
-		row++;
 	}
 }
 
@@ -87,16 +74,16 @@ int **new_2d_array(t_2dsize *dim)
 	int	**out;
 	int	i;
 
-	out = (int **)ft_calloc(dim->columns, sizeof(int *));
+	out = (int **)ft_calloc(dim->rows, sizeof(int *));
 	if (out == NULL)
 	{
 		perror("Memory allocation failed");
 		return (NULL);
 	}
 	i = 0;
-	while (i < dim->columns)
+	while (i < dim->rows)
 	{
-		out[i] = (int *)ft_calloc(dim->rows, sizeof(int));
+		out[i] = (int *)ft_calloc(dim->columns, sizeof(int));
 		if (out[i] == NULL)
 		{
 			perror("Memory allocation failed");
@@ -113,39 +100,52 @@ int **new_2d_array(t_2dsize *dim)
 t_2dsize	*get_map_dimensions(int fd)
 {
 	t_2dsize	*size;
-	char		*line;
-	int			rows;
 
 	size = (t_2dsize *)malloc(sizeof(t_2dsize));
-	line = get_next_line(fd);
-	size->columns = num_of_columns(line);
-	size->rows = 0;
-	while (42)
+	if (size == NULL)
 	{
-		line = get_next_line(fd);
-		if (line)
-			size->rows++;
-		else
-			break ;
+		perror("Memory allocation failed");
+		return (NULL);
 	}
+	size->columns = get_num_of_columns(fd);
+	size->rows = get_num_of_rows(fd);
 	return (size);
 }
 
-int	num_of_columns(char *str)
+int	get_num_of_columns(int fd)
 {
-	int	num;
+	char	*str;
+	int		len;
 
-	num = 0;
+	len = 0;
+	str = get_next_line(fd);
 	while (*str != '\0' && *str != '\n')
 	{
 		while (*str == 32 || (*str >= 9 && *str <= 13))
 			str++;
-		if (ft_isdigit(*str++))
-			num++;
-		while (ft_isdigit(*str++))
-			;
+		if (ft_isdigit(*str))
+			len++;
+		while (ft_isdigit(*str))
+			str++;
 	}
-	return (num);
+	return (len);
+}
+
+int	get_num_of_rows(char fd)
+{
+	char	*str;
+	int		len;	
+
+	len = 0;
+	while (42)
+	{
+		str = get_next_line(fd);
+		if (str == NULL)
+			break ;
+		else
+			len++;
+	}
+	return (len);
 }
 
 void	colorize_pixel(char *buf, int pix, int color, t_idata i_d)

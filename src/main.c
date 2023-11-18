@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 11:09:50 by akeryan           #+#    #+#             */
-/*   Updated: 2023/11/17 20:36:34 by akeryan          ###   ########.fr       */
+/*   Updated: 2023/11/18 13:14:46 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,10 @@ int main(int argc, char *argv[])
 		}
 	}
 	mlx_put_image_to_window(mlx, win, image, 0, 0);
-	printf("pixel_bits: %d\n", i_d.pixel_bits);
-	printf("line_bytes: %d\n", i_d.line_bytes);
-	printf("endian: %d\n", i_d.endian);
-	printf("color: %d\n", color);
+	//printf("pixel_bits: %d\n", i_d.pixel_bits);
+	//printf("line_bytes: %d\n", i_d.line_bytes);
+	//printf("endian: %d\n", i_d.endian);
+	//printf("color: %d\n", color);
     
 	int fd = open(argv[1], O_RDONLY);
 	if(!fd)
@@ -53,18 +53,19 @@ int main(int argc, char *argv[])
 	t_2dsize *dims = get_map_dimensions(fd);
 	printf("COLS: %d\n", dims->columns);
 	printf("ROWS: %d\n", dims->rows);
-	close(fd);
-	fd = open(argv[1], O_RDONLY);
-	int **out = map_to_array(fd);
-	int x = 0;
-	int y = 0;
-	while (x < dims->rows)
+	int **ar = map_to_array(fd);
+	int j = 0;
+	int i = 0;
+	while(i < dims->rows)
 	{
-		while (y < dims->columns)
-			printf("%d ", out[x][y++]);
-		x++;
+		j = 0;
+		while (j < dims->columns)
+		{
+			printf("%d ", ar[i][j++]);
+		}
+		i++;
 		printf("\n");
 	}
-
+	close(fd);
     mlx_loop(mlx);
 }
