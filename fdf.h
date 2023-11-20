@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 09:31:35 by akeryan           #+#    #+#             */
-/*   Updated: 2023/11/19 19:01:30 by akeryan          ###   ########.fr       */
+/*   Updated: 2023/11/20 10:45:21 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,10 @@ void		colorize_pixel(char *buf, int pix, int color, t_idata d);
 void		check_ptr(void *ptr);
 t_2dsize	*get_map_dimensions(int fd);
 void		mlx_end(void *mlx_ptr, void *win_ptr);
-//int			get_num_of_columns(char *str);
-//int			get_num_of_rows(int fd);
-//int			**new_2d_array(t_2dsize *dim);
-//int			**map_to_array(int fd);
-//void		map_to_arr(int **arr, int fd);
+int			get_num_of_columns(t_str *map);
+int			get_num_of_rows(t_str *map);
+int			**new_2d_array(int rows, int cols);
+int			**map_to_array(t_str *map);
 t_str		*push_bottom(t_str *top, char *str);
 t_str		*push_end(t_str *top, char *str);
 void		free_list(t_str *top);

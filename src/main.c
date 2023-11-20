@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 11:09:50 by akeryan           #+#    #+#             */
-/*   Updated: 2023/11/19 17:45:58 by akeryan          ###   ########.fr       */
+/*   Updated: 2023/11/20 10:46:24 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,14 +40,22 @@ int main(int argc, char *argv[])
 	t_str	*top;
 
 	top = read_map(argv[1]);
-	t_str *temp;
-	temp = top;
-	while (42)
+	int **arr = map_to_array(top);
+	int rows = get_num_of_rows(top);
+	int cols = get_num_of_columns(top);
+	int i = 0;
+	int j = 0;
+	while (i < rows)
 	{
-		if (temp == NULL)
-			break ;
-		printf("%s", temp->str);
-		temp = temp->next;
+		while (j < cols)
+		{
+			printf("%d ", arr[i][j]);
+			j++;
+		}
+		printf("\n");
+		i++;
+		j = 0;
 	}
+
     //mlx_loop(mlx);
 }

@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 11:09:32 by akeryan           #+#    #+#             */
-/*   Updated: 2023/11/19 19:01:39 by akeryan          ###   ########.fr       */
+/*   Updated: 2023/11/20 10:47:17 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,79 +60,108 @@ t_str	*read_map(char *file)
 	return (top);
 }
 
-//int	get_num_of_columns(char *str)
-//{
-	//int		len;
+int	**map_to_array(t_str *map)
+{
+	int	cols;
+	int	rows;
+	int	**arr;
 
-	//len = 0;
-	//while (*str != '\0' && *str != '\n')
-	//{
-		//while (*str == 32 || (*str >= 9 && *str <= 13))
-			//str++;
-		//if (ft_isdigit(*str))
-			//len++;
-		//while (ft_isdigit(*str))
-			//str++;
-	//}
-	//return (len);
-//}
+	cols = get_num_of_columns(map);
+	rows = get_num_of_rows(map);
+	arr = new_2d_array(rows, cols);
+	return (arr);
+}
 
-//void	map_to_arr(int **arr, int fd)
-//{
-	//char	*line;
-	//int		row;
-	//int		col;
+int	get_num_of_columns(t_str *map)
+{
+	char 	*str;
+	int		len;
 
-	//row = -1;
-	//col = -1;
-	//while (42)
-	//{
-		//line = get_next_line(fd);
-		//printf("%s", line);
-		//if (line == NULL)
-			//break ;
-		//row++;
-		//while (*line != '\0' && *line != '\n')
-		//{
-			//col++;
-			//while (*line == 32 || (*line >= 9 && *line <= 13))
-				//line++;
-			//if ((char)*line != '0')
-				//arr[row][col] = ft_atoi(line);
-			//while (ft_isdigit(*line))
-				//line++;
-		//}
-	//}
-//}
+	str = map->str;
+	len = 0;
+	while (*str != '\0' && *str != '\n')
+	{
+		while (*str == 32 || (*str >= 9 && *str <= 13))
+			str++;
+		if (ft_isdigit(*str))
+			len++;
+		while (ft_isdigit(*str))
+			str++;
+	}
+	return (len);
+}
 
-//// dynamically creates a 2d-array of 'dim' dimansions filled with zerroes;
-//int **new_2d_array(t_2dsize *dim)
-//{
-	//int	**out;
-	//int	i;
+int	get_num_of_rows(t_str *map)
+{
+	int		num;
 
-	//out = (int **)ft_calloc(dim->rows, sizeof(int *));
-	//if (out == NULL)
-	//{
-		//perror("Memory allocation failed");
-		//return (NULL);
-	//}
-	//i = 0;
-	//while (i < dim->rows)
-	//{
-		//out[i] = (int *)ft_calloc(dim->columns, sizeof(int));
-		//if (out[i] == NULL)
-		//{
-			//perror("Memory allocation failed");
-			//while (--i >= 0)
-				//free(out[i]);
-			//free(out);
-			//return (NULL);
-		//}
-		//i++;
-	//}
-	//return (out);
-//}
+	if (!map)	
+		return (-1);
+	num = 1;
+	while (map->next)
+	{
+		num++;
+		map = map->next;
+	}
+	return (num);
+}
+
+void	map_to_arr(int **arr, int fd)
+{
+	char	*line;
+	int		row;
+	int		col;
+
+	row = -1;
+	col = -1;
+	while (42)
+	{
+		line = get_next_line(fd);
+		printf("%s", line);
+		if (line == NULL)
+			break ;
+		row++;
+		while (*line != '\0' && *line != '\n')
+		{
+			col++;
+			while (*line == 32 || (*line >= 9 && *line <= 13))
+				line++;
+			if ((char)*line != '0')
+				arr[row][col] = ft_atoi(line);
+			while (ft_isdigit(*line))
+				line++;
+		}
+	}
+}
+
+// dynamically creates a 2d-array of 'dim' dimansions filled with zerroes;
+int **new_2d_array(int rows, int cols)
+{
+	int	**out;
+	int	i;
+
+	out = (int **)ft_calloc(rows, sizeof(int *));
+	if (out == NULL)
+	{
+		perror("Memory allocation failed");
+		return (NULL);
+	}
+	i = 0;
+	while (i < rows)
+	{
+		out[i] = (int *)ft_calloc(cols, sizeof(int));
+		if (out[i] == NULL)
+		{
+			perror("Memory allocation failed");
+			while (--i >= 0)
+				free(out[i]);
+			free(out);
+			return (NULL);
+		}
+		i++;
+	}
+	return (out);
+}
 
 //t_2dsize	*get_map_dimensions(int fd)
 //{
@@ -150,22 +179,7 @@ t_str	*read_map(char *file)
 //}
 
 
-//int	get_num_of_rows(int fd)
-//{
-	//char	*str;
-	//int		len;	
 
-	//len = 0;
-	//while (42)
-	//{
-		//str = get_next_line(fd);
-		//if (str == NULL)
-			//break ;
-		//else
-			//len++;
-	//}
-	//return (len);
-//}
 
 void	colorize_pixel(char *buf, int pix, int color, t_idata i_d)
 {
