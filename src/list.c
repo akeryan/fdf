@@ -6,17 +6,17 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 15:41:45 by akeryan           #+#    #+#             */
-/*   Updated: 2023/11/19 19:01:15 by akeryan          ###   ########.fr       */
+/*   Updated: 2023/11/20 16:31:16 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../fdf.h"
 
-t_str	*new_node(void)
+t_node	*new_node(void)
 {
-	t_str	*new;
+	t_node	*new;
 
-	new = (t_str *)malloc(sizeof(t_str));
+	new = (t_node *)malloc(sizeof(t_node));
 	if (new == NULL)
 	{
 		perror("Memory allocation failed");
@@ -27,46 +27,69 @@ t_str	*new_node(void)
 	return (new);
 }
 
-t_str	*push_top(t_str *top, char *str)
+void	push_bottom(t_map *lst, char *str)
 {
-	t_str	*new;
+	t_node	*new;
+	t_node	*tmp;
 
-	new = new_node();
-	new->str = ft_strdup(str);
-	new->next = top;
-	return (new);
-}
-
-t_str	*push_bottom(t_str *top, char *str)
-{
-	t_str	*new;
-	t_str	*tmp;
-
+	if (lst == NULL || str == NULL)
+		return ;
 	new = new_node();
 	new->str = str;
-	if (top == NULL)
-		return (new);
-	tmp = top;
+	tmp = lst->top;
 	while (tmp->next)
 		tmp = tmp->next;
-	tmp->next = new;	
-	return (top);
+	tmp->next = new;
 }
 
-void	free_list(t_str *top)
+void	free_list(t_map *lst)
 {
-	t_str	*temp;
-	t_str	*current;
+	t_node	*current;
+	t_node	*tmp;
 
-	current = top;
+	if (lst == NULL || lst->top == NULL)
+		return ;
+	current = lst->top;
 	while (42)
 	{
-		temp = current->next;
+		tmp = current->next;
 		free(current->str);
 		free(current);
-		if (temp == NULL)
+		if (tmp == NULL)
 			break ;
-		current = temp;
+		current = tmp;
+	}
+}
+
+t_map	*new_lst(void)
+{
+	t_map	*lst;
+
+	lst = (t_map *)malloc(sizeof(t_map));
+	if (lst == NULL)
+	{
+		perror("Memory allocation failed in new_lst()");
+		return (NULL);
+	}
+	lst->len = 0;
+	lst->top = NULL;
+	return (lst);
+}
+
+void	print_lst(t_map *lst)
+{
+	char	*str;
+	t_node	*tmp;
+
+	if (lst == NULL || lst->top == NULL)
+		return ;
+	tmp = lst->top;
+	while (42)
+	{
+		printf("%s", tmp->str);
+		if (!tmp->next)
+			break ;
+		tmp = tmp->next;
 	}
 }
 

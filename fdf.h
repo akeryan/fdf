@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 09:31:35 by akeryan           #+#    #+#             */
-/*   Updated: 2023/11/20 10:45:21 by akeryan          ###   ########.fr       */
+/*   Updated: 2023/11/20 16:25:35 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,30 +31,50 @@ typedef struct s_img_data
 	int	endian;
 }	t_idata;
 
+typedef struct s_array
+{
+	int	**arr;
+	int	rows;
+	int	cols;
+} t_array;
+
 typedef struct s_2darray_size
 {
 	int	rows;
 	int	columns;
 }	t_2dsize;
 
-typedef struct s_str
+typedef struct s_node
 {
 	char			*str;
-	struct s_str	*next;
-}	t_str;
+	struct s_node	*next;
+}	t_node;
+
+typedef struct s_map
+{
+	t_node	*top;
+	int		len;
+}	t_map;
 
 void		colorize_pixel(char *buf, int pix, int color, t_idata d);
 void		check_ptr(void *ptr);
-t_2dsize	*get_map_dimensions(int fd);
 void		mlx_end(void *mlx_ptr, void *win_ptr);
-int			get_num_of_columns(t_str *map);
-int			get_num_of_rows(t_str *map);
-int			**new_2d_array(int rows, int cols);
-int			**map_to_array(t_str *map);
-t_str		*push_bottom(t_str *top, char *str);
-t_str		*push_end(t_str *top, char *str);
-void		free_list(t_str *top);
-t_str		*read_map(char *file);
+int			get_num_of_columns(t_map *map);
+int			get_num_of_rows(t_map *map);
+t_array		*new_2d_array(int rows, int cols);
+//int			**map_to_array(t_lst *map);
+void		push_bottom(t_map *top, char *str);
+void		free_list(t_map*top);
+t_map		*read_map(char *file);
+void		cpy_map_to_arr(int **arr, t_map *map);
+void		check_allocation(void *ptr);
+
+//t_lst
+t_map		*new_lst(void);
+void		print_lst(t_map *lst);
+
+//t_array
+void		print_arr(t_array *a);
 
 
 #endif

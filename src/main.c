@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 11:09:50 by akeryan           #+#    #+#             */
-/*   Updated: 2023/11/20 10:46:24 by akeryan          ###   ########.fr       */
+/*   Updated: 2023/11/20 16:27:38 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,25 +37,14 @@ int main(int argc, char *argv[])
 		//}
 	//}
 	//mlx_put_image_to_window(mlx, win, image, 0, 0);
-	t_str	*top;
+	//t_lst	*map;
 
-	top = read_map(argv[1]);
-	int **arr = map_to_array(top);
-	int rows = get_num_of_rows(top);
-	int cols = get_num_of_columns(top);
-	int i = 0;
-	int j = 0;
-	while (i < rows)
-	{
-		while (j < cols)
-		{
-			printf("%d ", arr[i][j]);
-			j++;
-		}
-		printf("\n");
-		i++;
-		j = 0;
-	}
+	//map = read_map(argv[1]);
+	//int **arr = map_to_array(map);
+	//int rows = get_num_of_rows(map);
+	//int cols = get_num_of_columns(map);
+	t_map *map = read_map(argv[1]);
+	print_lst(map);
 
     //mlx_loop(mlx);
 }
