@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 15:41:45 by akeryan           #+#    #+#             */
-/*   Updated: 2023/11/20 16:31:16 by akeryan          ###   ########.fr       */
+/*   Updated: 2023/11/20 19:29:44 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,17 @@ void	push_bottom(t_map *lst, char *str)
 		return ;
 	new = new_node();
 	new->str = str;
+	if (lst->top == NULL)
+	{
+		lst->top = new;
+		lst->len++;
+		return ;
+	}
 	tmp = lst->top;
 	while (tmp->next)
 		tmp = tmp->next;
 	tmp->next = new;
+	lst->len++;
 }
 
 void	free_list(t_map *lst)
@@ -61,7 +68,7 @@ void	free_list(t_map *lst)
 	}
 }
 
-t_map	*new_lst(void)
+t_map	*new_map(void)
 {
 	t_map	*lst;
 
@@ -76,7 +83,7 @@ t_map	*new_lst(void)
 	return (lst);
 }
 
-void	print_lst(t_map *lst)
+void	print_map(t_map *lst)
 {
 	char	*str;
 	t_node	*tmp;
