@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 09:31:35 by akeryan           #+#    #+#             */
-/*   Updated: 2023/11/21 13:52:56 by akeryan          ###   ########.fr       */
+/*   Updated: 2023/11/21 19:50:59 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,12 @@
 # define WINDOW_HEIGHT 600
 # define MLX_ERROR 1
 
+typedef struct s_data
+{
+	void	*mlx;
+	void	*win;
+}	t_data;
+
 typedef struct s_img_data
 {
 	int	pixel_bits;
@@ -37,12 +43,6 @@ typedef struct s_array
 	int	rows;
 	int	cols;
 }	t_array;
-
-typedef struct s_2darray_size
-{
-	int	rows;
-	int	columns;
-}	t_2dsize;
 
 typedef struct s_node
 {
@@ -74,5 +74,8 @@ t_lst		*new_map(void);
 t_array		*new_tarray(int rows, int cols);
 void		print_arr(t_array *arr);
 t_array		*array_from_map(t_lst *map);
+
+//hooks
+int			close_window(int key, t_data *d);
 
 #endif
