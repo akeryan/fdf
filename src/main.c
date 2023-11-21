@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 11:09:50 by akeryan           #+#    #+#             */
-/*   Updated: 2023/11/20 20:20:05 by akeryan          ###   ########.fr       */
+/*   Updated: 2023/11/21 13:51:12 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int main(int argc, char *argv[])
 		//}
 	//}
 	//mlx_put_image_to_window(mlx, win, image, 0, 0);
-	t_map	*map;
+	t_lst	*map;
 	map = read_map(argv[1]);
 
 	print_map(map);

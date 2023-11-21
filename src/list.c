@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 15:41:45 by akeryan           #+#    #+#             */
-/*   Updated: 2023/11/20 19:29:44 by akeryan          ###   ########.fr       */
+/*   Updated: 2023/11/21 13:51:12 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ t_node	*new_node(void)
 	return (new);
 }
 
-void	push_bottom(t_map *lst, char *str)
+void	push_bottom(t_lst *lst, char *str)
 {
 	t_node	*new;
 	t_node	*tmp;
@@ -49,7 +49,7 @@ void	push_bottom(t_map *lst, char *str)
 	lst->len++;
 }
 
-void	free_list(t_map *lst)
+void	free_list(t_lst *lst)
 {
 	t_node	*current;
 	t_node	*tmp;
@@ -68,11 +68,11 @@ void	free_list(t_map *lst)
 	}
 }
 
-t_map	*new_map(void)
+t_lst	*new_map(void)
 {
-	t_map	*lst;
+	t_lst	*lst;
 
-	lst = (t_map *)malloc(sizeof(t_map));
+	lst = (t_lst *)malloc(sizeof(t_lst));
 	if (lst == NULL)
 	{
 		perror("Memory allocation failed in new_lst()");
@@ -83,7 +83,7 @@ t_map	*new_map(void)
 	return (lst);
 }
 
-void	print_map(t_map *lst)
+void	print_map(t_lst *lst)
 {
 	char	*str;
 	t_node	*tmp;
@@ -99,4 +99,3 @@ void	print_map(t_map *lst)
 		tmp = tmp->next;
 	}
 }
-

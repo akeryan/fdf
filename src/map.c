@@ -6,15 +6,44 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 13:51:51 by akeryan           #+#    #+#             */
-/*   Updated: 2023/11/20 20:26:15 by akeryan          ###   ########.fr       */
+/*   Updated: 2023/11/21 13:51:12 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../fdf.h"
 
-t_map	*read_map(char *file)
+t_array	*array_from_map(t_lst *map)
 {
-	t_map	*lst;
+	t_array	*a;
+	t_node	*tmp;
+	int		i;
+	int		j;
+	char	**spl;
+
+	if (!map || !map->top)
+		return (NULL);
+	a = new_tarray(map->len, get_num_of_columns(map));
+	if (!a)
+		return (NULL);
+	i = 0;
+	tmp = map->top;
+	while (42)
+	{
+		spl = ft_split(tmp->str, ' ');
+		j = -1;
+		while (++j < a->cols)
+			a->arr[i][j] = ft_atoi(spl[j]);
+		if (!tmp->next)
+			break ;
+		tmp = tmp->next;
+		i++;
+	}	
+	return (a);
+}
+
+t_lst	*read_map(char *file)
+{
+	t_lst	*lst;
 	char	*str;
 	int		fd;
 
@@ -40,9 +69,9 @@ t_map	*read_map(char *file)
 	return (lst);
 }
 
-int	get_num_of_columns(t_map *map)
+int	get_num_of_columns(t_lst *map)
 {
-	char 	*str;
+	char	*str;
 	int		len;
 
 	if (map == NULL)
@@ -60,105 +89,6 @@ int	get_num_of_columns(t_map *map)
 	}
 	return (len);
 }
-
-t_array	*array_from_map(t_map *map)
-{
-	t_array	*a;
-	t_node	*tmp;
-	int		i;
-	int		j;
-	char	**spl;
-
-	if (!map || !map->top)
-		return (NULL);
-	a = new_tarray(map->len, get_num_of_columns(map));
-	if (!a)
-		return (NULL);
-	i = 0;
-	j = 0;
-	tmp = map->top;
-	while (42)
-	{
-		spl = ft_split(tmp->str, ' ');
-		while (j < a->cols)	
-		{
-			a->arr[i][j] = ft_atoi(spl[j]);
-			j++;
-		}
-		if (!tmp->next)
-			break ;
-		tmp = tmp->next;
-		j = 0;
-		i++;
-	}	
-	return (a);
-}
-
-//t_array	*array_from_map(t_map *map)
-//{
-	//t_array	*a;
-	//t_node	*tmp;
-	//char	*line;
-	//int		row;
-	//int		col;
-
-	//if (!map || !map->top)
-		//return (NULL);
-	//a = new_tarray(map->len, get_num_of_columns(map));
-	//if (!a)
-		//return (NULL);
-	//row = 0;
-	//col = 0;
-	//tmp = map->top;
-	//while (42)
-	//{
-		//line = tmp->str;
-		//printf("%s", line);
-		//while (*line != '\0' && *line != '\n')
-		//{
-			//col++;
-			//while (*line == 32 || (*line >= 9 && *line <= 13))
-				//line++;
-			//if ((char)*line != '0')
-				//a->arr[row][col] = ft_atoi(line);
-			//while (ft_isdigit(*line))
-				//line++;
-		//}
-		//if (!tmp->next)
-			//break ;
-		//tmp = tmp->next;
-		//row++;
-	//}
-	//return (a);
-//}
-
-//void	cpy_map_to_arr(int **arr, t_map *map)
-//{
-	//char	*line;
-	//int		row;
-	//int		col;
-
-	//if (!map)
-		//return ;
-	//row = -1;
-	//col = -1;
-	//while (map->str)
-	//{
-		//row++;
-		//line = map->str;
-		//while (*line != '\0' && *line != '\n')
-		//{
-			//col++;
-			//while (*line == 32 || (*line >= 9 && *line <= 13))
-				//line++;
-			//if ((char)*line != '0')
-				//arr[row][col] = ft_atoi(line);
-			//while (ft_isdigit(*line))
-				//line++;
-		//}
-		//map = map->next;
-	//}
-//}
 
 t_array	*new_tarray(int rows, int cols)
 {
@@ -194,17 +124,12 @@ void	print_arr(t_array *a)
 	int	i;
 	int	j;
 
-	i = 0;
-	j = 0;
-	while (i < a->rows)
+	i = -1;
+	while (++i < a->rows)
 	{
-		while (j < a->cols)
-		{
+		j = -1;
+		while (++j < a->cols)
 			printf("%d ", a->arr[i][j]);
-			j++;
-		}
 		printf("\n");
-		i++;
-		j = 0;
 	}
 }
