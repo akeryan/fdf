@@ -9,7 +9,6 @@ LIBFT_DIR = libft
 BUILD_DIR = build
 SRC_DIR = src
 MINILIBX_DIR = minilibx
-INCLUDE = fdf.h
 
 all: submodules libft_build minilibx_build $(NAME)
 
@@ -21,12 +20,10 @@ $(BUILD_DIR)/%.o: | $(BUILD_DIR)
 $(BUILD_DIR):
 	mkdir -p $(BUILD_DIR)
 
-#%.o: %.c
-#	cc -c $(FLAGS) $(LINKS) $< -o $@
-$(NAME): $(OBJECTS) $(INCLUDE) 
-	cc $(FLAGS) $(LINKS) $(OBJECTS) -o $(NAME) 
+$(NAME): $(OBJECTS)
+	cc $(FLAGS) $(LINKS) $^ -o $@
 
-$(BUILD_DIR)/%.o: $(SRC_DIR)/%.c $(INCLUDE) | $(BUILD_DIR)
+$(BUILD_DIR)/%.o: $(SRC_DIR)/%.c | $(BUILD_DIR)
 	cc -c $(FLAGS) $(LINKS) -c -o $@ $< 
 
 submodules:

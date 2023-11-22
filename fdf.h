@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 09:31:35 by akeryan           #+#    #+#             */
-/*   Updated: 2023/11/21 19:50:59 by akeryan          ###   ########.fr       */
+/*   Updated: 2023/11/22 12:50:21 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
 # include <stdio.h>
 # include <string.h>
 # include <fcntl.h>
-# include "./minilibx/mlx.h" 
-# include "../libft/libft.h"
+# include "mlx.h" 
+# include "libft.h"
 
 # define WINDOW_WIDTH 800 
 # define WINDOW_HEIGHT 600
@@ -56,7 +56,7 @@ typedef struct s_lst
 	int		len;
 }	t_lst;
 
-void		colorize_pixel(char *buf, int pix, int color, t_idata d);
+void		draw_pixel(char *buf, const int pix, const int color, const int endian);
 void		check_ptr(void *ptr);
 void		mlx_end(void *mlx_ptr, void *win_ptr);
 void		check_allocation(void *ptr);
@@ -77,5 +77,7 @@ t_array		*array_from_map(t_lst *map);
 
 //hooks
 int			close_window(int key, t_data *d);
+int			get_keycode(int key, t_data *d);
+int			key_handler(int key, t_data *d);
 
 #endif
