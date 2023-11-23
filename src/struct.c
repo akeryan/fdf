@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 17:14:51 by akeryan           #+#    #+#             */
-/*   Updated: 2023/11/23 09:36:06 by akeryan          ###   ########.fr       */
+/*   Updated: 2023/11/23 09:48:34 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,3 +59,4 @@ t_pnt3d	*new_pnt3d(int x, int y, int z)
 	a->z = z;
 	return (a);
 }
+

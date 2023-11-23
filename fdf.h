@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 09:31:35 by akeryan           #+#    #+#             */
-/*   Updated: 2023/11/23 09:27:34 by akeryan          ###   ########.fr       */
+/*   Updated: 2023/11/23 10:20:32 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,9 @@ int			key_handler(int key, t_data *d);
 void		plot_line(t_pair *p, char *buf, t_idata id);
 void		plot_line_low(t_pair *p, char *buf, t_idata d);
 void		plot_line_high(t_pair *p, char *buf, t_idata id);
+
+//3dobj
+t_obj3d		*new_obj3d(int rows, int cols);
 
 //structs
 void		*new_point(int x, int y);
