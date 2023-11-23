@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 09:31:35 by akeryan           #+#    #+#             */
-/*   Updated: 2023/11/23 09:04:03 by akeryan          ###   ########.fr       */
+/*   Updated: 2023/11/23 09:27:34 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,8 +89,9 @@ typedef struct s_pnt3d
 
 typedef struct s_obj3d
 {
-	t_pnt3d		*pts;
-	int			num;
+	t_pnt3d		**pts;
+	int			rows;
+	int			cols;
 }	t_obj3d;
 
 void		plot(int x, int y, char *buf, t_idata d);
