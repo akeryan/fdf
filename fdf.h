@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 09:31:35 by akeryan           #+#    #+#             */
-/*   Updated: 2023/11/22 18:38:13 by akeryan          ###   ########.fr       */
+/*   Updated: 2023/11/23 09:04:03 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,19 +58,19 @@ typedef struct s_lst
 	int		len;
 }	t_lst;
 
+typedef struct s_point
+{
+	int	x;
+	int	y;
+}	t_point;
+
 typedef struct s_pair
 {
 	int	x0;
 	int	y0;
 	int	x1;
 	int	y1;
-} t_pair;
-
-typedef struct s_point
-{
-	int	x;
-	int	y;
-}	t_point;
+}	t_pair;
 
 typedef struct s_quad
 {
@@ -79,6 +79,19 @@ typedef struct s_quad
 	int	i;
 	int	d;
 }	t_quad;
+
+typedef struct s_pnt3d
+{
+	float	x;
+	float	y;
+	float	z;
+}	t_pnt3d;
+
+typedef struct s_obj3d
+{
+	t_pnt3d		*pts;
+	int			num;
+}	t_obj3d;
 
 void		plot(int x, int y, char *buf, t_idata d);
 void		check_ptr(void *ptr);
