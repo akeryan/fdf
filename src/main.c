@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 11:09:50 by akeryan           #+#    #+#             */
-/*   Updated: 2023/11/23 15:08:00 by akeryan          ###   ########.fr       */
+/*   Updated: 2023/11/23 20:22:19 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,12 @@ int	main(int argc, char *argv[])
 	//t_obj3d *obj = obj_from_map(map);
 	//print_obj(obj);
 	p = new_pair(100, 300, 20, 250);
-	plot_line(p, &d);
+	t_p3d a, b;
+	a.i_x = 200;
+	a.i_y = 300;
+	b.i_x = 0;
+	b.i_y = 50;
+	plot_line(&a, &b, &d);
 	mlx_put_image_to_window(d.mlx, d.win, d.img, 0, 0);
     mlx_key_hook(d.win, key_handler, &d);
 	mlx_hook(d.win, 17, 0, close_window, NULL);

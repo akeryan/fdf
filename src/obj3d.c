@@ -6,13 +6,13 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 10:18:28 by akeryan           #+#    #+#             */
-/*   Updated: 2023/11/23 11:50:20 by akeryan          ###   ########.fr       */
+/*   Updated: 2023/11/23 19:28:12 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../fdf.h"
 
-static void	put_values(t_pnt3d *a, int x, int y, int z);
+static void	put_values(t_p3d *a, int x, int y, int z);
 
 t_obj3d	*new_obj3d(int rows, int cols)
 {
@@ -22,7 +22,7 @@ t_obj3d	*new_obj3d(int rows, int cols)
 	out = (t_obj3d *)malloc(sizeof(t_obj3d));
 	if (out == NULL)
 		return (NULL);
-	out->pts = (t_pnt3d **)malloc(rows * sizeof(t_pnt3d *));
+	out->pts = (t_p3d **)malloc(rows * sizeof(t_p3d *));
 	if (out->pts == NULL)
 		return (NULL);
 	out->rows = rows;
@@ -30,7 +30,7 @@ t_obj3d	*new_obj3d(int rows, int cols)
 	i = 0;
 	while (i < rows)
 	{
-		out->pts[i] = (t_pnt3d *)malloc(cols * sizeof(t_pnt3d));
+		out->pts[i] = (t_p3d *)malloc(cols * sizeof(t_p3d));
 		if (out->pts[i] == NULL)
 		{
 			while (--i >= 0)
@@ -72,7 +72,7 @@ t_obj3d	*obj_from_map(t_lst *map)
 	return (a);
 }
 
-static void	put_values(t_pnt3d *a, int x, int y, int z)
+static void	put_values(t_p3d *a, int x, int y, int z)
 {
 	if (a == NULL)
 		return ;

@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 09:31:35 by akeryan           #+#    #+#             */
-/*   Updated: 2023/11/23 19:09:49 by akeryan          ###   ########.fr       */
+/*   Updated: 2023/11/23 20:20:36 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,21 +70,21 @@ typedef struct s_pair
 }	t_pair;
 
 
-typedef struct s_pnt3d
+typedef struct s_p3d
 {
-	float	x;
-	float	y;
-	float	z;
-	float	w;
-	int		i_x;
-	int		i_y;
-	t_pnt3d	*n;
-	t_pnt3d	*w;	
-}	t_pnt3d;
+	float			x;
+	float			y;
+	float			z;
+	float			v;
+	int				i_x;
+	int				i_y;
+	struct s_p3d	*n;
+	struct s_p3d	*w;	
+}	t_p3d;
 
 typedef struct s_obj3d
 {
-	t_pnt3d		**pts;
+	t_p3d		**pts;
 	int			rows;
 	int			cols;
 }	t_obj3d;
@@ -120,10 +120,7 @@ int			get_keycode(int key, t_data *d);
 int			key_handler(int key, t_data *d);
 
 //line
-void		plot(int x, int y, t_data *d);
-void		plot_line(t_pnt3d *a, t_pnt3d *b, t_data *d);
-void		plot_line_low(t_pair *p, t_data *d);
-void		plot_line_high(t_pair *p, t_data *d);
+void		plot_line(t_p3d *a, t_p3d *b, t_data *d);
 
 //3dobj
 t_obj3d		*new_obj3d(int rows, int cols);

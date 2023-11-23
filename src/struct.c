@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 17:14:51 by akeryan           #+#    #+#             */
-/*   Updated: 2023/11/23 12:40:32 by akeryan          ###   ########.fr       */
+/*   Updated: 2023/11/23 19:28:12 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,11 @@ void	*new_pair(int x0, int y0, int x1, int y1)
 	return (p);
 }
 
-t_pnt3d	*new_pnt3d(int x, int y, int z)
+t_p3d	*new_pnt3d(int x, int y, int z)
 {
-	t_pnt3d	*a;
+	t_p3d	*a;
 
-	a = (t_pnt3d *)malloc(sizeof(t_pnt3d));
+	a = (t_p3d *)malloc(sizeof(t_p3d));
 	if (a == NULL)
 	{
 		perror("Memory allocation faild in new_pnt3d()");
