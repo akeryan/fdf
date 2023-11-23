@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 12:06:43 by akeryan           #+#    #+#             */
-/*   Updated: 2023/11/23 15:12:09 by akeryan          ###   ########.fr       */
+/*   Updated: 2023/11/23 15:42:44 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	plot_line(t_pair *p, t_data *d)
 	}
 }
 
-void	plot_line_low(t_pair *p, t_data *d)
+static void	plot_line_low(t_pair *p, t_data *d)
 {
 	t_pnt2d	*a;	
 	t_quad	q;
@@ -48,21 +48,27 @@ void	plot_line_low(t_pair *p, t_data *d)
 	}
 	q.d = 2 * q.dy - q.dx;
 	a = new_point(p->x0, p->y0);
+	loop(p, &q, d, a);
+	free(a);
+}
+
+static void	loop_low(t_pair *p, t_quad *q, t_data *d, t_pnt2d *a)
+{
 	while (a->x <= p->x1)
 	{
 		plot(a->x, a->y, d);
-		if (q.d > 0)
+		if (q->d > 0)
 		{
-			a->y = a->y + q.i;
-			q.d = q.d + (2 * (q.dy - q.dx));
+			a->y = a->y + q->i;
+			q->d = q->d + (2 * (q->dy - q->dx));
 		}
 		else
-			q.d = q.d + 2 * q.dy;
+			q->d = q->d + 2 * q->dy;
 		a->x++;
 	}
 }
 
-void	plot_line_high(t_pair *p, t_data *d)
+static void	plot_line_high(t_pair *p, t_data *d)
 {
 	t_pnt2d	*a;	
 	t_quad	q;
@@ -77,21 +83,27 @@ void	plot_line_high(t_pair *p, t_data *d)
 	}
 	q.d = 2 * q.dx - q.dy;
 	a = new_point(p->x0, p->y0);
+	loop_high(p, &q, d, a);
+	free(a);
+}
+
+static void	loop_high(t_pair *p, t_quad *q, t_data *d, t_pnt2d *a)
+{
 	while (a->y <= p->y1)
 	{
 		plot(a->x, a->y, d);
-		if (q.d > 0)
+		if (q->d > 0)
 		{
-			a->x = a->x + q.i;
-			q.d = q.d + (2 * (q.dx - q.dy));
+			a->x = a->x + q->i;
+			q->d = q->d + (2 * (q->dx - q->dy));
 		}
 		else
-			q.d = q.d + 2 * q.dx;
+			q->d = q->d + 2 * q->dx;
 		a->y++;
 	}
 }
 
-void	plot(int x, int y, t_data *d)
+static void	plot(int x, int y, t_data *d)
 {
 	int	pix;
 	int	color;
