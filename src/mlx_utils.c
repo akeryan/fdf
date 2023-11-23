@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 11:09:32 by akeryan           #+#    #+#             */
-/*   Updated: 2023/11/22 16:18:33 by akeryan          ###   ########.fr       */
+/*   Updated: 2023/11/23 15:09:35 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,28 +36,7 @@ void	check_allocation(void *ptr)
 	}
 }
 
-void	plot(int x, int y, char *buf, t_idata d)
-{
-	int	pix;
-	int	color;
 
-	color = 0xFF0000;
-	pix = (y * d.line_bytes) + (x * 4);
-	if (d.endian == 1)
-	{
-		buf[pix + 0] = (color >> 24);
-		buf[pix + 1] = (color >> 16) & 0xFF;
-		buf[pix + 2] = (color >> 8) & 0xFF;
-		buf[pix + 3] = (color) & 0xFF;
-	}
-	else
-	{
-		buf[pix + 0] = (color) & 0xFF;
-		buf[pix + 1] = (color >> 8) & 0xFF;
-		buf[pix + 2] = (color >> 16) & 0xFF;
-		buf[pix + 3] = (color >> 24);
-	}
-}
 //void	draw_line(char *buf, int x1, int y1, int x2, int y2, int color)
 //{
 

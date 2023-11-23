@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 09:31:35 by akeryan           #+#    #+#             */
-/*   Updated: 2023/11/23 12:42:42 by akeryan          ###   ########.fr       */
+/*   Updated: 2023/11/23 15:13:56 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,12 @@ typedef struct s_data
 {
 	void	*mlx;
 	void	*win;
+	int		pixel_bits;
+	int		line_bytes;
+	int		endian;
+	void	*img;
+	char	*buf;
 }	t_data;
-
-typedef struct s_img_data
-{
-	int	pixel_bits;
-	int	line_bytes;
-	int	endian;
-}	t_idata;
 
 typedef struct s_array
 {
@@ -85,6 +83,9 @@ typedef struct s_pnt3d
 	float	x;
 	float	y;
 	float	z;
+	float	w;
+	int		iso_x;
+	int		iso_y;
 }	t_pnt3d;
 
 typedef struct s_obj3d
@@ -101,7 +102,6 @@ typedef struct s_iso3d
 	int		cols;
 }	t_iso3d;
 
-void		plot(int x, int y, char *buf, t_idata d);
 void		check_ptr(void *ptr);
 void		mlx_end(void *mlx_ptr, void *win_ptr);
 void		check_allocation(void *ptr);
@@ -126,9 +126,10 @@ int			get_keycode(int key, t_data *d);
 int			key_handler(int key, t_data *d);
 
 //line
-void		plot_line(t_pair *p, char *buf, t_idata id);
-void		plot_line_low(t_pair *p, char *buf, t_idata d);
-void		plot_line_high(t_pair *p, char *buf, t_idata id);
+void		plot(int x, int y, t_data *d);
+void		plot_line(t_pair *p, t_data *d);
+void		plot_line_low(t_pair *p, t_data *d);
+void		plot_line_high(t_pair *p, t_data *d);
 
 //3dobj
 t_obj3d		*new_obj3d(int rows, int cols);

@@ -6,13 +6,13 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 12:06:43 by akeryan           #+#    #+#             */
-/*   Updated: 2023/11/23 12:40:32 by akeryan          ###   ########.fr       */
+/*   Updated: 2023/11/23 15:12:09 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../fdf.h"
 
-void	plot_line(t_pair *p, char *buf, t_idata id)
+void	plot_line(t_pair *p, t_data *d)
 {
 	t_pair	*tmp;
 
@@ -20,20 +20,20 @@ void	plot_line(t_pair *p, char *buf, t_idata id)
 	if (abs(p->y1 - p->y0) < abs(p->x1 - p->x0))
 	{
 		if (p->x0 > p->x1)
-			plot_line_low(tmp, buf, id);
+			plot_line_low(tmp, d);
 		else
-			plot_line_low(p, buf, id);
+			plot_line_low(p, d);
 	}
 	else
 	{
 		if (p->y0 > p->y1)
-			plot_line_high(tmp, buf, id);
+			plot_line_high(tmp, d);
 		else
-			plot_line_high(p, buf, id);
+			plot_line_high(p, d);
 	}
 }
 
-void	plot_line_low(t_pair *p, char *buf, t_idata id)
+void	plot_line_low(t_pair *p, t_data *d)
 {
 	t_pnt2d	*a;	
 	t_quad	q;
@@ -50,7 +50,7 @@ void	plot_line_low(t_pair *p, char *buf, t_idata id)
 	a = new_point(p->x0, p->y0);
 	while (a->x <= p->x1)
 	{
-		plot(a->x, a->y, buf, id);
+		plot(a->x, a->y, d);
 		if (q.d > 0)
 		{
 			a->y = a->y + q.i;
@@ -62,7 +62,7 @@ void	plot_line_low(t_pair *p, char *buf, t_idata id)
 	}
 }
 
-void	plot_line_high(t_pair *p, char *buf, t_idata id)
+void	plot_line_high(t_pair *p, t_data *d)
 {
 	t_pnt2d	*a;	
 	t_quad	q;
@@ -79,7 +79,7 @@ void	plot_line_high(t_pair *p, char *buf, t_idata id)
 	a = new_point(p->x0, p->y0);
 	while (a->y <= p->y1)
 	{
-		plot(a->x, a->y, buf, id);
+		plot(a->x, a->y, d);
 		if (q.d > 0)
 		{
 			a->x = a->x + q.i;
@@ -88,5 +88,28 @@ void	plot_line_high(t_pair *p, char *buf, t_idata id)
 		else
 			q.d = q.d + 2 * q.dx;
 		a->y++;
+	}
+}
+
+void	plot(int x, int y, t_data *d)
+{
+	int	pix;
+	int	color;
+
+	color = 0xFF0000;
+	pix = (y * d->line_bytes) + (x * 4);
+	if (d->endian == 1)
+	{
+		d->buf[pix + 0] = (color >> 24);
+		d->buf[pix + 1] = (color >> 16) & 0xFF;
+		d->buf[pix + 2] = (color >> 8) & 0xFF;
+		d->buf[pix + 3] = (color) & 0xFF;
+	}
+	else
+	{
+		d->buf[pix + 0] = (color) & 0xFF;
+		d->buf[pix + 1] = (color >> 8) & 0xFF;
+		d->buf[pix + 2] = (color >> 16) & 0xFF;
+		d->buf[pix + 3] = (color >> 24);
 	}
 }
