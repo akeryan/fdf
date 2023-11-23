@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 10:18:28 by akeryan           #+#    #+#             */
-/*   Updated: 2023/11/23 10:44:19 by akeryan          ###   ########.fr       */
+/*   Updated: 2023/11/23 11:50:20 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ t_obj3d	*new_obj3d(int rows, int cols)
 	return (out);
 }
 
-t_obj3d	*array_from_map(t_lst *map)
+t_obj3d	*obj_from_map(t_lst *map)
 {
 	t_obj3d	*a;
 	t_node	*tmp;
@@ -79,4 +79,19 @@ static void	put_values(t_pnt3d *a, int x, int y, int z)
 	a->x = x;
 	a->y = y;
 	a->z = z;
+}
+
+void	print_obj(t_obj3d *a)
+{
+	int	i;
+	int	j;
+
+	i = -1;
+	while (++i < a->rows)
+	{
+		j = -1;
+		while (++j < a->cols)
+			printf("%.0f ", a->pts[i][j].z);
+		printf("\n");
+	}
 }

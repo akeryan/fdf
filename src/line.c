@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 12:06:43 by akeryan           #+#    #+#             */
-/*   Updated: 2023/11/22 18:37:19 by akeryan          ###   ########.fr       */
+/*   Updated: 2023/11/23 12:40:32 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	plot_line(t_pair *p, char *buf, t_idata id)
 
 void	plot_line_low(t_pair *p, char *buf, t_idata id)
 {
-	t_point	*a;	
+	t_pnt2d	*a;	
 	t_quad	q;
 
 	q.dx = p->x1 - p->x0;
@@ -64,7 +64,7 @@ void	plot_line_low(t_pair *p, char *buf, t_idata id)
 
 void	plot_line_high(t_pair *p, char *buf, t_idata id)
 {
-	t_point	*a;	
+	t_pnt2d	*a;	
 	t_quad	q;
 
 	q.dx = p->x1 - p->x0;

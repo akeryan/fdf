@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 17:14:51 by akeryan           #+#    #+#             */
-/*   Updated: 2023/11/23 09:48:34 by akeryan          ###   ########.fr       */
+/*   Updated: 2023/11/23 12:40:32 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 void	*new_point(int x, int y)
 {
-	t_point	*p;
+	t_pnt2d	*p;
 
-	p = (t_point *)malloc(sizeof(t_point));
+	p = (t_pnt2d *)malloc(sizeof(t_pnt2d));
 	if (!p)
 	{
 		perror("Memory allocation failed in new_point()");
