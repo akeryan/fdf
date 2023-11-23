@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 09:31:35 by akeryan           #+#    #+#             */
-/*   Updated: 2023/11/23 15:13:56 by akeryan          ###   ########.fr       */
+/*   Updated: 2023/11/23 17:07:59 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,8 @@ typedef struct s_pnt3d
 	float	w;
 	int		iso_x;
 	int		iso_y;
+	t_pnt3d	*n;
+	t_pnt3d	*w;	
 }	t_pnt3d;
 
 typedef struct s_obj3d

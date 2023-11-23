@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 12:06:43 by akeryan           #+#    #+#             */
-/*   Updated: 2023/11/23 15:42:44 by akeryan          ###   ########.fr       */
+/*   Updated: 2023/11/23 17:11:55 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,23 +52,7 @@ static void	plot_line_low(t_pair *p, t_data *d)
 	free(a);
 }
 
-static void	loop_low(t_pair *p, t_quad *q, t_data *d, t_pnt2d *a)
-{
-	while (a->x <= p->x1)
-	{
-		plot(a->x, a->y, d);
-		if (q->d > 0)
-		{
-			a->y = a->y + q->i;
-			q->d = q->d + (2 * (q->dy - q->dx));
-		}
-		else
-			q->d = q->d + 2 * q->dy;
-		a->x++;
-	}
-}
-
-static void	plot_line_high(t_pair *p, t_data *d)
+static void	plot_line_high(t_pnt3d *n, t_pnt3d *w, t_data *d)
 {
 	t_pnt2d	*a;	
 	t_quad	q;
@@ -85,6 +69,22 @@ static void	plot_line_high(t_pair *p, t_data *d)
 	a = new_point(p->x0, p->y0);
 	loop_high(p, &q, d, a);
 	free(a);
+}
+
+static void	loop_low(t_pair *p, t_quad *q, t_data *d, t_pnt2d *a)
+{
+	while (a->x <= p->x1)
+	{
+		plot(a->x, a->y, d);
+		if (q->d > 0)
+		{
+			a->y = a->y + q->i;
+			q->d = q->d + (2 * (q->dy - q->dx));
+		}
+		else
+			q->d = q->d + 2 * q->dy;
+		a->x++;
+	}
 }
 
 static void	loop_high(t_pair *p, t_quad *q, t_data *d, t_pnt2d *a)
