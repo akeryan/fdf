@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 09:31:35 by akeryan           #+#    #+#             */
-/*   Updated: 2023/11/23 17:07:59 by akeryan          ###   ########.fr       */
+/*   Updated: 2023/11/23 19:09:49 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 # include <stdlib.h>
 # include <stdio.h>
 # include <string.h>
-//# include <math.h>
 # include <fcntl.h>
 # include "mlx.h" 
 # include "libft.h"
@@ -70,13 +69,6 @@ typedef struct s_pair
 	int	y1;
 }	t_pair;
 
-typedef struct s_quad
-{
-	int	dx;
-	int	dy;
-	int	i;
-	int	d;
-}	t_quad;
 
 typedef struct s_pnt3d
 {
@@ -84,8 +76,8 @@ typedef struct s_pnt3d
 	float	y;
 	float	z;
 	float	w;
-	int		iso_x;
-	int		iso_y;
+	int		i_x;
+	int		i_y;
 	t_pnt3d	*n;
 	t_pnt3d	*w;	
 }	t_pnt3d;
@@ -129,7 +121,7 @@ int			key_handler(int key, t_data *d);
 
 //line
 void		plot(int x, int y, t_data *d);
-void		plot_line(t_pair *p, t_data *d);
+void		plot_line(t_pnt3d *a, t_pnt3d *b, t_data *d);
 void		plot_line_low(t_pair *p, t_data *d);
 void		plot_line_high(t_pair *p, t_data *d);
 
