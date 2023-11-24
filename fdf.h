@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 09:31:35 by akeryan           #+#    #+#             */
-/*   Updated: 2023/11/24 14:56:45 by akeryan          ###   ########.fr       */
+/*   Updated: 2023/11/24 18:06:57 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <stdio.h>
 # include <string.h>
 # include <fcntl.h>
+# include <math.h>
 # include "mlx.h" 
 # include "libft.h"
 
@@ -74,10 +75,10 @@ typedef struct s_p3d
 	float			y;
 	float			z;
 	float			v;
-	int				i_x;
-	int				i_y;
-	struct s_p3d	*n;
-	struct s_p3d	*w;	
+	int				iso_x;
+	int				iso_y;
+	struct s_p3d	*n_ptr;
+	struct s_p3d	*w_ptr;	
 }	t_p3d;
 
 typedef struct s_obj3d

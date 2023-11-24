@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 10:18:28 by akeryan           #+#    #+#             */
-/*   Updated: 2023/11/24 15:35:52 by akeryan          ###   ########.fr       */
+/*   Updated: 2023/11/24 18:14:39 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,17 @@ static void	put_values(t_obj_vars *v)
 	v->to->x = v->i;
 	v->to->y = v->j;
 	v->to->z = ft_atoi(v->spl[v->j]);
+	v->to->v = 1;
+	v->to->iso_x = round(v->to->x);
+	v->to->iso_y = round(v->to->y);
+	if (v->j > 0)
+		v->to->w_ptr = &v->obj->pts[v->i * v->cols + v->j - 1];
+	else
+		v->to->w_ptr = NULL;
+	if (v->i > 0) 
+		v->to->n_ptr = &v->obj->pts[(v->i - 1) * v->cols + v->j];
+	else
+		v->to->n_ptr = NULL;
 }
 
 void	print_obj(t_obj3d *a)
