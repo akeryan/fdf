@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 09:31:35 by akeryan           #+#    #+#             */
-/*   Updated: 2023/11/24 14:19:21 by akeryan          ###   ########.fr       */
+/*   Updated: 2023/11/24 14:56:45 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,6 @@ typedef struct s_pair
 	int	y1;
 }	t_pair;
 
-
 typedef struct s_p3d
 {
 	float			x;
@@ -86,6 +85,28 @@ typedef struct s_obj3d
 	t_p3d		*pts;
 	int			len;
 }	t_obj3d;
+
+typedef struct s_obj_vars
+{
+	t_obj3d	*obj;
+	t_p3d	*to;
+	t_node	*tn;
+	char	**spl;
+	int		rows;
+	int		cols;
+	int		i;
+	int		j;
+}	t_obj_vars;	
+
+typedef struct s_line_vars
+{
+	int		dx;
+	int		dy;
+	int		_x;
+	int		_y;
+	int		i;
+	int		d;
+}	t_line_vars;
 
 //typedef struct s_obj3d
 //{

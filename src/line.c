@@ -6,12 +6,11 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 12:06:43 by akeryan           #+#    #+#             */
-/*   Updated: 2023/11/23 20:12:50 by akeryan          ###   ########.fr       */
+/*   Updated: 2023/11/24 14:54:23 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../fdf.h"
-#include "line.h"
 
 static void	plot_line_low(t_p3d *a, t_p3d *b, t_data *d);
 static void	plot_line_high(t_p3d *a, t_p3d *b, t_data *d);
