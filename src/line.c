@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 12:06:43 by akeryan           #+#    #+#             */
-/*   Updated: 2023/11/24 14:54:23 by akeryan          ###   ########.fr       */
+/*   Updated: 2023/11/24 19:42:22 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,16 @@ static void	plot(int x, int y, t_data *d);
 
 void	plot_line(t_p3d *a, t_p3d *b, t_data *d)
 {
-	if (abs(b->i_y - a->i_y) < abs(b->i_x - a->i_x))
+	if (abs(b->iso_y - a->iso_y) < abs(b->iso_x - a->iso_x))
 	{
-		if (a->i_x > b->i_x)
+		if (a->iso_x > b->iso_x)
 			plot_line_low(b, a, d);
 		else
 			plot_line_low(a, b, d);
 	}
 	else
 	{
-		if (a->i_y > b->i_y)
+		if (a->iso_y > b->iso_y)
 			plot_line_high(b, a, d);
 		else
 			plot_line_high(a, b, d);
@@ -38,8 +38,8 @@ static void	plot_line_low(t_p3d *a, t_p3d *b, t_data *d)
 {
 	t_line_vars	q;
 
-	q.dx = b->i_x - a->i_x;
-	q.dy = b->i_y - a->i_y;
+	q.dx = b->iso_x - a->iso_x;
+	q.dy = b->iso_y - a->iso_y;
 	q.i = 1;
 	if (q.dy < 0)
 	{
@@ -47,9 +47,9 @@ static void	plot_line_low(t_p3d *a, t_p3d *b, t_data *d)
 		q.dy = -q.dy;
 	}
 	q.d = 2 * q.dy - q.dx;
-	q._x = a->i_x;
-	q._y = a->i_y;
-	while (q._x <= b->i_x)
+	q._x = a->iso_x;
+	q._y = a->iso_y;
+	while (q._x <= b->iso_x)
 	{
 		plot(q._x, q._y, d);
 		if (q.d > 0)
@@ -59,7 +59,7 @@ static void	plot_line_low(t_p3d *a, t_p3d *b, t_data *d)
 		}
 		else
 			q.d = q.d + 2 * q.dy;
-		a->x++;
+		q._x++;
 	}
 }
 
@@ -67,8 +67,8 @@ static void	plot_line_high(t_p3d *a, t_p3d *b, t_data *d)
 {
 	t_line_vars	q;
 
-	q.dx = b->i_x - a->i_x;
-	q.dy = b->i_y - a->i_y;
+	q.dx = b->iso_x - a->iso_x;
+	q.dy = b->iso_y - a->iso_y;
 	q.i = 1;
 	if (q.dx < 0)
 	{
@@ -76,9 +76,9 @@ static void	plot_line_high(t_p3d *a, t_p3d *b, t_data *d)
 		q.dx = -q.dx;
 	}
 	q.d = 2 * q.dx - q.dy;
-	q._x = a->i_x;
-	q._y = a->i_y;
-	while (q._y <= b->i_y)
+	q._x = a->iso_x;
+	q._y = a->iso_y;
+	while (q._y <= b->iso_y)
 	{
 		plot(q._x, q._y, d);
 		if (q.d > 0)

@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 10:18:28 by akeryan           #+#    #+#             */
-/*   Updated: 2023/11/24 18:14:39 by akeryan          ###   ########.fr       */
+/*   Updated: 2023/11/24 19:53:04 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,5 +85,29 @@ void	print_obj(t_obj3d *a)
 		while (++j < 19)
 			printf("%.0f ", a->pts[i * 19 + j].z);
 		printf("\n");
+	}
+}
+
+void	print_obj2(t_obj3d *a)
+{
+	int	i;
+
+	i = 0;
+	while (i++ < a->len)
+	{
+		//printf("x: %d, y: %d\n", a->pts->iso_x, a->pts->iso_y);
+		printf("z: %d\n", a->pts[i].iso_x);
+	}
+}
+
+void magnify(t_obj3d *obj, int a)
+{
+	int i;
+	i = 0;
+	while (i < obj->len)
+	{
+		obj->pts[i].iso_x *= a;
+		obj->pts[i].iso_y *= a;
+		i++;
 	}
 }
