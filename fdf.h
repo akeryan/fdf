@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 09:31:35 by akeryan           #+#    #+#             */
-/*   Updated: 2023/11/24 19:51:59 by akeryan          ###   ########.fr       */
+/*   Updated: 2023/11/24 20:12:26 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ typedef struct s_p3d
 	int				iso_y;
 	struct s_p3d	*n_ptr;
 	struct s_p3d	*w_ptr;	
+	int				color;
 }	t_p3d;
 
 typedef struct s_obj3d

@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 12:06:43 by akeryan           #+#    #+#             */
-/*   Updated: 2023/11/24 19:42:22 by akeryan          ###   ########.fr       */
+/*   Updated: 2023/11/24 20:20:39 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	plot_line_low(t_p3d *a, t_p3d *b, t_data *d);
 static void	plot_line_high(t_p3d *a, t_p3d *b, t_data *d);
-static void	plot(int x, int y, t_data *d);
+static void	plot(int x, int y, t_data *d, int color);
 
 void	plot_line(t_p3d *a, t_p3d *b, t_data *d)
 {
@@ -51,7 +51,7 @@ static void	plot_line_low(t_p3d *a, t_p3d *b, t_data *d)
 	q._y = a->iso_y;
 	while (q._x <= b->iso_x)
 	{
-		plot(q._x, q._y, d);
+		plot(q._x, q._y, d, b->color);
 		if (q.d > 0)
 		{
 			q._y = q._y + q.i;
@@ -80,7 +80,7 @@ static void	plot_line_high(t_p3d *a, t_p3d *b, t_data *d)
 	q._y = a->iso_y;
 	while (q._y <= b->iso_y)
 	{
-		plot(q._x, q._y, d);
+		plot(q._x, q._y, d, b->color);
 		if (q.d > 0)
 		{
 			q._x = q._x + q.i;
@@ -92,12 +92,10 @@ static void	plot_line_high(t_p3d *a, t_p3d *b, t_data *d)
 	}
 }
 
-static void	plot(int x, int y, t_data *d)
+static void	plot(int x, int y, t_data *d, int color)
 {
 	int	pix;
-	int	color;
 
-	color = 0xFF0000;
 	pix = (y * d->line_bytes) + (x * 4);
 	if (d->endian == 1)
 	{
