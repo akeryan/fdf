@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 09:31:35 by akeryan           #+#    #+#             */
-/*   Updated: 2023/11/22 18:38:13 by akeryan          ###   ########.fr       */
+/*   Updated: 2023/11/24 14:56:45 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 # include <stdlib.h>
 # include <stdio.h>
 # include <string.h>
-//# include <math.h>
 # include <fcntl.h>
 # include "mlx.h" 
 # include "libft.h"
@@ -24,20 +23,17 @@
 # define WINDOW_WIDTH 800 
 # define WINDOW_HEIGHT 600
 # define MLX_ERROR 1
-# define COLOR 0xFF0000
 
 typedef struct s_data
 {
 	void	*mlx;
 	void	*win;
+	int		pixel_bits;
+	int		line_bytes;
+	int		endian;
+	void	*img;
+	char	*buf;
 }	t_data;
-
-typedef struct s_img_data
-{
-	int	pixel_bits;
-	int	line_bytes;
-	int	endian;
-}	t_idata;
 
 typedef struct s_array
 {
@@ -58,29 +54,74 @@ typedef struct s_lst
 	int		len;
 }	t_lst;
 
+typedef struct s_pnt2d
+{
+	int	x;
+	int	y;
+}	t_pnt2d;
+
 typedef struct s_pair
 {
 	int	x0;
 	int	y0;
 	int	x1;
 	int	y1;
-} t_pair;
+}	t_pair;
 
-typedef struct s_point
+typedef struct s_p3d
 {
-	int	x;
-	int	y;
-}	t_point;
+	float			x;
+	float			y;
+	float			z;
+	float			v;
+	int				i_x;
+	int				i_y;
+	struct s_p3d	*n;
+	struct s_p3d	*w;	
+}	t_p3d;
 
-typedef struct s_quad
+typedef struct s_obj3d
 {
-	int	dx;
-	int	dy;
-	int	i;
-	int	d;
-}	t_quad;
+	t_p3d		*pts;
+	int			len;
+}	t_obj3d;
 
-void		plot(int x, int y, char *buf, t_idata d);
+typedef struct s_obj_vars
+{
+	t_obj3d	*obj;
+	t_p3d	*to;
+	t_node	*tn;
+	char	**spl;
+	int		rows;
+	int		cols;
+	int		i;
+	int		j;
+}	t_obj_vars;	
+
+typedef struct s_line_vars
+{
+	int		dx;
+	int		dy;
+	int		_x;
+	int		_y;
+	int		i;
+	int		d;
+}	t_line_vars;
+
+//typedef struct s_obj3d
+//{
+	//t_p3d		**pts;
+	//int			rows;
+	//int			cols;
+//}	t_obj3d;
+
+typedef struct s_iso3d
+{
+	t_pnt2d	**pts;
+	int		rows;
+	int		cols;
+}	t_iso3d;
+
 void		check_ptr(void *ptr);
 void		mlx_end(void *mlx_ptr, void *win_ptr);
 void		check_allocation(void *ptr);
@@ -105,12 +146,15 @@ int			get_keycode(int key, t_data *d);
 int			key_handler(int key, t_data *d);
 
 //line
-void		plot_line(t_pair *p, char *buf, t_idata id);
-void		plot_line_low(t_pair *p, char *buf, t_idata d);
-void		plot_line_high(t_pair *p, char *buf, t_idata id);
+void		plot_line(t_p3d *a, t_p3d *b, t_data *d);
+
+//3dobj
+t_obj3d		*new_obj3d(int len);
+t_obj3d		*obj_from_map(t_lst *map);
 
 //structs
 void		*new_point(int x, int y);
 void		*new_pair(int x0, int y0, int x1, int y1);
+void		print_obj(t_obj3d *a);
 
 #endif

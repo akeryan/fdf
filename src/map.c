@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_to_arr.c                                       :+:      :+:    :+:   */
+/*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 13:51:51 by akeryan           #+#    #+#             */
-/*   Updated: 2023/11/21 13:51:12 by akeryan          ###   ########.fr       */
+/*   Updated: 2023/11/23 11:34:48 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,17 +119,3 @@ t_array	*new_tarray(int rows, int cols)
 	return (out);
 }
 
-void	print_arr(t_array *a)
-{
-	int	i;
-	int	j;
-
-	i = -1;
-	while (++i < a->rows)
-	{
-		j = -1;
-		while (++j < a->cols)
-			printf("%d ", a->arr[i][j]);
-		printf("\n");
-	}
-}
