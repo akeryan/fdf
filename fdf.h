@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 09:31:35 by akeryan           #+#    #+#             */
-/*   Updated: 2023/11/23 20:20:36 by akeryan          ###   ########.fr       */
+/*   Updated: 2023/11/24 14:19:21 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@
 # define WINDOW_WIDTH 800 
 # define WINDOW_HEIGHT 600
 # define MLX_ERROR 1
-# define COLOR 0xFF0000
 
 typedef struct s_data
 {
@@ -84,10 +83,16 @@ typedef struct s_p3d
 
 typedef struct s_obj3d
 {
-	t_p3d		**pts;
-	int			rows;
-	int			cols;
+	t_p3d		*pts;
+	int			len;
 }	t_obj3d;
+
+//typedef struct s_obj3d
+//{
+	//t_p3d		**pts;
+	//int			rows;
+	//int			cols;
+//}	t_obj3d;
 
 typedef struct s_iso3d
 {
@@ -123,7 +128,7 @@ int			key_handler(int key, t_data *d);
 void		plot_line(t_p3d *a, t_p3d *b, t_data *d);
 
 //3dobj
-t_obj3d		*new_obj3d(int rows, int cols);
+t_obj3d		*new_obj3d(int len);
 t_obj3d		*obj_from_map(t_lst *map);
 
 //structs

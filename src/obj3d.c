@@ -6,79 +6,58 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 10:18:28 by akeryan           #+#    #+#             */
-/*   Updated: 2023/11/23 19:28:12 by akeryan          ###   ########.fr       */
+/*   Updated: 2023/11/24 14:18:50 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../fdf.h"
+#include "obj3d.h"
 
-static void	put_values(t_p3d *a, int x, int y, int z);
+static void	put_values(t_obj_vars *v);
 
-t_obj3d	*new_obj3d(int rows, int cols)
+t_obj3d	*new_obj3d(int len)
 {
-	t_obj3d	*out;
-	int		i;
+	t_obj3d	*obj;
 
-	out = (t_obj3d *)malloc(sizeof(t_obj3d));
-	if (out == NULL)
-		return (NULL);
-	out->pts = (t_p3d **)malloc(rows * sizeof(t_p3d *));
-	if (out->pts == NULL)
-		return (NULL);
-	out->rows = rows;
-	out->cols = cols;
-	i = 0;
-	while (i < rows)
-	{
-		out->pts[i] = (t_p3d *)malloc(cols * sizeof(t_p3d));
-		if (out->pts[i] == NULL)
-		{
-			while (--i >= 0)
-				free(out->pts[i]);
-			free(out->pts);
-			return (NULL);
-		}
-		i++;
-	}
-	return (out);
+	obj = (t_obj3d *)malloc(len * sizeof(t_obj3d));
+	check_allocation(obj);
+	return (obj);
 }
 
 t_obj3d	*obj_from_map(t_lst *map)
 {
-	t_obj3d	*a;
-	t_node	*tmp;
-	int		i;
-	int		j;
-	char	**spl;
+	t_obj_vars	v;	
 
 	if (!map || !map->top)
 		return (NULL);
-	a = new_obj3d(map->len, get_num_of_columns(map));
-	if (!a)
-		return (NULL);
-	i = 0;
-	tmp = map->top;
-	while (42)
+	v.rows = map->len;
+	v.cols = get_num_of_columns(map);
+	v.obj = new_obj(v.rows * v.cols);
+	check_allocation(v.obj);
+	v.i = 0;
+	v.tn = map->top;
+	while (1)
 	{
-		spl = ft_split(tmp->str, ' ');
-		j = -1;
-		while (++j < a->cols)
-			put_values(&a->pts[i][j], i, j, ft_atoi(spl[j]));
-		if (!tmp->next)
+		v.spl = split(v.tn->str, ' ');
+		v.j = -1;
+		while (++v.j < v.cols)
+			put_values(&v);
+		if (!v.tn->next)
 			break ;
-		tmp = tmp->next;
-		i++;
-	}	
-	return (a);
+		v.tn = v.tn->next;
+		v.i++;
+	}
+	return (v.obj);
 }
 
-static void	put_values(t_p3d *a, int x, int y, int z)
+static void	put_values(t_obj_vars *v)
 {
-	if (a == NULL)
+	if (v == NULL)
 		return ;
-	a->x = x;
-	a->y = y;
-	a->z = z;
+	v->to = &v->obj->pts[v->i * v->rows + v->j];
+	v->to->x = v->i;
+	v->to->y = v->j;
+	v->to->z = ft_atoi(v->spl[v->j]);
 }
 
 void	print_obj(t_obj3d *a)
