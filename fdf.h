@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 09:31:35 by akeryan           #+#    #+#             */
-/*   Updated: 2023/11/25 20:52:58 by akeryan          ###   ########.fr       */
+/*   Updated: 2023/11/25 22:15:18 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ typedef struct s_obj3d
 {
 	t_p3d		*a;
 	int			len;
+	int			dx;
+	int			dy;
 }	t_obj3d;
 
 typedef struct s_data

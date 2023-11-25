@@ -1,31 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   translation.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/13 11:09:50 by akeryan           #+#    #+#             */
-/*   Updated: 2023/11/25 21:05:20 by akeryan          ###   ########.fr       */
+/*   Created: 2023/11/25 21:58:45 by akeryan           #+#    #+#             */
+/*   Updated: 2023/11/25 22:31:23 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../fdf.h"
 
-int	main(int argc, char *argv[])
+void	translate(t_obj3d *obj, int key)
 {
-	t_data	d;
-	initialize(&d, argv[1]);
-	magnify2(d.obj, 35);
-	//cpy_to_iso(d.obj);
-	rotate(d.obj, &d, 'z');
-	rotate(d.obj, &d, 'x');
-	rotate(d.obj, &d, 'y');
-	cpy_to_iso(d.obj);
-	draw_obj(d.obj, &d);
-	mlx_put_image_to_window(d.mlx, d.win, d.img, 0, 0);
-    mlx_key_hook(d.win, key_handler, &d);
-	mlx_hook(d.win, 17, 0, close_window, NULL);
-    mlx_loop(d.mlx);
-	return (0);
+	if(key == 13)
+	{
+		int i;
+
+	}
 }

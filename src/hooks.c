@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 19:19:30 by akeryan           #+#    #+#             */
-/*   Updated: 2023/11/25 21:02:44 by akeryan          ###   ########.fr       */
+/*   Updated: 2023/11/25 22:20:04 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,44 @@ int	key_handler(int key, t_data *d)
 		rotate(d->obj, d, 'x');
 		render(d);
 	}
+	else if (key == 86)
+	{
+		d->angle = -abs(d->angle);
+		rotate(d->obj, d, 'y');
+		render(d);
+	}
+	else if (key == 87)
+	{
+		d->angle = abs(d->angle);
+		rotate(d->obj, d, 'y');
+		render(d);
+	}
+	else if (key == 83)
+	{
+		d->angle = -abs(d->angle);
+		rotate(d->obj, d, 'z');
+		render(d);
+	}
+	else if (key == 84)
+	{
+		d->angle = abs(d->angle);
+		rotate(d->obj, d, 'z');
+		render(d);
+	}
+	else if (key == 13)
+		d->obj->dy += d->pan;
+	else if (key == 1)
+		d->obj->dy -= d->pan;
+	else if (key == 0)
+		d->obj->dx -= d->pan;
+	else if (key == 2)
+		d->obj->dx += d->pan;
 	return (0);
 }
 
 int	close_window(int key, t_data *d)
 {
+	mlx_destroy_window(d->mlx, d->win);
 	exit(0);
 }
 
