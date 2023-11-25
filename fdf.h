@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 09:31:35 by akeryan           #+#    #+#             */
-/*   Updated: 2023/11/25 08:28:04 by akeryan          ###   ########.fr       */
+/*   Updated: 2023/11/25 10:46:03 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,16 +25,40 @@
 # define WINDOW_HEIGHT 600
 # define MLX_ERROR 1
 
+typedef struct s_p3d
+{
+	float			x;
+	float			y;
+	float			z;
+	float			v;
+	int				iso_x;
+	int				iso_y;
+	struct s_p3d	*n_ptr;
+	struct s_p3d	*w_ptr;	
+	int				color;
+}	t_p3d;
+
+typedef struct s_obj3d
+{
+	t_p3d		*pts;
+	int			len;
+}	t_obj3d;
+
 typedef struct s_data
 {
 	void	*mlx;
 	void	*win;
-	int		pixel_bits;
-	int		line_bytes;
+	int		pix_bits;
+	int		l_bytes;
 	int		endian;
 	void	*img;
 	char	*buf;
-	int		step;
+	t_obj3d	*obj;
+	int		width;
+	int		height;
+	int		margin;
+	int		deg;
+	int		pan;
 }	t_data;
 
 typedef struct s_array
@@ -70,25 +94,6 @@ typedef struct s_pair
 	int	y1;
 }	t_pair;
 
-typedef struct s_p3d
-{
-	float			x;
-	float			y;
-	float			z;
-	float			v;
-	int				iso_x;
-	int				iso_y;
-	struct s_p3d	*n_ptr;
-	struct s_p3d	*w_ptr;	
-	int				color;
-}	t_p3d;
-
-typedef struct s_obj3d
-{
-	t_p3d		*pts;
-	int			len;
-}	t_obj3d;
-
 typedef struct s_obj_vars
 {
 	t_obj3d	*obj;
@@ -114,6 +119,7 @@ typedef struct s_line_vars
 void		check_ptr(void *ptr);
 void		mlx_end(void *mlx_ptr, void *win_ptr);
 void		check_allocation(void *ptr);
+void		initialize(t_data *d, char *str);
 
 //t_lst
 t_node		*new_node(void);
@@ -146,6 +152,6 @@ void		draw_obj(t_obj3d *obj, t_data *d);
 void		*new_point(int x, int y);
 void		*new_pair(int x0, int y0, int x1, int y1);
 void		print_obj(t_obj3d *a);
-void magnify(t_obj3d *obj, int a);
+void		magnify(t_obj3d *obj, int a);
 
 #endif

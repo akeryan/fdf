@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 12:06:43 by akeryan           #+#    #+#             */
-/*   Updated: 2023/11/25 09:16:09 by akeryan          ###   ########.fr       */
+/*   Updated: 2023/11/25 10:38:03 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ static void	plot(int x, int y, t_data *d, int color)
 {
 	int	pix;
 
-	pix = (y * d->line_bytes) + (x * 4);
+	pix = (y * d->l_bytes) + (x * 4);
 	if (d->endian == 1)
 	{
 		d->buf[pix + 0] = (color >> 24);

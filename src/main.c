@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 11:09:50 by akeryan           #+#    #+#             */
-/*   Updated: 2023/11/25 09:26:31 by akeryan          ###   ########.fr       */
+/*   Updated: 2023/11/25 10:22:35 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,9 @@
 int	main(int argc, char *argv[])
 {
 	t_data	d;
- 
-	d.mlx = mlx_init();
-    d.win = mlx_new_window(d.mlx, WINDOW_WIDTH, WINDOW_HEIGHT, "Create Image");
-	d.img = mlx_new_image(d.mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
-	d.buf = mlx_get_data_addr(d.img, &d.pixel_bits, &d.line_bytes, &d.endian);
-	d.step = 10;		
-	t_lst *map = read_map(argv[1]);
-	t_obj3d *obj = obj_from_map(map);
-	magnify(obj, 30);
-	draw_obj(obj, &d);
+	initialize(&d, argv[1]);
+	magnify(d.obj, 30);
+	draw_obj(d.obj, &d);
 	mlx_put_image_to_window(d.mlx, d.win, d.img, 0, 0);
     mlx_key_hook(d.win, key_handler, &d);
 	mlx_hook(d.win, 17, 0, close_window, NULL);
