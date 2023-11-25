@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 10:18:28 by akeryan           #+#    #+#             */
-/*   Updated: 2023/11/24 20:15:53 by akeryan          ###   ########.fr       */
+/*   Updated: 2023/11/25 09:25:04 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,11 +54,9 @@ t_obj3d	*obj_from_map(t_lst *map)
 
 static void	put_values(t_obj_vars *v)
 {
-	if (v == NULL)
-		return ;
 	v->to = &v->obj->pts[v->i * v->cols + v->j];
-	v->to->x = v->i;
-	v->to->y = v->j;
+	v->to->x = v->j;
+	v->to->y = v->i;
 	v->to->z = ft_atoi(v->spl[v->j]);
 	v->to->v = 1;
 	v->to->iso_x = round(v->to->x);
@@ -68,11 +66,11 @@ static void	put_values(t_obj_vars *v)
 	else
 		v->to->color = 0xFFFFFF;
 	if (v->j > 0)
-		v->to->w_ptr = &v->obj->pts[v->i * v->cols + v->j - 1];
+		v->to->w_ptr = v->to - 1;
 	else
 		v->to->w_ptr = NULL;
 	if (v->i > 0) 
-		v->to->n_ptr = &v->obj->pts[(v->i - 1) * v->cols + v->j];
+		v->to->n_ptr = v->to - v->cols;
 	else
 		v->to->n_ptr = NULL;
 }
@@ -92,21 +90,10 @@ void	print_obj(t_obj3d *a)
 	}
 }
 
-void	print_obj2(t_obj3d *a)
+void	magnify(t_obj3d *obj, int a)
 {
 	int	i;
 
-	i = 0;
-	while (i++ < a->len)
-	{
-		//printf("x: %d, y: %d\n", a->pts->iso_x, a->pts->iso_y);
-		printf("z: %d\n", a->pts[i].iso_x);
-	}
-}
-
-void magnify(t_obj3d *obj, int a)
-{
-	int i;
 	i = 0;
 	while (i < obj->len)
 	{
