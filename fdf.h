@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 09:31:35 by akeryan           #+#    #+#             */
-/*   Updated: 2023/11/25 10:46:03 by akeryan          ###   ########.fr       */
+/*   Updated: 2023/11/25 20:52:58 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,13 @@ typedef struct s_p3d
 
 typedef struct s_obj3d
 {
-	t_p3d		*pts;
+	t_p3d		*a;
 	int			len;
 }	t_obj3d;
 
 typedef struct s_data
 {
+	t_obj3d	*obj;
 	void	*mlx;
 	void	*win;
 	int		pix_bits;
@@ -53,11 +54,10 @@ typedef struct s_data
 	int		endian;
 	void	*img;
 	char	*buf;
-	t_obj3d	*obj;
 	int		width;
 	int		height;
 	int		margin;
-	int		deg;
+	int		angle;
 	int		pan;
 }	t_data;
 
@@ -116,10 +116,10 @@ typedef struct s_line_vars
 	int		d;
 }	t_line_vars;
 
-void		check_ptr(void *ptr);
-void		mlx_end(void *mlx_ptr, void *win_ptr);
 void		check_allocation(void *ptr);
 void		initialize(t_data *d, char *str);
+float		deg_to_rad(float degs);
+void		render(t_data *d);
 
 //t_lst
 t_node		*new_node(void);
@@ -147,11 +147,17 @@ void		plot_line(t_p3d *a, t_p3d *b, t_data *d);
 t_obj3d		*new_obj3d(int len);
 t_obj3d		*obj_from_map(t_lst *map);
 void		draw_obj(t_obj3d *obj, t_data *d);
+void	cpy_to_iso(t_obj3d *obj);
 
 //structs
 void		*new_point(int x, int y);
 void		*new_pair(int x0, int y0, int x1, int y1);
 void		print_obj(t_obj3d *a);
 void		magnify(t_obj3d *obj, int a);
+void		magnify2(t_obj3d *obj, int a);
+
+//transformation
+void		rotate(t_obj3d *obj, t_data *d, char axis);
+void		project(t_obj3d *obj);
 
 #endif

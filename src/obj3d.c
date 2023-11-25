@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 10:18:28 by akeryan           #+#    #+#             */
-/*   Updated: 2023/11/25 09:25:04 by akeryan          ###   ########.fr       */
+/*   Updated: 2023/11/25 17:33:17 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ t_obj3d	*new_obj3d(int len)
 	obj = (t_obj3d *)malloc(sizeof(t_obj3d));
 	check_allocation(obj);
 	obj->len = len;
-	obj->pts = (t_p3d *)malloc(len * sizeof(t_p3d));
-	check_allocation(obj->pts);
+	obj->a = (t_p3d *)malloc(len * sizeof(t_p3d));
+	check_allocation(obj->a);
 	return (obj);
 }
 
@@ -54,7 +54,7 @@ t_obj3d	*obj_from_map(t_lst *map)
 
 static void	put_values(t_obj_vars *v)
 {
-	v->to = &v->obj->pts[v->i * v->cols + v->j];
+	v->to = &v->obj->a[v->i * v->cols + v->j];
 	v->to->x = v->j;
 	v->to->y = v->i;
 	v->to->z = ft_atoi(v->spl[v->j]);
@@ -85,7 +85,7 @@ void	print_obj(t_obj3d *a)
 	{
 		j = -1;
 		while (++j < 19)
-			printf("%.0f ", a->pts[i * 19 + j].z);
+			printf("%.0f ", a->a[i * 19 + j].z);
 		printf("\n");
 	}
 }
@@ -97,8 +97,22 @@ void	magnify(t_obj3d *obj, int a)
 	i = 0;
 	while (i < obj->len)
 	{
-		obj->pts[i].iso_x *= a;
-		obj->pts[i].iso_y *= a;
+		obj->a[i].iso_x *= a;
+		obj->a[i].iso_y *= a;
+		i++;
+	}
+}
+
+void	magnify2(t_obj3d *obj, int a)
+{
+	int	i;
+
+	i = 0;
+	while (i < obj->len)
+	{
+		obj->a[i].x *= a;
+		obj->a[i].y *= a;
+		obj->a[i].z *= a;
 		i++;
 	}
 }

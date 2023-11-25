@@ -6,26 +6,11 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 11:09:32 by akeryan           #+#    #+#             */
-/*   Updated: 2023/11/25 10:41:02 by akeryan          ###   ########.fr       */
+/*   Updated: 2023/11/25 20:57:47 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../fdf.h"
-
-void	check_ptr(void *ptr)
-{
-	if (ptr == NULL)
-	{
-		printf("ptr is NULL\n");
-		exit(MLX_ERROR);
-	}
-}
-
-void	mlx_end(void *mlx_ptr, void *win_ptr)
-{
-	mlx_destroy_window(mlx_ptr, win_ptr);
-	free(mlx_ptr);
-}
 
 void	check_allocation(void *ptr)
 {
@@ -40,10 +25,42 @@ void	initialize(t_data *d, char *str)
 {
 	t_lst	*map;
 
+	d->width = 800;
+	d->height = 600;
+	d->margin = 30;
+	d->angle = 5;
 	d->mlx = mlx_init();
-	d->win = mlx_new_window(d->mlx, WINDOW_WIDTH, WINDOW_HEIGHT, "FDF");
-	d->img = mlx_new_image(d->mlx, WINDOW_WIDTH - 30, WINDOW_HEIGHT - 30);
+	d->win = mlx_new_window(d->mlx, d->width, d->height, "FDF");
+	d->img = mlx_new_image(d->mlx, d->width, d->height);
 	d->buf = mlx_get_data_addr(d->img, &d->pix_bits, &d->l_bytes, &d->endian);
 	map = read_map(str);
 	d->obj = obj_from_map(map);
 }
+
+float	deg_to_rad(float degs)
+{
+	return ((degs * M_PI) / 180);
+}
+
+void	cpy_to_iso(t_obj3d *obj)
+{
+	int i;
+
+	i = 0;
+	while (i < obj->len)
+	{
+		obj->a[i].iso_x = obj->a[i].x;
+		obj->a[i].iso_y = obj->a[i].y;
+		i++;
+	}
+}
+
+void	render(t_data *d)
+{
+	cpy_to_iso(d->obj);
+	d->img = mlx_new_image(d->mlx, d->width, d->height);
+	d->buf = mlx_get_data_addr(d->img, &d->pix_bits, &d->l_bytes, &d->endian);
+	draw_obj(d->obj, d);
+	mlx_put_image_to_window(d->mlx, d->win, d->img, 0, 0);
+}
+
