@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 10:18:28 by akeryan           #+#    #+#             */
-/*   Updated: 2023/11/26 10:26:21 by akeryan          ###   ########.fr       */
+/*   Updated: 2023/11/26 17:00:35 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,9 @@ static void	put_values(t_obj_vars *v)
 	v->to->_x = v->j;
 	v->to->_y = v->i;
 	v->to->_z = ft_atoi(v->spl[v->j]);
+	v->to->x = v->to->_x;
+	v->to->y = v->to->_y;
+	v->to->z = v->to->_z;
 	if (v->to->_z > 0)
 		v->to->color = 0xFF0000;
 	else

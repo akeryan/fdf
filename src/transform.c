@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 21:58:45 by akeryan           #+#    #+#             */
-/*   Updated: 2023/11/26 14:41:13 by akeryan          ###   ########.fr       */
+/*   Updated: 2023/11/26 17:11:42 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,44 +33,29 @@ void	transform(t_obj3d *obj, t_data *d)
 static float	transform_x(t_obj3d *obj, t_data *d, int i)
 {
 	t_trans_vars	t;
-	float			s;
-	float			c;
 
-	s = sin(d->_rad);
-	c = cos(d->_rad);
-	i = 0;
-	t.w = obj->a[i]._x * obj->zoom * cos(obj->ry) * cos(obj->rz);
-	t.v = obj->a[i]._y * obj->zoom * (cos(obj->rz) * sin(obj->rx) * sin(obj->ry) - sin(obj->rz) * cos(obj->rx));
-	t.u = obj->a[i]._z * obj->zoom * (cos(obj->rx) * sin(obj->ry) * cos(obj->rz) + sin(obj->rx) * sin(obj->rz));
-	return (t.w + t.v + t.u + obj->zoom * obj->dx);
+	t.w = obj->a[i]._x * cos(obj->ry) * cos(obj->rz);
+	t.v = obj->a[i]._y * (cos(obj->rz) * sin(obj->rx) * sin(obj->ry) - sin(obj->rz) * cos(obj->rx));
+	t.u = obj->a[i]._z * (cos(obj->rx) * sin(obj->ry) * cos(obj->rz) + sin(obj->rx) * sin(obj->rz));
+	return (obj->zoom * (t.w + t.v + t.u + obj->dx));
 }
 
 static float	transform_y(t_obj3d *obj, t_data *d, int i)
 {
 	t_trans_vars	t;
-	float			s;
-	float			c;
 
-	s = sin(d->_rad);
-	c = cos(d->_rad);
-	i = 0;
-	t.w = obj->a[i]._x * obj->zoom * s * c;
-	t.v = obj->a[i]._y * obj->zoom * (s * s * s + c * c);
-	t.u = obj->a[i]._z * obj->zoom * (s * s * c - s * c);
-	return (t.w + t.v + t.u + obj->zoom * obj->dy);
+	t.w = obj->a[i]._x * cos(obj->ry) * sin(obj->rz);
+	t.v = obj->a[i]._y * (sin(obj->rx) * sin(obj->ry) * sin(obj->rz) + cos(obj->rx) * cos(obj->rz));
+	t.u = obj->a[i]._z * (cos(obj->rx) * sin(obj->ry) * sin(obj->rz) - sin(obj->rx) * cos(obj->rz));
+	return (obj->zoom * (t.w + t.v + t.u + obj->dy));
 }
 
 static float	transform_z(t_obj3d *obj, t_data *d, int i)
 {
 	t_trans_vars	t;
-	float			s;
-	float			c;
 
-	s = sin(d->_rad);
-	c = cos(d->_rad);
-	i = 0;
-	t.w = -obj->a[i]._x * obj->zoom * s;
-	t.v = obj->a[i]._y * obj->zoom * (s * c);
-	t.u = obj->a[i]._z * obj->zoom * (c * c);
-	return (t.w + t.v + t.u);
+	t.w = -obj->a[i]._x * sin(obj->ry);
+	t.v = obj->a[i]._y * sin(obj->rx) * cos(obj->ry);
+	t.u = obj->a[i]._z * cos(obj->rx) * cos(obj->ry);
+	return (obj->zoom * (t.w + t.v + t.u));
 }
