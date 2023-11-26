@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 09:31:35 by akeryan           #+#    #+#             */
-/*   Updated: 2023/11/26 07:54:30 by akeryan          ###   ########.fr       */
+/*   Updated: 2023/11/26 10:14:19 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,12 @@
 
 typedef struct s_p3d
 {
+	float			_x;
+	float			_y;
+	float			_z;
 	float			x;
 	float			y;
 	float			z;
-	float			v;
-	int				iso_x;
-	int				iso_y;
 	struct s_p3d	*n_ptr;
 	struct s_p3d	*w_ptr;	
 	int				color;
@@ -133,7 +133,7 @@ void		print_map(t_lst *map);
 //t_array
 t_lst		*new_map(void);
 t_array		*new_tarray(int rows, int cols);
-void		print_arr(t_array *arr);
+//void		print_arr(t_array *arr);
 t_array		*array_from_map(t_lst *map);
 
 //hooks
@@ -148,13 +148,13 @@ void		plot_line(t_p3d *a, t_p3d *b, t_data *d);
 t_obj3d		*new_obj3d(int len);
 t_obj3d		*obj_from_map(t_lst *map);
 void		draw_obj(t_obj3d *obj, t_data *d);
-void		cpy_to_iso(t_obj3d *obj);
+//void		cpy_to_iso(t_obj3d *obj);
 
 //structs
 void		*new_point(int x, int y);
 void		*new_pair(int x0, int y0, int x1, int y1);
 void		print_obj(t_obj3d *a);
-void		magnify(t_obj3d *obj, int a);
+//void		magnify(t_obj3d *obj, int a);
 void		magnify2(t_obj3d *obj, int a);
 
 //transformation

@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 11:09:32 by akeryan           #+#    #+#             */
-/*   Updated: 2023/11/26 07:54:19 by akeryan          ###   ########.fr       */
+/*   Updated: 2023/11/26 10:17:57 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,22 +40,22 @@ void	initialize(t_data *d, char *str)
 	d->obj->dy = 0;
 }
 
-void	cpy_to_iso(t_obj3d *obj)
-{
-	int	i;
+//void	cpy_to_iso(t_obj3d *obj)
+//{
+	//int	i;
 
-	i = 0;
-	while (i < obj->len)
-	{
-		obj->a[i].iso_x = obj->a[i].x + obj->dx;
-		obj->a[i].iso_y = obj->a[i].y + obj->dy;
-		i++;
-	}
-}
+	//i = 0;
+	//while (i < obj->len)
+	//{
+		//obj->a[i].x = obj->a[i].x + obj->dx;
+		//obj->a[i].y = obj->a[i].y + obj->dy;
+		//i++;
+	//}
+//}
 
 void	render(t_data *d)
 {
-	cpy_to_iso(d->obj);
+	//cpy_to_iso(d->obj);
 	mlx_destroy_image(d->mlx, d->img);
 	d->img = mlx_new_image(d->mlx, d->width, d->height);
 	d->buf = mlx_get_data_addr(d->img, &d->pix_bits, &d->l_bytes, &d->endian);
