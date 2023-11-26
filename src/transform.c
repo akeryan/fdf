@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   translation.c                                      :+:      :+:    :+:   */
+/*   transform.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 21:58:45 by akeryan           #+#    #+#             */
-/*   Updated: 2023/11/26 14:04:17 by akeryan          ###   ########.fr       */
+/*   Updated: 2023/11/26 14:41:13 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,9 @@ static float	transform_x(t_obj3d *obj, t_data *d, int i)
 	s = sin(d->_rad);
 	c = cos(d->_rad);
 	i = 0;
-	t.w = obj->a[i]._x * obj->zoom * c * c;
-	t.v = obj->a[i]._y * obj->zoom * (c * s * s - s * c);
-	t.u = obj->a[i]._z * obj->zoom * (s * c * c + s * s);
+	t.w = obj->a[i]._x * obj->zoom * cos(obj->ry) * cos(obj->rz);
+	t.v = obj->a[i]._y * obj->zoom * (cos(obj->rz) * sin(obj->rx) * sin(obj->ry) - sin(obj->rz) * cos(obj->rx));
+	t.u = obj->a[i]._z * obj->zoom * (cos(obj->rx) * sin(obj->ry) * cos(obj->rz) + sin(obj->rx) * sin(obj->rz));
 	return (t.w + t.v + t.u + obj->zoom * obj->dx);
 }
 

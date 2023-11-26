@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 11:09:32 by akeryan           #+#    #+#             */
-/*   Updated: 2023/11/26 10:58:30 by akeryan          ###   ########.fr       */
+/*   Updated: 2023/11/26 14:43:07 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,13 @@ void	initialize(t_data *d, char *str)
 	d->height = 600;
 	d->_angle = 5.0;
 	d->_rad = d->_angle * M_PI / 180.0;
-	d->_pan = 10.0;
+	d->_pan = 5.0;
 	d->_zoom = 0.1;
 	map = read_map(str);
 	d->obj = obj_from_map(map);
 	d->obj->dx = 0.0;
 	d->obj->dy = 0.0;
-	d->obj->zoom = 1.0;
+	d->obj->zoom = 30.0;
 	d->obj->rx = 0.0;
 	d->obj->ry = 0.0;
 	d->obj->rz = 0.0;
