@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 09:31:35 by akeryan           #+#    #+#             */
-/*   Updated: 2023/11/26 10:57:03 by akeryan          ###   ########.fr       */
+/*   Updated: 2023/11/26 14:03:31 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,6 +124,13 @@ typedef struct s_line_vars
 	int		d;
 }	t_line_vars;
 
+typedef struct s_trans_vars
+{
+	float	w;
+	float	u;
+	float	v;
+}	t_trans_vars;
+
 void		check_allocation(void *ptr);
 void		initialize(t_data *d, char *str);
 void		render(t_data *d);
@@ -166,6 +173,6 @@ void		magnify2(t_obj3d *obj, int a);
 //transformation
 void		rotate(t_obj3d *obj, t_data *d, char axis);
 void		project(t_obj3d *obj);
-void		translate(t_obj3d *obj);
+void		transform(t_obj3d *obj, t_data *d);
 
 #endif

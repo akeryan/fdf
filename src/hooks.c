@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 19:19:30 by akeryan           #+#    #+#             */
-/*   Updated: 2023/11/26 10:57:52 by akeryan          ###   ########.fr       */
+/*   Updated: 2023/11/26 14:02:57 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,69 +18,31 @@ int	key_handler(int key, t_data *d)
 	if (key == 53)
 		close_window(key, d);
 	else if (key == 89)
-	{
-		d->_angle = -fabsf(d->_angle);
-		rotate(d->obj, d, 'x');
-		render(d);
-	}
+		d->obj->rx -= d->_angle;
 	else if (key == 91)
-	{
-		d->_angle = fabsf(d->_angle);
-		rotate(d->obj, d, 'x');
-		render(d);
-	}
+		d->obj->rx += d->_angle;
 	else if (key == 86)
-	{
-		d->_angle = -fabsf(d->_angle);
-		rotate(d->obj, d, 'y');
-		render(d);
-	}
+		d->obj->ry -= d->_angle;
 	else if (key == 87)
-	{
-		d->_angle = fabsf(d->_angle);
-		rotate(d->obj, d, 'y');
-		render(d);
-	}
+		d->obj->ry += d->_angle;
 	else if (key == 83)
-	{
-		d->_angle = -fabsf(d->_angle);
-		rotate(d->obj, d, 'z');
-		render(d);
-	}
+		d->obj->rz -= d->_angle;
 	else if (key == 84)
-	{
-		d->_angle = fabsf(d->_angle);
-		rotate(d->obj, d, 'z');
-		render(d);
-	}
+		d->obj->rz += d->_angle;
 	else if (key == 13)
-	{
 		d->obj->dy -= d->_pan;
-		//printf("dy: %d\n", d->obj->dy);
-		translate(d->obj);
-		render(d);
-	}
 	else if (key == 1)
-	{
 		d->obj->dy += d->_pan;
-		//printf("dy: %d\n", d->obj->dy);
-		translate(d->obj);
-		render(d);
-	}
 	else if (key == 0)
-	{
 		d->obj->dx -= d->_pan;
-		//printf("dx: %d\n", d->obj->dx);
-		translate(d->obj);
-		render(d);
-	}
 	else if (key == 2)
-	{
 		d->obj->dx += d->_pan;
-		//printf("dx: %d\n", d->obj->dx);
-		translate(d->obj);
-		render(d);
-	}
+	else if (key == 78)
+		d->obj->zoom -= d->_zoom;
+	else if (key == 69)
+		d->obj->zoom += d->_zoom;
+	transform(d->obj, d);
+	render(d);
 	return (0);
 }
 
