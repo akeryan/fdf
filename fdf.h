@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 09:31:35 by akeryan           #+#    #+#             */
-/*   Updated: 2023/11/26 18:18:08 by akeryan          ###   ########.fr       */
+/*   Updated: 2023/11/26 19:23:03 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,7 +147,6 @@ void		print_map(t_lst *map);
 //t_array
 t_lst		*new_map(void);
 t_array		*new_tarray(int rows, int cols);
-//void		print_arr(t_array *arr);
 t_array		*array_from_map(t_lst *map);
 
 //hooks
@@ -162,18 +161,12 @@ void		plot_line(t_p3d *a, t_p3d *b, t_data *d);
 t_obj3d		*new_obj3d(int len);
 t_obj3d		*obj_from_map(t_lst *map);
 void		draw_obj(t_obj3d *obj, t_data *d);
-//void		cpy_to_iso(t_obj3d *obj);
 
 //structs
 void		*new_point(int x, int y);
 void		*new_pair(int x0, int y0, int x1, int y1);
-void		print_obj(t_obj3d *a);
-//void		magnify(t_obj3d *obj, int a);
-void		magnify2(t_obj3d *obj, int a);
 
 //transformation
-void		rotate(t_obj3d *obj, t_data *d, char axis);
-void		project(t_obj3d *obj);
 void		transform(t_obj3d *obj, t_data *d);
 
 #endif

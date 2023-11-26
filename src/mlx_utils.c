@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 11:09:32 by akeryan           #+#    #+#             */
-/*   Updated: 2023/11/26 19:12:49 by akeryan          ###   ########.fr       */
+/*   Updated: 2023/11/26 19:35:22 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ void	initialize(t_data *d, char *str)
 {
 	t_lst	*map;
 
-	d->width = 1800;
-	d->height = 1600;
+	d->width = 2400;
+	d->height = 1200;
 	d->_angle = 5.0;
 	d->_rad = d->_angle * M_PI / 180.0;
 	d->_pan = 1.0;
@@ -35,7 +35,7 @@ void	initialize(t_data *d, char *str)
 	d->obj = obj_from_map(map);
 	d->obj->dx = 0.0;
 	d->obj->dy = 0.0;
-	d->obj->zoom = 5.0;
+	d->obj->zoom = 30.0;
 	d->obj->rx = asin(1 / sqrt(3));
 	d->obj->ry = 0.0;
 	d->obj->rz = 45 * M_PI / 180;
