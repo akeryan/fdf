@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 09:31:35 by akeryan           #+#    #+#             */
-/*   Updated: 2023/11/26 19:23:03 by akeryan          ###   ########.fr       */
+/*   Updated: 2023/11/26 22:20:05 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,6 +161,7 @@ void		plot_line(t_p3d *a, t_p3d *b, t_data *d);
 t_obj3d		*new_obj3d(int len);
 t_obj3d		*obj_from_map(t_lst *map);
 void		draw_obj(t_obj3d *obj, t_data *d);
+void		print_obj(t_obj3d *obj);
 
 //structs
 void		*new_point(int x, int y);
@@ -168,5 +169,6 @@ void		*new_pair(int x0, int y0, int x1, int y1);
 
 //transformation
 void		transform(t_obj3d *obj, t_data *d);
+void		put_obj_to_origin(t_obj3d *obj);
 
 #endif

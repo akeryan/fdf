@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 11:09:32 by akeryan           #+#    #+#             */
-/*   Updated: 2023/11/26 19:35:22 by akeryan          ###   ########.fr       */
+/*   Updated: 2023/11/26 22:10:24 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,3 @@ void	render(t_data *d)
 	draw_obj(d->obj, d);
 	mlx_put_image_to_window(d->mlx, d->win, d->img, 0, 0);
 }
-
-
-
