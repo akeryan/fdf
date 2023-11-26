@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 12:48:02 by akeryan           #+#    #+#             */
-/*   Updated: 2023/11/26 07:59:40 by akeryan          ###   ########.fr       */
+/*   Updated: 2023/11/26 10:55:16 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,11 @@ void	rotate(t_obj3d *obj, t_data *d, char axis)
 {
 
 	if (axis == 'x' || axis == 'X')
-		rotate_x(obj, &d->rad);
+		rotate_x(obj, &d->_rad);
 	else if (axis == 'y' || axis == 'Y')
-		rotate_y(obj, &d->rad);
+		rotate_y(obj, &d->_rad);
 	else if (axis == 'z' || axis == 'Z')
-		rotate_z(obj, &d->rad);
+		rotate_z(obj, &d->_rad);
 }
 
 static void	rotate_x(t_obj3d *obj, float *rad)

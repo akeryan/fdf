@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 09:31:35 by akeryan           #+#    #+#             */
-/*   Updated: 2023/11/26 10:39:41 by akeryan          ###   ########.fr       */
+/*   Updated: 2023/11/26 10:57:03 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,9 +62,10 @@ typedef struct s_data
 	char	*buf;
 	int		width;
 	int		height;
-	float	angle;
-	float	rad;
-	float	pan;
+	float	_angle;
+	float	_rad;
+	float	_pan;
+	float	_zoom;
 
 }	t_data;
 
