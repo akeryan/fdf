@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 09:31:35 by akeryan           #+#    #+#             */
-/*   Updated: 2023/11/26 10:14:19 by akeryan          ###   ########.fr       */
+/*   Updated: 2023/11/26 10:39:41 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,12 @@ typedef struct s_obj3d
 {
 	t_p3d		*a;
 	int			len;
-	int			dx;
-	int			dy;
+	float		dx;
+	float		dy;
+	float		zoom;
+	float		rx;
+	float		ry;
+	float		rz;
 }	t_obj3d;
 
 typedef struct s_data
@@ -58,9 +62,10 @@ typedef struct s_data
 	char	*buf;
 	int		width;
 	int		height;
-	int		angle;
+	float	angle;
 	float	rad;
-	int		pan;
+	float	pan;
+
 }	t_data;
 
 typedef struct s_array

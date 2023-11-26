@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 12:06:43 by akeryan           #+#    #+#             */
-/*   Updated: 2023/11/26 10:11:10 by akeryan          ###   ########.fr       */
+/*   Updated: 2023/11/26 10:38:44 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void	plot(int x, int y, t_data *d, int color);
 
 void	plot_line(t_p3d *a, t_p3d *b, t_data *d)
 {
-	if (abs(b->y - a->y) < abs(b->x - a->x))
+	if (fabsf(b->y - a->y) < fabsf(b->x - a->x))
 	{
 		if (a->x > b->x)
 			plot_line_low(b, a, d);

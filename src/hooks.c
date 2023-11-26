@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 19:19:30 by akeryan           #+#    #+#             */
-/*   Updated: 2023/11/26 06:58:09 by akeryan          ###   ########.fr       */
+/*   Updated: 2023/11/26 10:38:44 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,65 +19,65 @@ int	key_handler(int key, t_data *d)
 		close_window(key, d);
 	else if (key == 89)
 	{
-		d->angle = -abs(d->angle);
+		d->angle = -fabsf(d->angle);
 		rotate(d->obj, d, 'x');
 		render(d);
 	}
 	else if (key == 91)
 	{
-		d->angle = abs(d->angle);
+		d->angle = fabsf(d->angle);
 		rotate(d->obj, d, 'x');
 		render(d);
 	}
 	else if (key == 86)
 	{
-		d->angle = -abs(d->angle);
+		d->angle = -fabsf(d->angle);
 		rotate(d->obj, d, 'y');
 		render(d);
 	}
 	else if (key == 87)
 	{
-		d->angle = abs(d->angle);
+		d->angle = fabsf(d->angle);
 		rotate(d->obj, d, 'y');
 		render(d);
 	}
 	else if (key == 83)
 	{
-		d->angle = -abs(d->angle);
+		d->angle = -fabsf(d->angle);
 		rotate(d->obj, d, 'z');
 		render(d);
 	}
 	else if (key == 84)
 	{
-		d->angle = abs(d->angle);
+		d->angle = fabsf(d->angle);
 		rotate(d->obj, d, 'z');
 		render(d);
 	}
 	else if (key == 13)
 	{
 		d->obj->dy -= d->pan;
-		printf("dy: %d\n", d->obj->dy);
+		//printf("dy: %d\n", d->obj->dy);
 		translate(d->obj);
 		render(d);
 	}
 	else if (key == 1)
 	{
 		d->obj->dy += d->pan;
-		printf("dy: %d\n", d->obj->dy);
+		//printf("dy: %d\n", d->obj->dy);
 		translate(d->obj);
 		render(d);
 	}
 	else if (key == 0)
 	{
 		d->obj->dx -= d->pan;
-		printf("dx: %d\n", d->obj->dx);
+		//printf("dx: %d\n", d->obj->dx);
 		translate(d->obj);
 		render(d);
 	}
 	else if (key == 2)
 	{
 		d->obj->dx += d->pan;
-		printf("dx: %d\n", d->obj->dx);
+		//printf("dx: %d\n", d->obj->dx);
 		translate(d->obj);
 		render(d);
 	}
