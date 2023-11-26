@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 11:09:32 by akeryan           #+#    #+#             */
-/*   Updated: 2023/11/26 06:57:06 by akeryan          ###   ########.fr       */
+/*   Updated: 2023/11/26 07:54:19 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void	initialize(t_data *d, char *str)
 	d->width = 800;
 	d->height = 600;
 	d->angle = 5;
+	d->rad = d->angle * M_PI / 180;
 	d->pan = 10;
 	d->mlx = mlx_init();
 	d->win = mlx_new_window(d->mlx, d->width, d->height, "FDF");
@@ -37,11 +38,6 @@ void	initialize(t_data *d, char *str)
 	d->obj = obj_from_map(map);
 	d->obj->dx = 0;
 	d->obj->dy = 0;
-}
-
-float	deg_to_rad(float degs)
-{
-	return ((degs * M_PI) / 180);
 }
 
 void	cpy_to_iso(t_obj3d *obj)

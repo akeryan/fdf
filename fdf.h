@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 09:31:35 by akeryan           #+#    #+#             */
-/*   Updated: 2023/11/26 06:40:05 by akeryan          ###   ########.fr       */
+/*   Updated: 2023/11/26 07:54:30 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ typedef struct s_data
 	int		width;
 	int		height;
 	int		angle;
+	float	rad;
 	int		pan;
 }	t_data;
 
@@ -119,7 +120,6 @@ typedef struct s_line_vars
 
 void		check_allocation(void *ptr);
 void		initialize(t_data *d, char *str);
-float		deg_to_rad(float degs);
 void		render(t_data *d);
 
 //t_lst
