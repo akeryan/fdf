@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 09:31:35 by akeryan           #+#    #+#             */
-/*   Updated: 2023/11/26 14:03:31 by akeryan          ###   ########.fr       */
+/*   Updated: 2023/11/26 18:18:08 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,6 +129,7 @@ typedef struct s_trans_vars
 	float	w;
 	float	u;
 	float	v;
+	float	h;
 }	t_trans_vars;
 
 void		check_allocation(void *ptr);
