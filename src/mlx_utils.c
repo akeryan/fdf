@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 11:09:32 by akeryan           #+#    #+#             */
-/*   Updated: 2023/11/25 22:15:28 by akeryan          ###   ########.fr       */
+/*   Updated: 2023/11/26 06:57:06 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ void	initialize(t_data *d, char *str)
 
 	d->width = 800;
 	d->height = 600;
-	d->margin = 30;
 	d->angle = 5;
 	d->pan = 10;
 	d->mlx = mlx_init();
@@ -47,13 +46,13 @@ float	deg_to_rad(float degs)
 
 void	cpy_to_iso(t_obj3d *obj)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < obj->len)
 	{
-		obj->a[i].iso_x = obj->a[i].x;
-		obj->a[i].iso_y = obj->a[i].y;
+		obj->a[i].iso_x = obj->a[i].x + obj->dx;
+		obj->a[i].iso_y = obj->a[i].y + obj->dy;
 		i++;
 	}
 }

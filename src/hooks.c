@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 19:19:30 by akeryan           #+#    #+#             */
-/*   Updated: 2023/11/25 22:20:04 by akeryan          ###   ########.fr       */
+/*   Updated: 2023/11/26 06:58:09 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,13 +54,33 @@ int	key_handler(int key, t_data *d)
 		render(d);
 	}
 	else if (key == 13)
-		d->obj->dy += d->pan;
-	else if (key == 1)
+	{
 		d->obj->dy -= d->pan;
+		printf("dy: %d\n", d->obj->dy);
+		translate(d->obj);
+		render(d);
+	}
+	else if (key == 1)
+	{
+		d->obj->dy += d->pan;
+		printf("dy: %d\n", d->obj->dy);
+		translate(d->obj);
+		render(d);
+	}
 	else if (key == 0)
+	{
 		d->obj->dx -= d->pan;
+		printf("dx: %d\n", d->obj->dx);
+		translate(d->obj);
+		render(d);
+	}
 	else if (key == 2)
+	{
 		d->obj->dx += d->pan;
+		printf("dx: %d\n", d->obj->dx);
+		translate(d->obj);
+		render(d);
+	}
 	return (0);
 }
 
