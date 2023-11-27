@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 10:18:28 by akeryan           #+#    #+#             */
-/*   Updated: 2023/11/26 19:23:44 by akeryan          ###   ########.fr       */
+/*   Updated: 2023/11/27 08:39:24 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,4 +73,13 @@ static void	put_values(t_obj_vars *v)
 		v->to->n_ptr = v->to - v->cols;
 	else
 		v->to->n_ptr = NULL;
+}
+
+void	print_obj(t_obj3d *obj)
+{
+	int	i;
+
+	i = -1;
+	while (++i < obj->len)
+		printf("%d - x: %.1f, y: %.1f, z: %.1f\n", i, obj->a[i]._x, obj->a[i]._y, obj->a[i]._z);
 }

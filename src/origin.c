@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/26 22:01:32 by akeryan           #+#    #+#             */
-/*   Updated: 2023/11/26 22:27:01 by akeryan          ###   ########.fr       */
+/*   Updated: 2023/11/27 08:52:40 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ void	put_obj_to_origin(t_obj3d *obj)
 	origin_x(obj);
 	origin_y(obj);
 	origin_z(obj);
-	print_obj(obj);
 }
 
 static void	origin_x(t_obj3d *obj)
@@ -91,13 +90,4 @@ static void	origin_z(t_obj3d *obj)
 	i = -1;
 	while (++i < obj->len)
 		obj->a[i]._z -= av;
-}
-
-void	print_obj(t_obj3d *obj)
-{
-	int	i;
-
-	i = -1;
-	while (++i < obj->len)
-		printf("%d - x: %.1f, y: %.1f, z: %.1f\n", i, obj->a[i]._x, obj->a[i]._y, obj->a[i]._z);
 }
