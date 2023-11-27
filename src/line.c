@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 12:06:43 by akeryan           #+#    #+#             */
-/*   Updated: 2023/11/27 14:22:08 by akeryan          ###   ########.fr       */
+/*   Updated: 2023/11/27 14:40:45 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,18 +97,21 @@ static void	plot(int x, int y, t_data *d, int color)
 	int	pix;
 
 	pix = (y * d->l_bytes) + (x * 4);
-	if (d->endi == 1)
+	if (x >= 0 && x * 4 < d->l_bytes && y >= 0 && pix < d->buf_size)
 	{
-		d->buf[pix + 0] = (color >> 24);
-		d->buf[pix + 1] = (color >> 16) & 0xFF;
-		d->buf[pix + 2] = (color >> 8) & 0xFF;
-		d->buf[pix + 3] = (color) & 0xFF;
-	}
-	else
-	{
-		d->buf[pix + 0] = (color) & 0xFF;
-		d->buf[pix + 1] = (color >> 8) & 0xFF;
-		d->buf[pix + 2] = (color >> 16) & 0xFF;
-		d->buf[pix + 3] = (color >> 24);
+		if (d->endi == 1)
+		{
+			d->buf[pix + 0] = (color >> 24);
+			d->buf[pix + 1] = (color >> 16) & 0xFF;
+			d->buf[pix + 2] = (color >> 8) & 0xFF;
+			d->buf[pix + 3] = (color) & 0xFF;
+		}
+		else
+		{
+			d->buf[pix + 0] = (color) & 0xFF;
+			d->buf[pix + 1] = (color >> 8) & 0xFF;
+			d->buf[pix + 2] = (color >> 16) & 0xFF;
+			d->buf[pix + 3] = (color >> 24);
+		}
 	}
 }
