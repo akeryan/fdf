@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 13:21:54 by akeryan           #+#    #+#             */
-/*   Updated: 2023/11/27 14:07:08 by akeryan          ###   ########.fr       */
+/*   Updated: 2023/11/27 14:10:21 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	render(t_data *d)
 		d->img = mlx_new_image(d->mlx, d->width, d->height);
 		d->buf = mlx_get_data_addr(d->img, &d->pix_bits, &d->l_bytes, &d->endian);
 	}
-	ft_bzero(d->buf, 1000000);
+	ft_bzero(d->buf, d->height * d->l_bytes);
 	draw_obj(d->obj, d);
 	mlx_put_image_to_window(d->mlx, d->win, d->img, 0, 0);
 }
