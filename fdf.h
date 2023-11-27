@@ -6,12 +6,19 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 09:31:35 by akeryan           #+#    #+#             */
-/*   Updated: 2023/11/27 15:58:15 by akeryan          ###   ########.fr       */
+/*   Updated: 2023/11/27 21:46:02 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FDF_H
 # define FDF_H
+
+
+# ifdef BONUS_AVAILABLE
+#  define XXX 1
+# else 
+#  define XXX 2
+# endif
 
 # include <stdlib.h>
 # include <stdio.h>
@@ -69,6 +76,7 @@ typedef struct s_data
 	float	_rad;
 	float	_pan;
 	float	_zoom;
+	void	(*bonus_function_ptr)(int key, struct s_data *d);
 
 }	t_data;
 
@@ -168,5 +176,8 @@ void		put_obj_to_origin(t_obj3d *obj);
 //utils
 float		min(float a, float b);
 float		max(float a, float b);
+
+//bonus
+void		bonus_key_handler(int key, t_data *d);
 
 #endif

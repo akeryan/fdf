@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 11:09:32 by akeryan           #+#    #+#             */
-/*   Updated: 2023/11/27 16:02:04 by akeryan          ###   ########.fr       */
+/*   Updated: 2023/11/27 21:43:11 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,9 @@ void	initialize(t_data *d, char *str)
 	d->mlx = mlx_init();
 	d->win = mlx_new_window(d->mlx, d->width, d->height, "FDF");
 	d->img = NULL;
+	d->bonus_function_ptr = NULL;
+	if (XXX == 1)
+		d->bonus_function_ptr = &bonus_key_handler;
 }
 
 void	free_all(t_data *d)

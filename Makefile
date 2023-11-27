@@ -1,6 +1,18 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2023/11/27 20:46:05 by akeryan           #+#    #+#              #
+#    Updated: 2023/11/27 22:37:25 by akeryan          ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 NAME = fdf 
 
-FLAGS = -fsanitize=address#-Wall -Wextra -Werror
+FLAGS = #-Wall -Wextra -Werror
 LINKS = -I ./libft -L ./libft \
     	-I ./minilibx -L ./minilibx \
     	-l mlx -l ft -framework OpenGL -framework Appkit
@@ -19,6 +31,7 @@ $(BUILD_DIR)/%.o: | $(BUILD_DIR)
 
 $(BUILD_DIR):
 	mkdir -p $(BUILD_DIR)
+	mkdir -p $(LIBFT_DIR)
 
 $(NAME): $(OBJECTS)
 	cc $(FLAGS) $(LINKS) $^ -o $@
@@ -36,6 +49,9 @@ minilibx_build:
 libft_build:
 	@$(MAKE) -C $(LIBFT_DIR)
 
+bonus: submodules minilibx_build libft_build  $(SOURCES) 
+	cc -D BONUS_AVAILABLE=1 $(FLAGS) $(LINKS) bonus.c $(SOURCES) -o fdf 
+
 clean:
 	make -C $(LIBFT_DIR) clean
 	make -C $(MINILIBX_DIR) clean
@@ -48,4 +64,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re
+.PHONY: submodules libft_build minilibx_build bonus all clean fclean re
