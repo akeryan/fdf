@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 11:09:32 by akeryan           #+#    #+#             */
-/*   Updated: 2023/11/27 09:21:08 by akeryan          ###   ########.fr       */
+/*   Updated: 2023/11/27 11:13:21 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,4 +51,20 @@ void	render(t_data *d)
 	d->buf = mlx_get_data_addr(d->img, &d->pix_bits, &d->l_bytes, &d->endian);
 	draw_obj(d->obj, d);
 	mlx_put_image_to_window(d->mlx, d->win, d->img, 0, 0);
+}
+
+float	min(float a, float b)
+{
+	if (a < b)
+		return (a);
+	else
+		return (b);
+}
+
+float	max(float a, float b)
+{
+	if (a > b)
+		return (a);
+	else
+		return (b);
 }

@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 09:31:35 by akeryan           #+#    #+#             */
-/*   Updated: 2023/11/26 22:20:05 by akeryan          ###   ########.fr       */
+/*   Updated: 2023/11/27 11:14:34 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,5 +170,9 @@ void		*new_pair(int x0, int y0, int x1, int y1);
 //transformation
 void		transform(t_obj3d *obj, t_data *d);
 void		put_obj_to_origin(t_obj3d *obj);
+
+//utils
+float		min(float a, float b);
+float		max(float a, float b);
 
 #endif
