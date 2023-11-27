@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 10:18:28 by akeryan           #+#    #+#             */
-/*   Updated: 2023/11/27 08:39:24 by akeryan          ###   ########.fr       */
+/*   Updated: 2023/11/27 11:24:49 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ t_obj3d	*obj_from_map(t_lst *map)
 	v.rows = map->len;
 	v.cols = get_num_of_columns(map);
 	v.obj = new_obj3d(v.rows * v.cols);
+	v.obj->h = v.rows;
+	v.obj->w = v.cols;
 	v.i = 0;
 	v.tn = map->top;
 	while (1)

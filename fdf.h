@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 09:31:35 by akeryan           #+#    #+#             */
-/*   Updated: 2023/11/27 11:14:34 by akeryan          ###   ########.fr       */
+/*   Updated: 2023/11/27 11:23:32 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ typedef struct s_obj3d
 	float		rx;
 	float		ry;
 	float		rz;
+	int			h;
+	int			w;
 }	t_obj3d;
 
 typedef struct s_data
