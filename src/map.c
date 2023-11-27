@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 13:51:51 by akeryan           #+#    #+#             */
-/*   Updated: 2023/11/27 15:45:55 by akeryan          ###   ########.fr       */
+/*   Updated: 2023/11/27 15:55:36 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,33 +59,4 @@ int	get_num_of_columns(t_lst *map)
 			str++;
 	}
 	return (len);
-}
-
-t_array	*new_tarray(int rows, int cols)
-{
-	t_array	*out;
-	int		i;
-
-	out = (t_array *)malloc(sizeof(t_array));
-	if (out == NULL)
-		return (NULL);
-	out->arr = (int **)ft_calloc(rows, sizeof(int *));
-	if (out->arr == NULL)
-		return (NULL);
-	out->cols = cols;
-	out->rows = rows;
-	i = 0;
-	while (i < rows)
-	{
-		out->arr[i] = (int *)ft_calloc(cols, sizeof(int));
-		if (out->arr[i] == NULL)
-		{
-			while (--i >= 0)
-				free(out->arr[i]);
-			free(out->arr);
-			return (NULL);
-		}
-		i++;
-	}
-	return (out);
 }

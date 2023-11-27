@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 11:09:32 by akeryan           #+#    #+#             */
-/*   Updated: 2023/11/27 15:52:58 by akeryan          ###   ########.fr       */
+/*   Updated: 2023/11/27 16:02:04 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,8 @@ void	initialize(t_data *d, char *str)
 void	free_all(t_data *d)
 {
 	mlx_destroy_image(d->mlx, d->img);
-
-
+	free(d->obj->a);
+	free(d->obj);
 }
 
 float	min(float a, float b)
