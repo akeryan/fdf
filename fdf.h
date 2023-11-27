@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 09:31:35 by akeryan           #+#    #+#             */
-/*   Updated: 2023/11/27 11:23:32 by akeryan          ###   ########.fr       */
+/*   Updated: 2023/11/27 14:21:37 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,10 @@ typedef struct s_data
 	void	*win;
 	int		pix_bits;
 	int		l_bytes;
-	int		endian;
+	int		endi;
 	void	*img;
 	char	*buf;
+	int		buf_size;
 	int		width;
 	int		height;
 	float	_angle;

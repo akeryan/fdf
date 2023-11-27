@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 11:09:32 by akeryan           #+#    #+#             */
-/*   Updated: 2023/11/27 14:02:48 by akeryan          ###   ########.fr       */
+/*   Updated: 2023/11/27 14:18:43 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ void	initialize(t_data *d, char *str)
 	d->obj->rz = 45 * M_PI / 180;
 	d->mlx = mlx_init();
 	d->win = mlx_new_window(d->mlx, d->width, d->height, "FDF");
+	d->img = NULL;
 }
 
 float	min(float a, float b)
