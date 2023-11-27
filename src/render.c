@@ -1,16 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw.c                                             :+:      :+:    :+:   */
+/*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/24 18:34:45 by akeryan           #+#    #+#             */
-/*   Updated: 2023/11/26 10:11:54 by akeryan          ###   ########.fr       */
+/*   Created: 2023/11/27 13:21:54 by akeryan           #+#    #+#             */
+/*   Updated: 2023/11/27 14:07:08 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../fdf.h"
+
+void	render(t_data *d)
+{
+	if (!d->img)
+	{
+		d->img = mlx_new_image(d->mlx, d->width, d->height);
+		d->buf = mlx_get_data_addr(d->img, &d->pix_bits, &d->l_bytes, &d->endian);
+	}
+	ft_bzero(d->buf, 1000000);
+	draw_obj(d->obj, d);
+	mlx_put_image_to_window(d->mlx, d->win, d->img, 0, 0);
+}
 
 void	draw_obj(t_obj3d *obj, t_data *d)
 {
