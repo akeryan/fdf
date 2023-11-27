@@ -6,15 +6,15 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/26 22:01:32 by akeryan           #+#    #+#             */
-/*   Updated: 2023/11/27 08:52:40 by akeryan          ###   ########.fr       */
+/*   Updated: 2023/11/27 15:16:38 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../fdf.h"
 
-static void	origin_x(t_obj3d * obj);
-static void	origin_y(t_obj3d * obj);
-static void	origin_z(t_obj3d * obj);
+static void	origin_x(t_obj3d *obj);
+static void	origin_y(t_obj3d *obj);
+static void	origin_z(t_obj3d *obj);
 
 void	put_obj_to_origin(t_obj3d *obj)
 {

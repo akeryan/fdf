@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 13:51:51 by akeryan           #+#    #+#             */
-/*   Updated: 2023/11/23 11:34:48 by akeryan          ###   ########.fr       */
+/*   Updated: 2023/11/27 15:14:55 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,4 +118,3 @@ t_array	*new_tarray(int rows, int cols)
 	}
 	return (out);
 }
-
