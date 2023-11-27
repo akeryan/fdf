@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 15:41:45 by akeryan           #+#    #+#             */
-/*   Updated: 2023/11/21 13:51:12 by akeryan          ###   ########.fr       */
+/*   Updated: 2023/11/27 15:35:28 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,21 +81,4 @@ t_lst	*new_map(void)
 	lst->len = 0;
 	lst->top = NULL;
 	return (lst);
-}
-
-void	print_map(t_lst *lst)
-{
-	char	*str;
-	t_node	*tmp;
-
-	if (lst == NULL || lst->top == NULL)
-		return ;
-	tmp = lst->top;
-	while (42)
-	{
-		printf("%s", tmp->str);
-		if (!tmp->next)
-			break ;
-		tmp = tmp->next;
-	}
 }

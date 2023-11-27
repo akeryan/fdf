@@ -6,40 +6,11 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 13:51:51 by akeryan           #+#    #+#             */
-/*   Updated: 2023/11/27 15:14:55 by akeryan          ###   ########.fr       */
+/*   Updated: 2023/11/27 15:45:55 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../fdf.h"
-
-t_array	*array_from_map(t_lst *map)
-{
-	t_array	*a;
-	t_node	*tmp;
-	int		i;
-	int		j;
-	char	**spl;
-
-	if (!map || !map->top)
-		return (NULL);
-	a = new_tarray(map->len, get_num_of_columns(map));
-	if (!a)
-		return (NULL);
-	i = 0;
-	tmp = map->top;
-	while (42)
-	{
-		spl = ft_split(tmp->str, ' ');
-		j = -1;
-		while (++j < a->cols)
-			a->arr[i][j] = ft_atoi(spl[j]);
-		if (!tmp->next)
-			break ;
-		tmp = tmp->next;
-		i++;
-	}	
-	return (a);
-}
 
 t_lst	*read_map(char *file)
 {

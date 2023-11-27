@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 09:31:35 by akeryan           #+#    #+#             */
-/*   Updated: 2023/11/27 15:16:00 by akeryan          ###   ########.fr       */
+/*   Updated: 2023/11/27 15:45:50 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@
 # include <string.h>
 # include <fcntl.h>
 # include <math.h>
-# include "mlx.h" 
-# include "libft.h"
+# include "./minilibx/mlx.h" 
+# include "./libft/libft.h"
 
 # define WINDOW_WIDTH 800 
 # define WINDOW_HEIGHT 600
@@ -145,16 +145,13 @@ void		free_list(t_lst *map);
 void		push_bottom(t_lst *map, char *str);
 t_lst		*read_map(char *file);
 int			get_num_of_columns(t_lst *map);
-void		print_map(t_lst *map);
 
 //t_array
 t_lst		*new_map(void);
 t_array		*new_tarray(int rows, int cols);
-t_array		*array_from_map(t_lst *map);
 
 //hooks
 int			close_window(int key, t_data *d);
-int			get_keycode(int key, t_data *d);
 int			key_handler(int key, t_data *d);
 
 //line

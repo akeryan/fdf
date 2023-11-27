@@ -1,6 +1,6 @@
 NAME = fdf 
 
-FLAGS = #-Wall -Wextra -Werror
+FLAGS = -fsanitize=address#-Wall -Wextra -Werror
 LINKS = -I ./libft -L ./libft \
     	-I ./minilibx -L ./minilibx \
     	-l mlx -l ft -framework OpenGL -framework Appkit
@@ -24,7 +24,7 @@ $(NAME): $(OBJECTS)
 	cc $(FLAGS) $(LINKS) $^ -o $@
 
 $(BUILD_DIR)/%.o: $(SRC_DIR)/%.c | $(BUILD_DIR)
-	cc -c $(FLAGS) $(LINKS) -c -o $@ $< 
+	cc -c $(FLAGS) -c -o $@ $< 
 
 submodules:
 	git submodule init

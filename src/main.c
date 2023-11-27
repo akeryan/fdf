@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 11:09:50 by akeryan           #+#    #+#             */
-/*   Updated: 2023/11/27 15:14:21 by akeryan          ###   ########.fr       */
+/*   Updated: 2023/11/27 15:46:18 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,5 @@ int	main(int argc, char *argv[])
 	mlx_key_hook(d.win, key_handler, &d);
 	mlx_hook(d.win, 17, 0, close_window, NULL);
 	mlx_loop(d.mlx);
-	mlx_destroy_image(d.mlx, d.img);
 	return (0);
 }
