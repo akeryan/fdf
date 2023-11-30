@@ -14,7 +14,8 @@
 
 int	key_handler(int key, t_data *d)
 {
-	if (key == 53)
+	printf("%d\n", key);
+	if (key == XK_Escape)
 		close_window(key, d);
 	if (d->bonus_function_ptr)
 		d->bonus_function_ptr(key, d);

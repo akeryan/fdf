@@ -3,28 +3,43 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
+/*   By: akeryan <akeryan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 09:31:35 by akeryan           #+#    #+#             */
-/*   Updated: 2023/11/27 21:46:02 by akeryan          ###   ########.fr       */
+/*   Updated: 2023/11/30 22:10:20 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FDF_H
 # define FDF_H
 
-
-# ifdef BONUS_AVAILABLE
-#  define XXX 1
+# ifndef BONUS_AVAILABLE
+#  define BONUS 0
 # else 
-#  define XXX 2
+#  define BONUS 	1
+#  define KP_7		65429
+#  define KP_8		65431
+#  define KP_4		65430
+#  define KP_5		65437
+#  define KP_1		65436
+#  define KP_2		65433
+#  define LEFT		97
+#  define RIGHT		100 
+#  define UP		119
+#  define DOWN		115
+#  define ZOOM_IN	65451
+#  define ZOOM_OUT	65453
+#  define M_1		49
+#  define M_2		50
 # endif
+
 
 # include <stdlib.h>
 # include <stdio.h>
 # include <string.h>
 # include <fcntl.h>
 # include <math.h>
+# include <X11/keysym.h>
 # include "./minilibx/mlx.h" 
 # include "./libft/libft.h"
 

@@ -25,8 +25,8 @@ void	initialize(t_data *d, char *str)
 {
 	t_lst	*map;
 
-	d->width = 1900;
-	d->height = 1200;
+	d->width = 1200;
+	d->height = 600;
 	d->_angle = 5.0;
 	d->_rad = d->_angle * M_PI / 180.0;
 	map = read_map(str);
@@ -44,7 +44,7 @@ void	initialize(t_data *d, char *str)
 	d->win = mlx_new_window(d->mlx, d->width, d->height, "FDF");
 	d->img = NULL;
 	d->bonus_function_ptr = NULL;
-	if (XXX == 1)
+	if (BONUS)
 		d->bonus_function_ptr = &bonus_key_handler;
 }
 
