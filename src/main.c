@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 22:06:44 by akeryan           #+#    #+#             */
-/*   Updated: 2023/11/30 22:06:51 by akeryan          ###   ########.fr       */
+/*   Updated: 2023/12/01 11:33:38 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	main(int argc, char *argv[])
 		perror("Faild to open file");
 		exit (0);
 	}
-	initialize(&d, argv[1]);
+	init(&d, argv[1]);
 	put_obj_to_origin(d.obj);
 	transform(d.obj, &d);
 	render(&d);

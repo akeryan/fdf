@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 09:31:35 by akeryan           #+#    #+#             */
-/*   Updated: 2023/12/01 11:26:23 by akeryan          ###   ########.fr       */
+/*   Updated: 2023/12/01 11:33:38 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,7 +145,7 @@ typedef struct s_trans_vars
 }	t_trans_vars;
 
 void		check_allocation(void *ptr);
-void		initialize(t_data *d, char *str);
+void		init(t_data *d, char *str);
 void		render(t_data *d);
 
 //t_lst
