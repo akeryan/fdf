@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 09:31:35 by akeryan           #+#    #+#             */
-/*   Updated: 2023/11/30 22:10:20 by akeryan          ###   ########.fr       */
+/*   Updated: 2023/12/01 11:26:23 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,20 +113,6 @@ typedef struct s_lst
 	t_node	*top;
 	int		len;
 }	t_lst;
-
-typedef struct s_pnt2d
-{
-	int	x;
-	int	y;
-}	t_pnt2d;
-
-typedef struct s_pair
-{
-	int	x0;
-	int	y0;
-	int	x1;
-	int	y1;
-}	t_pair;
 
 typedef struct s_obj_vars
 {
