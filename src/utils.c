@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mlx_utils.c                                        :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akeryan <akeryan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 11:09:32 by akeryan           #+#    #+#             */
-/*   Updated: 2023/12/01 08:39:12 by akeryan          ###   ########.fr       */
+/*   Updated: 2023/12/02 14:19:31 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,4 +42,9 @@ float	max(float a, float b)
 		return (a);
 	else
 		return (b);
+}
+
+int	rgb_to_hex(unsigned char r, unsigned char g, unsigned char b)
+{
+	return ((r << 16) | (g << 8) | b);
 }
