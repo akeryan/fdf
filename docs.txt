@@ -1,0 +1,72 @@
+// s_p3d structure represents a point in a 3-dimensional space
+typedef struct s_p3d
+{
+	float			_x;     // original 'x' position
+	float			_y;     // original 'y' position
+	float			_z;     // original 'z' position
+	float			x;      // operating 'x' position
+	float			y;      // operating 'y' position
+	float			z;      // operating 'z' position
+	struct s_p3d	*n_ptr; // ptr to 'northern' vertex
+	struct s_p3d	*w_ptr; // ptr to 'western' vertex	
+	int				color;  // color of the vertex, if available
+}	t_p3d;
+
+Notes:
+- Each vertex of a map is connected with 2 to 4 neighbouring 
+vertices depending on its position. The connections in between
+vertices are edges that form a 3d object. To make the object
+visible, the edges are made visible in form of lines. 'n_ptr'
+and 'w_ptr' are pointers to 'northern' and 'western' vertices
+correspondingly, which are connected with given vertex. Keeping 
+information about these two vertices is enough to display
+all the edges of the object.
+
+------------------------------------------------------------------
+
+typedef struct s_obj3d
+{
+	t_p3d		*a;     // array of points forming the 3d object 
+	int			len;    // length of the array
+	float		dx;     // operating position of the object along the X axis
+	float		dy;     // operating position of the object along the Y axis
+	float		zoom;   // operating scale of zoom
+	float		rx;     // operating angle along the X axis
+	float		ry;     // operating angle along the Y axis
+	float		rz;     // operating angle along the Z axis
+	int			h;      // number of points forming the height of the map
+	int			w;      // number of points forming the width of the map
+}	t_obj3d;
+
+Notes:
+- Position along the Z axis is not kept. The object can be
+moved only along the X and Y axis.
+- Input data of the 3d object (or terrain) is a 'map', which is a
+matrix [x][y], where 'x' and 'y' are coordinates along X and Y axis
+correspondingly, and the value on the crossection of 'x' and 'y' is
+the 'z' value, which is the elevation. So, 'h' and 'w' variables
+keep the information about the number of points along the Y and X
+axis correspondingly.
+
+
+----------------------------------------------------------------------
+typedef struct s_data
+{
+	t_obj3d	*obj;       // pointer to 3d object   
+	void	*mlx;       // ptr to mlx, a return value from mlx_init()
+	void	*win;       // ptr to window, a return value from mlx_new_window()
+	int		pix_bits;   // number of bits per pixel (system dependent), assigned during mlx_get_data_addr() call
+	int		l_bytes;    // number of bytes per line of 'display', assigned during mlx_get_data_addr() call
+	int		endi;       // endian, assigned during mlx_get_data_addr() call
+	void	*img;       // ptr to image, a return value from mlx_new_image()
+	char	*buf;       // ptr to the buffer, a return value from mlx_get_data_addr(), a string that keeps 'address' of a 'pixel'    
+	int		buf_size;   // buffer size
+	int		width;      // width of the display in pixels, assigned during init()
+	int		height;     // height of the display in pixels, assigned during init()
+	float	_angle;     // a fixed value, assigned during init() that is an increment for modifying angles
+	float	_rad;       // same as '_angle' but in radians
+	float	_pan;       // increment to change position of an object along X and Y axis
+	float	_zoom;      // increment to change scale of an object
+	void	(*bonus_function_ptr)(int key, struct s_data *d);
+
+}	t_data;

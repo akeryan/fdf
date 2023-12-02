@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   transform.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
+/*   By: akeryan <akeryan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 21:58:45 by akeryan           #+#    #+#             */
-/*   Updated: 2023/11/27 15:17:18 by akeryan          ###   ########.fr       */
+/*   Updated: 2023/12/01 12:06:12 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static float	transform_x(t_obj3d *obj, t_data *d, int i)
 	t.v = obj->a[i]._y * (t.h - sin(obj->rz) * cos(obj->rx));
 	t.h = cos(obj->rx) * sin(obj->ry) * cos(obj->rz);
 	t.u = obj->a[i]._z * (t.h + sin(obj->rx) * sin(obj->rz));
-	return (obj->zoom * (t.w + t.v + t.u + obj->dx));
+	return (obj->zoom * (t.w + t.v + t.u) + obj->dx);
 }
 
 static float	transform_y(t_obj3d *obj, t_data *d, int i)
@@ -51,7 +51,7 @@ static float	transform_y(t_obj3d *obj, t_data *d, int i)
 	t.v = obj->a[i]._y * (t.h + cos(obj->rx) * cos(obj->rz));
 	t.h = cos(obj->rx) * sin(obj->ry) * sin(obj->rz);
 	t.u = obj->a[i]._z * (t.h - sin(obj->rx) * cos(obj->rz));
-	return (obj->zoom * (t.w + t.v + t.u + obj->dy));
+	return (obj->zoom * (t.w + t.v + t.u) + obj->dy);
 }
 
 static float	transform_z(t_obj3d *obj, t_data *d, int i)
