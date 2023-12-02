@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 08:37:51 by akeryan           #+#    #+#             */
-/*   Updated: 2023/12/02 19:55:31 by akeryan          ###   ########.fr       */
+/*   Updated: 2023/12/02 22:37:14 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,13 +71,21 @@ static void	colorize(t_obj3d *obj)
 	int		i;
 
 	obj->z_average = get_z_average(obj);
+	printf("ave: %.1f\n", obj->z_average);
+	printf("z_max: %.1f\n", obj->z_max);
+	printf("z_min: %.1f\n", obj->z_min);
 	i = 0;
 	while (i < obj->len)
 	{
-		if (obj->a[i]._z >= obj->z_average)
-			set_color(&obj->a[i], obj, ZERO, TOP);
+		if (obj->a[i]._z == 0)
+			obj->a[i].color = ZERO;
 		else
-			set_color(&obj->a[i], obj, ZERO, BOTTOM);
+		{
+			if (obj->a[i]._z >= obj->z_average)
+				set_color(&obj->a[i], obj, ZERO, TOP);
+			else
+				set_color(&obj->a[i], obj, ZERO, BOTTOM);
+		}
 		i++;
 	}
 }
@@ -87,21 +95,39 @@ static void	set_color(t_p3d *p, t_obj3d *obj, int a_hex, int b_hex)
 	t_gradient_vars	v;
 	t_rgb_color		out;
 
+	printf("==========================================\n");
 	get_rgb_from_hex(a_hex, &v.a.r, &v.a.g, &v.a.b);
+	printf("A: r-%d, g-%d, b-%d\n", v.a.r, v.a.g, v.a.b);
 	get_rgb_from_hex(b_hex, &v.b.r, &v.b.g, &v.b.b);
-	if (p->_z >= obj->z_average)
-		v.range = obj->z_max - p->_z;
-	else
-		v.range = abs(obj->z_min) - abs(p->_z) ;
-	if (p->_z == 0)
-		p->color = ZERO;
-	else
+	printf("B - r-%d, g-%d, b-%d\n", v.b.r, v.b.g, v.b.b);
+	if (p->_z > obj->z_average)
 	{
-		out.r = v.a.r + p->_z * (v.a.r - v.b.r) / abs(v.range);
-		out.g = v.a.r + p->_z * (v.a.g - v.b.g) / abs(v.range);
-		out.b = v.a.r + p->_z * (v.a.b - v.b.b) / abs(v.range);
-		p->color = get_hex_from_rgb(out.r, out.g, out.b);
+		v.range = obj->z_max - obj->z_average;
+		printf("range: %d\n", v.range);
+		printf("_z: %.1f\n", p->_z);
+		int z_ave = p->_z - obj->z_average;
+		printf("z - av:%d\n", z_ave);
+		float br_ar = v.b.r - v.a.r;
+		printf("b.r - a.r:%.1f\n", br_ar);
+		int times = z_ave * br_ar;
+		printf("times: %d\n", times);
+		int div = times / v.range;
+		printf("div: %d\n", div);
+		out.r = v.a.r + (int)(p->_z - obj->z_average) * (v.b.r - v.a.r) / v.range;
+		out.g = v.a.g + (int)(p->_z - obj->z_average) * (v.b.g - v.a.g) / v.range;
+		out.b = v.a.b + (int)(p->_z - obj->z_average) * (v.b.b - v.a.b) / v.range;
 	}
+	else 
+	{
+		v.range = obj->z_average - obj->z_min;
+		printf("range: %d\n", v.range);
+		printf("_z: %.1f\n", p->_z);
+		out.r = v.a.r + (obj->z_average - p->_z) * (v.b.r - v.a.r) / v.range;
+		out.g = v.a.g + (obj->z_average - p->_z) * (v.b.g - v.a.g) / v.range;
+		out.b = v.a.b + (obj->z_average - p->_z) * (v.b.b - v.a.b) / v.range;
+	}
+	p->color = get_hex_from_rgb(out.r, out.g, out.b);
+	printf("OUT: r-%d, g-%d, b-%d\n", out.r, out.g, out.b);
 }
 
 static float	get_z_average(t_obj3d *obj)
