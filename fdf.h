@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 09:31:35 by akeryan           #+#    #+#             */
-/*   Updated: 2023/12/02 14:19:55 by akeryan          ###   ########.fr       */
+/*   Updated: 2023/12/02 14:40:55 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@
 # define WINDOW_HEIGHT 600
 # define MLX_ERROR 1
 
-# define GREEN	0x00FF00
-# define RED	0xFF0000
-# define BLUE	0x0000FF
+# define TOP	0x00FF00
+# define ZERO	0xFF0000
+# define BOTTOM	0x0000FF
 
 # ifndef BONUS_AVAILABLE
 #  define BONUS 0
@@ -182,7 +182,8 @@ void		put_obj_to_origin(t_obj3d *obj);
 //utils
 float		min(float a, float b);
 float		max(float a, float b);
-int			rgb_to_hex(unsigned char r, unsigned char g, unsigned char b);
+int			set_rgb_to_hex(unsigned char r, unsigned char g, unsigned char b);
+void		get_rgb_from_hex(int hexValue, int *r, int *g, int *b);
 
 //bonus
 void		bonus_key_handler(int key, t_data *d);
