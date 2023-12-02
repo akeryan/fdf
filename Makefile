@@ -6,7 +6,7 @@
 #    By: akeryan <akeryan@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/27 20:46:05 by akeryan           #+#    #+#              #
-#    Updated: 2023/12/02 13:26:33 by akeryan          ###   ########.fr        #
+#    Updated: 2023/12/02 13:31:10 by akeryan          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,8 +51,6 @@ clean:
 	
 fclean: clean
 	make -C $(LIBFT_DIR) fclean
-	rm -rf $(LIBFT_DIR)
-	rm -rf $(MINILIBX_DIR)
 	rm -f $(NAME)
 
 re: fclean all
