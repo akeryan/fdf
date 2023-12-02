@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   line.c                                             :+:      :+:    :+:   */
+/*   plot.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
+/*   By: akeryan <akeryan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 12:06:43 by akeryan           #+#    #+#             */
-/*   Updated: 2023/11/27 14:40:45 by akeryan          ###   ########.fr       */
+/*   Updated: 2023/12/02 13:57:15 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	plot_line(t_p3d *a, t_p3d *b, t_data *d)
 
 static void	plot_line_low(t_p3d *a, t_p3d *b, t_data *d)
 {
-	t_line_vars	q;
+	t_plot_vars	q;
 
 	q.dx = b->x - a->x;
 	q.dy = b->y - a->y;
@@ -65,7 +65,7 @@ static void	plot_line_low(t_p3d *a, t_p3d *b, t_data *d)
 
 static void	plot_line_high(t_p3d *a, t_p3d *b, t_data *d)
 {
-	t_line_vars	q;
+	t_plot_vars	q;
 
 	q.dx = b->x - a->x;
 	q.dy = b->y - a->y;

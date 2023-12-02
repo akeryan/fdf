@@ -6,11 +6,13 @@
 /*   By: akeryan <akeryan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 08:37:51 by akeryan           #+#    #+#             */
-/*   Updated: 2023/12/02 11:31:20 by akeryan          ###   ########.fr       */
+/*   Updated: 2023/12/02 14:10:09 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../fdf.h"
+
+static void	set_z_min_max(t_data *d);
 
 void	init(t_data *d, char *str)
 {
@@ -35,6 +37,27 @@ void	init(t_data *d, char *str)
 	d->win = mlx_new_window(d->mlx, d->width, d->height, "FDF");
 	d->img = NULL;
 	d->bonus_function_ptr = NULL;
+	set_z_min_max(d);
 	if (BONUS)
 		d->bonus_function_ptr = &bonus_key_handler;
+}
+
+static void	set_z_min_max(t_data *d)
+{
+	float	min;
+	float	max;
+	int		i;
+
+	i = 0;
+	min = d->obj->a[0].z;
+	max = d->obj->a[0].z;
+	while (++i < d->obj->len)
+	{
+		if (min > d->obj->a[i].z)
+			min = d->obj->a[i].z;
+		if (max < d->obj->a[i].z)
+			max = d->obj->a[i].z;
+	}
+	d->z_max = max;
+	d->z_min = min;
 }

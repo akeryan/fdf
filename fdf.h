@@ -6,12 +6,25 @@
 /*   By: akeryan <akeryan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 09:31:35 by akeryan           #+#    #+#             */
-/*   Updated: 2023/12/01 11:33:38 by akeryan          ###   ########.fr       */
+/*   Updated: 2023/12/02 14:12:54 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FDF_H
 # define FDF_H
+
+# include <stdlib.h>
+# include <stdio.h>
+# include <string.h>
+# include <fcntl.h>
+# include <math.h>
+# include <X11/keysym.h>
+# include "./minilibx/mlx.h" 
+# include "./libft/libft.h"
+
+# define WINDOW_WIDTH 800 
+# define WINDOW_HEIGHT 600
+# define MLX_ERROR 1
 
 # ifndef BONUS_AVAILABLE
 #  define BONUS 0
@@ -32,20 +45,6 @@
 #  define M_1		49
 #  define M_2		50
 # endif
-
-
-# include <stdlib.h>
-# include <stdio.h>
-# include <string.h>
-# include <fcntl.h>
-# include <math.h>
-# include <X11/keysym.h>
-# include "./minilibx/mlx.h" 
-# include "./libft/libft.h"
-
-# define WINDOW_WIDTH 800 
-# define WINDOW_HEIGHT 600
-# define MLX_ERROR 1
 
 typedef struct s_p3d
 {
@@ -91,6 +90,8 @@ typedef struct s_data
 	float	_rad;
 	float	_pan;
 	float	_zoom;
+	float	z_min;
+	float	z_max;
 	void	(*bonus_function_ptr)(int key, struct s_data *d);
 
 }	t_data;
@@ -126,7 +127,7 @@ typedef struct s_obj_vars
 	int		j;
 }	t_obj_vars;	
 
-typedef struct s_line_vars
+typedef struct s_plot_vars
 {
 	int		dx;
 	int		dy;
@@ -134,7 +135,7 @@ typedef struct s_line_vars
 	int		_y;
 	int		i;
 	int		d;
-}	t_line_vars;
+}	t_plot_vars;
 
 typedef struct s_trans_vars
 {
