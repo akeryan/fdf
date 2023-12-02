@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 09:31:35 by akeryan           #+#    #+#             */
-/*   Updated: 2023/12/02 16:31:51 by akeryan          ###   ########.fr       */
+/*   Updated: 2023/12/02 17:29:21 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,7 +161,7 @@ typedef struct s_gradient_vars
 {
 	t_rgb_color	a;
 	t_rgb_color	b;	
-	int	step_size;
+	int			range;
 }	t_gradient_vars;
 
 
