@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 08:37:51 by akeryan           #+#    #+#             */
-/*   Updated: 2023/12/02 18:12:39 by akeryan          ###   ########.fr       */
+/*   Updated: 2023/12/02 19:55:31 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,14 +68,13 @@ static void	set_z_min_max(t_obj3d *obj)
 
 static void	colorize(t_obj3d *obj)
 {
-	float	av;
 	int		i;
 
-	av = get_z_average(obj);
+	obj->z_average = get_z_average(obj);
 	i = 0;
 	while (i < obj->len)
 	{
-		if (obj->a[i]._z > av)
+		if (obj->a[i]._z >= obj->z_average)
 			set_color(&obj->a[i], obj, ZERO, TOP);
 		else
 			set_color(&obj->a[i], obj, ZERO, BOTTOM);
@@ -90,14 +89,19 @@ static void	set_color(t_p3d *p, t_obj3d *obj, int a_hex, int b_hex)
 
 	get_rgb_from_hex(a_hex, &v.a.r, &v.a.g, &v.a.b);
 	get_rgb_from_hex(b_hex, &v.b.r, &v.b.g, &v.b.b);
-	if (p->_z >= 0)
-		v.range = obj->z_max;
+	if (p->_z >= obj->z_average)
+		v.range = obj->z_max - p->_z;
 	else
-		v.range = obj->z_min;
-	out.r = p->_z * (v.a.r - v.b.r) / abs(v.range);
-	out.g = p->_z * (v.a.g - v.b.g) / abs(v.range);
-	out.b = p->_z * (v.a.b - v.b.b) / abs(v.range);
-	p->color = get_hex_from_rgb(out.r, out.g, out.b);
+		v.range = abs(obj->z_min) - abs(p->_z) ;
+	if (p->_z == 0)
+		p->color = ZERO;
+	else
+	{
+		out.r = v.a.r + p->_z * (v.a.r - v.b.r) / abs(v.range);
+		out.g = v.a.r + p->_z * (v.a.g - v.b.g) / abs(v.range);
+		out.b = v.a.r + p->_z * (v.a.b - v.b.b) / abs(v.range);
+		p->color = get_hex_from_rgb(out.r, out.g, out.b);
+	}
 }
 
 static float	get_z_average(t_obj3d *obj)

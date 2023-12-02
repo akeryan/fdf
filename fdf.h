@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 09:31:35 by akeryan           #+#    #+#             */
-/*   Updated: 2023/12/02 17:29:21 by akeryan          ###   ########.fr       */
+/*   Updated: 2023/12/02 19:54:17 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@
 # define WINDOW_HEIGHT 600
 # define MLX_ERROR 1
 
-# define TOP	0x00FF00
-# define ZERO	0xFF0000
+# define TOP	0xFF0000
+# define ZERO	0x00FF00	
 # define BOTTOM	0x0000FF
 
 # ifndef BONUS_AVAILABLE
@@ -77,6 +77,7 @@ typedef struct s_obj3d
 	int			w;
 	float		z_min;
 	float		z_max;
+	float		z_average;
 }	t_obj3d;
 
 typedef struct s_data
@@ -151,9 +152,9 @@ typedef struct s_trans_vars
 
 typedef struct s_rgb_color
 {
-	int	r;
-	int	g;
-	int	b;
+	unsigned char	r;
+	unsigned char	g;
+	unsigned char	b;
 	int	hex;
 }	t_rgb_color;
 
@@ -199,7 +200,7 @@ void		put_obj_to_origin(t_obj3d *obj);
 float		min(float a, float b);
 float		max(float a, float b);
 int			get_hex_from_rgb(unsigned char r, unsigned char g, unsigned char b);
-void		get_rgb_from_hex(int hexValue, int *r, int *g, int *b);
+void		get_rgb_from_hex(int hexValue, unsigned char *r, unsigned char *g, unsigned char *b);
 
 //bonus
 void		bonus_key_handler(int key, t_data *d);
