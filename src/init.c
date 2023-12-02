@@ -6,15 +6,16 @@
 /*   By: akeryan <akeryan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 08:37:51 by akeryan           #+#    #+#             */
-/*   Updated: 2023/12/02 17:36:28 by akeryan          ###   ########.fr       */
+/*   Updated: 2023/12/02 18:12:39 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../fdf.h"
 
-static void	set_z_min_max(t_obj3d *d);
-static void	set_color(t_p3d *p, t_obj3d *obj, int a_hex, int b_hex);
-static void	colorize(t_obj3d *obj);
+static void		set_z_min_max(t_obj3d *d);
+static void		set_color(t_p3d *p, t_obj3d *obj, int a_hex, int b_hex);
+static void		colorize(t_obj3d *obj);
+static float	get_z_average(t_obj3d *obj);
 
 void	init(t_data *d, char *str)
 {
@@ -67,12 +68,14 @@ static void	set_z_min_max(t_obj3d *obj)
 
 static void	colorize(t_obj3d *obj)
 {
-	int	i;
+	float	av;
+	int		i;
 
+	av = get_z_average(obj);
 	i = 0;
 	while (i < obj->len)
 	{
-		if (obj->a[i]._z > 0)
+		if (obj->a[i]._z > av)
 			set_color(&obj->a[i], obj, ZERO, TOP);
 		else
 			set_color(&obj->a[i], obj, ZERO, BOTTOM);
@@ -95,4 +98,16 @@ static void	set_color(t_p3d *p, t_obj3d *obj, int a_hex, int b_hex)
 	out.g = p->_z * (v.a.g - v.b.g) / abs(v.range);
 	out.b = p->_z * (v.a.b - v.b.b) / abs(v.range);
 	p->color = get_hex_from_rgb(out.r, out.g, out.b);
+}
+
+static float	get_z_average(t_obj3d *obj)
+{
+	float	out;
+	int		i;
+
+	out = 0.0;
+	i = -1;
+	while (++i < obj->len)
+		out += obj->a[i]._z;
+	return (out / obj->len);
 }
