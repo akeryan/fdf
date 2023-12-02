@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 09:31:35 by akeryan           #+#    #+#             */
-/*   Updated: 2023/12/02 14:40:55 by akeryan          ###   ########.fr       */
+/*   Updated: 2023/12/02 16:31:51 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,8 @@ typedef struct s_obj3d
 	float		rz;
 	int			h;
 	int			w;
+	float		z_min;
+	float		z_max;
 }	t_obj3d;
 
 typedef struct s_data
@@ -94,8 +96,6 @@ typedef struct s_data
 	float	_rad;
 	float	_pan;
 	float	_zoom;
-	float	z_min;
-	float	z_max;
 	void	(*bonus_function_ptr)(int key, struct s_data *d);
 
 }	t_data;
@@ -149,6 +149,22 @@ typedef struct s_trans_vars
 	float	h;
 }	t_trans_vars;
 
+typedef struct s_rgb_color
+{
+	int	r;
+	int	g;
+	int	b;
+	int	hex;
+}	t_rgb_color;
+
+typedef struct s_gradient_vars
+{
+	t_rgb_color	a;
+	t_rgb_color	b;	
+	int	step_size;
+}	t_gradient_vars;
+
+
 void		check_allocation(void *ptr);
 void		init(t_data *d, char *str);
 void		render(t_data *d);
@@ -182,7 +198,7 @@ void		put_obj_to_origin(t_obj3d *obj);
 //utils
 float		min(float a, float b);
 float		max(float a, float b);
-int			set_rgb_to_hex(unsigned char r, unsigned char g, unsigned char b);
+int			get_hex_from_rgb(unsigned char r, unsigned char g, unsigned char b);
 void		get_rgb_from_hex(int hexValue, int *r, int *g, int *b);
 
 //bonus

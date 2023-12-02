@@ -6,13 +6,14 @@
 /*   By: akeryan <akeryan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 08:37:51 by akeryan           #+#    #+#             */
-/*   Updated: 2023/12/02 14:10:09 by akeryan          ###   ########.fr       */
+/*   Updated: 2023/12/02 16:36:42 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../fdf.h"
 
-static void	set_z_min_max(t_data *d);
+static void	set_z_min_max(t_obj3d *d);
+static int	set_color(t_p3d *p, t_obj3d *obj, int a_hex, int b_hex);
 
 void	init(t_data *d, char *str)
 {
@@ -37,27 +38,44 @@ void	init(t_data *d, char *str)
 	d->win = mlx_new_window(d->mlx, d->width, d->height, "FDF");
 	d->img = NULL;
 	d->bonus_function_ptr = NULL;
-	set_z_min_max(d);
+	set_z_min_max(d->obj);
 	if (BONUS)
 		d->bonus_function_ptr = &bonus_key_handler;
 }
 
-static void	set_z_min_max(t_data *d)
+static void	set_z_min_max(t_obj3d *obj)
 {
 	float	min;
 	float	max;
 	int		i;
 
 	i = 0;
-	min = d->obj->a[0].z;
-	max = d->obj->a[0].z;
-	while (++i < d->obj->len)
+	min = obj->a[0].z;
+	max = obj->a[0].z;
+	while (++i < obj->len)
 	{
-		if (min > d->obj->a[i].z)
-			min = d->obj->a[i].z;
-		if (max < d->obj->a[i].z)
-			max = d->obj->a[i].z;
+		if (min > obj->a[i].z)
+			min = obj->a[i].z;
+		if (max < obj->a[i].z)
+			max = obj->a[i].z;
 	}
-	d->z_max = max;
-	d->z_min = min;
+	obj->z_max = max;
+	obj->z_min = min;
+}
+
+static int	set_color(t_p3d *p, t_obj3d *obj, int a_hex, int b_hex)
+{
+	t_gradient_vars	v;
+	t_rgb_color		out;
+
+	get_rgb_from_hex(a_hex, &v.a.r, &v.a.g, &v.a.b);
+	get_rgb_from_hex(b_hex, &v.b.r, &v.b.g, &v.b.b);
+	if (z >= 0)
+		v.step_size = obj->z_max;
+	else
+		v.step_size = obj->z_min;
+	out.r = p->_z * (v.a.r - v.b.r) / v.step_size;
+	out.g = p->_z * (v.a.g - v.b.g) / v.step_size;
+	out.b = p->_z * (v.a.b - v.b.b) / v.step_size;
+	p->color = get_hex_from_rgb(out.r, out.g, out.b);
 }
