@@ -6,7 +6,7 @@
 #    By: akeryan <akeryan@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/27 20:46:05 by akeryan           #+#    #+#              #
-#    Updated: 2023/12/02 13:05:41 by akeryan          ###   ########.fr        #
+#    Updated: 2023/12/02 13:26:33 by akeryan          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,12 +22,12 @@ LIBFT_DIR = libft
 MINILIBX_DIR = minilibx
 SRC_DIR = src
 
-all:  sublibs $(NAME)
+all: $(NAME)
 
 SOURCES = $(wildcard $(SRC_DIR)/*.c)
 
-$(NAME): 
-	cc $(SOURCES) $(LINKS)  $^ -o $@
+$(NAME): sublibs 
+	cc $(SOURCES) $(LINKS) -o $@
 
 submodules:
 	git submodule init
