@@ -2,3 +2,8 @@
 	path = libft
 	url = git@github.com:akeryan/42AD-libft.git
 	branch = main
+
+[submodule "minilibx"]
+	path = minilibx
+	url = git@github.com:42Paris/minilibx-linux.git
+	branch = main

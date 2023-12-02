@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 08:37:51 by akeryan           #+#    #+#             */
-/*   Updated: 2023/12/01 12:13:00 by akeryan          ###   ########.fr       */
+/*   Updated: 2023/12/02 11:31:20 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ void	init(t_data *d, char *str)
 {
 	t_lst	*map;
 
-	d->width = 1200;
-	d->height = 600;
+	d->width = WINDOW_WIDTH;
+	d->height = WINDOW_HEIGHT;
 	d->_angle = 5.0;
 	d->_rad = d->_angle * M_PI / 180.0;
 	map = read_map(str);

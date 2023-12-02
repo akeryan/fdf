@@ -6,7 +6,7 @@
 #    By: akeryan <akeryan@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/27 20:46:05 by akeryan           #+#    #+#              #
-#    Updated: 2023/12/02 11:10:50 by akeryan          ###   ########.fr        #
+#    Updated: 2023/12/02 11:47:50 by akeryan          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,6 @@ all:  sublibs $(NAME)
 SOURCES = $(wildcard $(SRC_DIR)/*.c)
 
 $(NAME): 
-	rm -f $(NAME)
 	cc $(SOURCES) $(LINKS)  $^ -o $@
 
 submodules:
@@ -35,7 +34,7 @@ submodules:
 	git submodule update
 
 minilibx_build:
-	@$(MAKE) -C $(MINILIBX_DIR) CFLAGS="$(FLAGS) -Wno-deprecated-declarations"
+	@$(MAKE) -C $(MINILIBX_DIR) -Wno-deprecated-declarations
 
 libft_build:
 	@$(MAKE) -C $(LIBFT_DIR)
@@ -48,7 +47,6 @@ sublibs: submodules libft_build minilibx_build
 clean:
 	make -C $(LIBFT_DIR) clean
 	make -C $(MINILIBX_DIR) clean
-	rm -f $(OBJECTS)
 	rm -fr $(BUILD_DIR)
 	
 fclean: clean
