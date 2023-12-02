@@ -3,47 +3,56 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: akeryan <akeryan@student.42.fr>            +#+  +:+       +#+         #
+#    By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/27 20:46:05 by akeryan           #+#    #+#              #
-#    Updated: 2023/12/02 11:10:50 by akeryan          ###   ########.fr        #
+#    Updated: 2023/11/27 22:37:25 by akeryan          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = fdf 
+NAME = fdf
 
 FLAGS = #-Wall -Wextra -Werror
-LINKS = -Ilibft -Llibft \
+LINKS = -I ./libft -L ./libft \
     	-Iminilibx -Lminilibx \
 		-L/usr/lib \
-    	-lmlx -lft -lXext -lX11 -lm -lz
+		-lXext -lX11 -lm -lz \
+    	-lmlx -l ft 
 
 LIBFT_DIR = libft
-MINILIBX_DIR = minilibx
+BUILD_DIR = build
 SRC_DIR = src
+MINILIBX_DIR = minilibx
 
-all:  sublibs $(NAME)
+all: submodules libft_build minilibx_build $(NAME)
 
 SOURCES = $(wildcard $(SRC_DIR)/*.c)
+OBJECTS = $(patsubst $(SRC_DIR)/%.c, $(BUILD_DIR)/%.o, $(SOURCES))
 
-$(NAME): 
-	rm -f $(NAME)
-	cc $(SOURCES) $(LINKS)  $^ -o $@
+$(BUILD_DIR)/%.o: | $(BUILD_DIR)
+
+$(BUILD_DIR):
+	mkdir -p $(BUILD_DIR)
+	mkdir -p $(LIBFT_DIR)
+
+$(NAME): $(OBJECTS)
+	cc $(FLAGS) $(LINKS) $^ -o $@ -Lminilibx -lmlx -L/usr/lib -Iminilibx -lm  -lz -lXext -lX11 -lft
+
+$(BUILD_DIR)/%.o: $(SRC_DIR)/%.c | $(BUILD_DIR)
+	cc -c $(FLAGS) -c -o $@ $<
 
 submodules:
 	git submodule init
 	git submodule update
 
 minilibx_build:
-	@$(MAKE) -C $(MINILIBX_DIR) CFLAGS="$(FLAGS) -Wno-deprecated-declarations"
+	@$(MAKE) -C $(MINILIBX_DIR) CFLAGS=$(FLAGS) -Wno-deprecated-declarations
 
 libft_build:
 	@$(MAKE) -C $(LIBFT_DIR)
 
-bonus: sublibs 
-	cc -D BONUS_AVAILABLE=1 $(SOURCES) $(LINKS) bonus.c -o $(NAME)
-
-sublibs: submodules libft_build minilibx_build
+bonus: submodules minilibx_build libft_build  $(SOURCES) 
+	cc -D BONUS_AVAILABLE $(FLAGS) $(LINKS) bonus.c $(SOURCES) -o fdf -lm -lmlx -lz -lXext -lX11 -lft
 
 clean:
 	make -C $(LIBFT_DIR) clean
@@ -57,4 +66,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: submodules sublibs libft_build minilibx_build bonus all clean fclean re
+.PHONY: submodules libft_build minilibx_build bonus all clean fclean re
