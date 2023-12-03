@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 09:31:35 by akeryan           #+#    #+#             */
-/*   Updated: 2023/12/03 08:15:27 by akeryan          ###   ########.fr       */
+/*   Updated: 2023/12/03 08:47:04 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,6 +141,7 @@ typedef struct s_plot_vars
 	int		_y;
 	int		i;
 	int		d;
+	int		color;
 }	t_plot_vars;
 
 typedef struct s_trans_vars
@@ -192,7 +193,6 @@ void		plot_line(t_p3d *a, t_p3d *b, t_data *d);
 t_obj3d		*new_obj3d(int len);
 t_obj3d		*obj_from_map(t_lst *map);
 void		draw_obj(t_obj3d *obj, t_data *d);
-float		get_z_average(t_obj3d *obj);
 
 //transformation
 void		transform(t_obj3d *obj, t_data *d);
