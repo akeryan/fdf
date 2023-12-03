@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 12:06:43 by akeryan           #+#    #+#             */
-/*   Updated: 2023/12/02 13:57:15 by akeryan          ###   ########.fr       */
+/*   Updated: 2023/12/03 08:29:44 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ void	plot_line(t_p3d *a, t_p3d *b, t_data *d)
 static void	plot_line_low(t_p3d *a, t_p3d *b, t_data *d)
 {
 	t_plot_vars	q;
+	int			color;
 
 	q.dx = b->x - a->x;
 	q.dy = b->y - a->y;
@@ -51,7 +52,11 @@ static void	plot_line_low(t_p3d *a, t_p3d *b, t_data *d)
 	q._y = a->y;
 	while (q._x <= b->x)
 	{
-		plot(q._x, q._y, d, b->color);
+		if (a->_z >= d->z_ave)
+			color = a->color;
+		else
+			color = b->color;
+		plot(q._x, q._y, d, color);
 		if (q.d > 0)
 		{
 			q._y = q._y + q.i;
@@ -66,6 +71,7 @@ static void	plot_line_low(t_p3d *a, t_p3d *b, t_data *d)
 static void	plot_line_high(t_p3d *a, t_p3d *b, t_data *d)
 {
 	t_plot_vars	q;
+	int			color;
 
 	q.dx = b->x - a->x;
 	q.dy = b->y - a->y;
@@ -80,7 +86,11 @@ static void	plot_line_high(t_p3d *a, t_p3d *b, t_data *d)
 	q._y = a->y;
 	while (q._y <= b->y)
 	{
-		plot(q._x, q._y, d, b->color);
+		if (a->_z >= d->z_ave)
+			color = a->color;
+		else
+			color = b->color;
+		plot(q._x, q._y, d, color);
 		if (q.d > 0)
 		{
 			q._x = q._x + q.i;

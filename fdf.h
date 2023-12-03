@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 09:31:35 by akeryan           #+#    #+#             */
-/*   Updated: 2023/12/02 20:24:50 by akeryan          ###   ########.fr       */
+/*   Updated: 2023/12/03 08:15:27 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 # define MLX_ERROR 1
 
 # define TOP	0xFF0000
-# define ZERO	0x00FF00	
+# define ZERO	0x14c314
 # define BOTTOM	0x0000FF
 
 # ifndef BONUS_AVAILABLE
@@ -97,6 +97,7 @@ typedef struct s_data
 	float	_rad;
 	float	_pan;
 	float	_zoom;
+	int		z_ave;
 	void	(*bonus_function_ptr)(int key, struct s_data *d);
 
 }	t_data;
@@ -191,6 +192,7 @@ void		plot_line(t_p3d *a, t_p3d *b, t_data *d);
 t_obj3d		*new_obj3d(int len);
 t_obj3d		*obj_from_map(t_lst *map);
 void		draw_obj(t_obj3d *obj, t_data *d);
+float		get_z_average(t_obj3d *obj);
 
 //transformation
 void		transform(t_obj3d *obj, t_data *d);

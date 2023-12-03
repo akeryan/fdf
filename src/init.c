@@ -6,16 +6,15 @@
 /*   By: akeryan <akeryan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 08:37:51 by akeryan           #+#    #+#             */
-/*   Updated: 2023/12/02 22:37:14 by akeryan          ###   ########.fr       */
+/*   Updated: 2023/12/03 08:28:32 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../fdf.h"
 
-static void		set_z_min_max(t_obj3d *d);
+static void		set_z_min_max_ave(t_data *d);
 static void		set_color(t_p3d *p, t_obj3d *obj, int a_hex, int b_hex);
 static void		colorize(t_obj3d *obj);
-static float	get_z_average(t_obj3d *obj);
 
 void	init(t_data *d, char *str)
 {
@@ -36,7 +35,7 @@ void	init(t_data *d, char *str)
 	d->obj->rx = asin(1 / sqrt(3));
 	d->obj->ry = 0.0;
 	d->obj->rz = 45 * M_PI / 180;
-	set_z_min_max(d->obj);
+	set_z_min_max_ave(d);
 	colorize(d->obj);
 	d->mlx = mlx_init();
 	d->win = mlx_new_window(d->mlx, d->width, d->height, "FDF");
@@ -46,31 +45,37 @@ void	init(t_data *d, char *str)
 		d->bonus_function_ptr = &bonus_key_handler;
 }
 
-static void	set_z_min_max(t_obj3d *obj)
+static void	set_z_min_max_ave(t_data *d)
 {
 	float	min;
 	float	max;
+	float	ave;
+	t_p3d	*a;
 	int		i;
 
 	i = 0;
-	min = obj->a[0].z;
-	max = obj->a[0].z;
-	while (++i < obj->len)
+	a = d->obj->a;
+	min = a[0].z;
+	max = a[0].z;
+	ave = 0;
+	while (++i < d->obj->len)
 	{
-		if (min > obj->a[i].z)
-			min = obj->a[i].z;
-		if (max < obj->a[i].z)
-			max = obj->a[i].z;
+		if (min > a[i].z)
+			min = a[i].z;
+		if (max < a[i].z)
+			max = a[i].z;
+		ave += a[i].z;
 	}
-	obj->z_max = max;
-	obj->z_min = min;
+	d->obj->z_max = max;
+	d->obj->z_min = min;
+	d->obj->z_average = ave / d->obj->len;
+	d->z_ave = ave / d->obj->len;
 }
 
 static void	colorize(t_obj3d *obj)
 {
 	int		i;
 
-	obj->z_average = get_z_average(obj);
 	printf("ave: %.1f\n", obj->z_average);
 	printf("z_max: %.1f\n", obj->z_max);
 	printf("z_min: %.1f\n", obj->z_min);
@@ -128,16 +133,4 @@ static void	set_color(t_p3d *p, t_obj3d *obj, int a_hex, int b_hex)
 	}
 	p->color = get_hex_from_rgb(out.r, out.g, out.b);
 	printf("OUT: r-%d, g-%d, b-%d\n", out.r, out.g, out.b);
-}
-
-static float	get_z_average(t_obj3d *obj)
-{
-	float	out;
-	int		i;
-
-	out = 0.0;
-	i = -1;
-	while (++i < obj->len)
-		out += obj->a[i]._z;
-	return (out / obj->len);
 }
