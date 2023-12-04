@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 08:37:51 by akeryan           #+#    #+#             */
-/*   Updated: 2023/12/04 12:44:22 by akeryan          ###   ########.fr       */
+/*   Updated: 2023/12/04 15:45:51 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,9 +89,7 @@ static void	colorize(t_obj3d *obj)
 				set_color(&obj->a[i], obj, ZERO, BOTTOM);
 		}
 		t_rgb_color c;
-		printf("zerro: %x\n", ZERO);
 		get_rgb_from_hex(obj->a[i].color, &c.r, &c.g, &c.b);
-		printf("init color %d - r: %d, g: %d, b: %d, hex: %x, _z: %.1f\n", i, c.r, c.g, c.b, obj->a[i].color, obj->a[i]._z);
 		i++;
 	}
 }

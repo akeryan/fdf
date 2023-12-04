@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 09:31:35 by akeryan           #+#    #+#             */
-/*   Updated: 2023/12/04 12:12:57 by akeryan          ###   ########.fr       */
+/*   Updated: 2023/12/04 14:59:51 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ typedef struct s_data
 	float	_rad;
 	float	_pan;
 	float	_zoom;
-	int		z_ave;
+	float	z_ave;
 	void	(*bonus_function_ptr)(int key, struct s_data *d);
 
 }	t_data;
