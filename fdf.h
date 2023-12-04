@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 09:31:35 by akeryan           #+#    #+#             */
-/*   Updated: 2023/12/03 08:47:04 by akeryan          ###   ########.fr       */
+/*   Updated: 2023/12/04 12:12:57 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <stdlib.h>
 # include <stdio.h>
 # include <string.h>
+# include <stdint.h>
 # include <fcntl.h>
 # include <math.h>
 # include <X11/keysym.h>
@@ -60,7 +61,7 @@ typedef struct s_p3d
 	float			z;
 	struct s_p3d	*n_ptr;
 	struct s_p3d	*w_ptr;	
-	int				color;
+	uint32_t		color;
 }	t_p3d;
 
 typedef struct s_obj3d
@@ -135,13 +136,13 @@ typedef struct s_obj_vars
 
 typedef struct s_plot_vars
 {
-	int		dx;
-	int		dy;
-	int		_x;
-	int		_y;
-	int		i;
-	int		d;
-	int		color;
+	uint32_t	color;
+	int			dx;
+	int			dy;
+	int			_x;
+	int			_y;
+	int			i;
+	int			d;
 }	t_plot_vars;
 
 typedef struct s_trans_vars
@@ -201,8 +202,8 @@ void		put_obj_to_origin(t_obj3d *obj);
 //utils
 float		min(float a, float b);
 float		max(float a, float b);
-int			get_hex_from_rgb(unsigned char r, unsigned char g, unsigned char b);
-void		get_rgb_from_hex(int hexValue, unsigned char *r, unsigned char *g, unsigned char *b);
+uint32_t	get_hex_from_rgb(unsigned char r, unsigned char g, unsigned char b);
+void		get_rgb_from_hex(uint32_t hexValue, unsigned char *r, unsigned char *g, unsigned char *b);
 
 //bonus
 void		bonus_key_handler(int key, t_data *d);

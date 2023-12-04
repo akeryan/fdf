@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 08:37:51 by akeryan           #+#    #+#             */
-/*   Updated: 2023/12/03 09:21:15 by akeryan          ###   ########.fr       */
+/*   Updated: 2023/12/04 12:44:22 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ static void	set_z_min_max_ave(t_data *d)
 	d->obj->z_max = max;
 	d->obj->z_min = min;
 	d->obj->z_average = ave / d->obj->len;
-	d->z_ave = ave / d->obj->len;
+	d->z_ave = d->obj->z_average;
 }
 
 static void	colorize(t_obj3d *obj)
@@ -88,6 +88,10 @@ static void	colorize(t_obj3d *obj)
 			else
 				set_color(&obj->a[i], obj, ZERO, BOTTOM);
 		}
+		t_rgb_color c;
+		printf("zerro: %x\n", ZERO);
+		get_rgb_from_hex(obj->a[i].color, &c.r, &c.g, &c.b);
+		printf("init color %d - r: %d, g: %d, b: %d, hex: %x, _z: %.1f\n", i, c.r, c.g, c.b, obj->a[i].color, obj->a[i]._z);
 		i++;
 	}
 }
