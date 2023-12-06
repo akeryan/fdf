@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akeryan <akeryan@student.42.fr>            +#+  +:+       +#+        */
+/*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 09:31:35 by akeryan           #+#    #+#             */
-/*   Updated: 2023/12/04 14:59:51 by akeryan          ###   ########.fr       */
+/*   Updated: 2023/12/06 15:46:23 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@
 # include <stdint.h>
 # include <fcntl.h>
 # include <math.h>
-# include <X11/keysym.h>
 # include "./minilibx/mlx.h" 
 # include "./libft/libft.h"
 
@@ -30,25 +29,26 @@
 # define TOP	0xFF0000
 # define ZERO	0x14c314
 # define BOTTOM	0x0000FF
+# define ESC		53
 
 # ifndef BONUS_AVAILABLE
 #  define BONUS 0
 # else 
 #  define BONUS 	1
-#  define KP_7		65429
-#  define KP_8		65431
-#  define KP_4		65430
-#  define KP_5		65437
-#  define KP_1		65436
-#  define KP_2		65433
-#  define LEFT		97
-#  define RIGHT		100 
-#  define UP		119
-#  define DOWN		115
-#  define ZOOM_IN	65451
-#  define ZOOM_OUT	65453
-#  define M_1		49
-#  define M_2		50
+#  define KP_7		89	
+#  define KP_8		91	
+#  define KP_4		86	
+#  define KP_5		87	
+#  define KP_1		83	
+#  define KP_2		84	
+#  define LEFT		0	
+#  define RIGHT		2 
+#  define UP		13	
+#  define DOWN		1	
+#  define ZOOM_IN	69	
+#  define ZOOM_OUT	78	
+#  define M_1		18	
+#  define M_2		19	
 # endif
 
 typedef struct s_p3d

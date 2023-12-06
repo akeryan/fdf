@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: akeryan <akeryan@student.42.fr>            +#+  +:+       +#+         #
+#    By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/27 20:46:05 by akeryan           #+#    #+#              #
-#    Updated: 2023/12/02 13:31:10 by akeryan          ###   ########.fr        #
+#    Updated: 2023/12/06 14:55:59 by akeryan          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,8 @@ FLAGS = #-Wall -Wextra -Werror
 LINKS = -Ilibft -Llibft \
     	-Iminilibx -Lminilibx \
 		-L/usr/lib \
-    	-lmlx -lft -lXext -lX11 -lm -lz
+    	-lmlx -lft -lm -lz \
+		-framework OpenGL -framework AppKit
 
 LIBFT_DIR = libft
 MINILIBX_DIR = minilibx
