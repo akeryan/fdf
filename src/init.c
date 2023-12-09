@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akeryan <akeryan@student.42.fr>            +#+  +:+       +#+        */
+/*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 08:37:51 by akeryan           #+#    #+#             */
-/*   Updated: 2023/12/04 15:45:51 by akeryan          ###   ########.fr       */
+/*   Updated: 2023/12/06 16:19:17 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,28 +68,28 @@ static void	set_z_min_max_ave(t_data *d)
 	}
 	d->obj->z_max = max;
 	d->obj->z_min = min;
-	d->obj->z_average = ave / d->obj->len;
-	d->z_ave = d->obj->z_average;
+	d->obj->z_ave = ave / d->obj->len;
+	d->z_ave = d->obj->z_ave;
 }
 
 static void	colorize(t_obj3d *obj)
 {
-	int		i;
+	t_rgb_color	c;
+	int			i;
 
 	i = 0;
 	while (i < obj->len)
 	{
 		if (obj->a[i]._z == 0)
-			obj->a[i].color = ZERO;
+			obj->a[i].col = ZERO;
 		else
 		{
-			if (obj->a[i]._z >= obj->z_average)
+			if (obj->a[i]._z >= obj->z_ave)
 				set_color(&obj->a[i], obj, ZERO, TOP);
 			else
 				set_color(&obj->a[i], obj, ZERO, BOTTOM);
 		}
-		t_rgb_color c;
-		get_rgb_from_hex(obj->a[i].color, &c.r, &c.g, &c.b);
+		get_rgb_from_hex(obj->a[i].col, &c.r, &c.g, &c.b);
 		i++;
 	}
 }
@@ -101,23 +101,19 @@ static void	set_color(t_p3d *p, t_obj3d *obj, int a_hex, int b_hex)
 
 	get_rgb_from_hex(a_hex, &v.a.r, &v.a.g, &v.a.b);
 	get_rgb_from_hex(b_hex, &v.b.r, &v.b.g, &v.b.b);
-	if (p->_z > obj->z_average)
+	if (p->_z > obj->z_ave)
 	{
-		v.range = obj->z_max - obj->z_average;
-		int z_ave = p->_z - obj->z_average;
-		float br_ar = v.b.r - v.a.r;
-		int times = z_ave * br_ar;
-		int div = times / v.range;
-		out.r = v.a.r + (int)(p->_z - obj->z_average) * (v.b.r - v.a.r) / v.range;
-		out.g = v.a.g + (int)(p->_z - obj->z_average) * (v.b.g - v.a.g) / v.range;
-		out.b = v.a.b + (int)(p->_z - obj->z_average) * (v.b.b - v.a.b) / v.range;
+		v.range = obj->z_max - obj->z_ave;
+		out.r = v.a.r + (int)(p->_z - obj->z_ave) * (v.b.r - v.a.r) / v.range;
+		out.g = v.a.g + (int)(p->_z - obj->z_ave) * (v.b.g - v.a.g) / v.range;
+		out.b = v.a.b + (int)(p->_z - obj->z_ave) * (v.b.b - v.a.b) / v.range;
 	}
-	else 
+	else
 	{
-		v.range = obj->z_average - obj->z_min;
-		out.r = v.a.r + (obj->z_average - p->_z) * (v.b.r - v.a.r) / v.range;
-		out.g = v.a.g + (obj->z_average - p->_z) * (v.b.g - v.a.g) / v.range;
-		out.b = v.a.b + (obj->z_average - p->_z) * (v.b.b - v.a.b) / v.range;
+		v.range = obj->z_ave - obj->z_min;
+		out.r = v.a.r + (obj->z_ave - p->_z) * (v.b.r - v.a.r) / v.range;
+		out.g = v.a.g + (obj->z_ave - p->_z) * (v.b.g - v.a.g) / v.range;
+		out.b = v.a.b + (obj->z_ave - p->_z) * (v.b.b - v.a.b) / v.range;
 	}
-	p->color = get_hex_from_rgb(out.r, out.g, out.b);
+	p->col = get_hex_from_rgb(out.r, out.g, out.b);
 }

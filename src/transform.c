@@ -3,34 +3,34 @@
 /*                                                        :::      ::::::::   */
 /*   transform.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akeryan <akeryan@student.42.fr>            +#+  +:+       +#+        */
+/*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 21:58:45 by akeryan           #+#    #+#             */
-/*   Updated: 2023/12/01 12:06:12 by akeryan          ###   ########.fr       */
+/*   Updated: 2023/12/06 18:32:31 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../fdf.h"
 
-static float	transform_x(t_obj3d *obj, t_data *d, int i);
-static float	transform_y(t_obj3d *obj, t_data *d, int i);
-static float	transform_z(t_obj3d *obj, t_data *d, int i);
+static float	transform_x(t_obj3d *obj, int i);
+static float	transform_y(t_obj3d *obj, int i);
+static float	transform_z(t_obj3d *obj, int i);
 
-void	transform(t_obj3d *obj, t_data *d)
+void	transform(t_obj3d *obj)
 {
 	int	i;
 
 	i = 0;
 	while (i < obj->len)
 	{
-		obj->a[i].x = transform_x(obj, d, i);
-		obj->a[i].y = transform_y(obj, d, i);
-		obj->a[i].z = transform_z(obj, d, i);
+		obj->a[i].x = transform_x(obj, i);
+		obj->a[i].y = transform_y(obj, i);
+		obj->a[i].z = transform_z(obj, i);
 		i++;
 	}
 }
 
-static float	transform_x(t_obj3d *obj, t_data *d, int i)
+static float	transform_x(t_obj3d *obj, int i)
 {
 	t_trans_vars	t;
 
@@ -42,7 +42,7 @@ static float	transform_x(t_obj3d *obj, t_data *d, int i)
 	return (obj->zoom * (t.w + t.v + t.u) + obj->dx);
 }
 
-static float	transform_y(t_obj3d *obj, t_data *d, int i)
+static float	transform_y(t_obj3d *obj, int i)
 {
 	t_trans_vars	t;
 
@@ -54,7 +54,7 @@ static float	transform_y(t_obj3d *obj, t_data *d, int i)
 	return (obj->zoom * (t.w + t.v + t.u) + obj->dy);
 }
 
-static float	transform_z(t_obj3d *obj, t_data *d, int i)
+static float	transform_z(t_obj3d *obj, int i)
 {
 	t_trans_vars	t;
 

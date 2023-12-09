@@ -6,7 +6,7 @@
 /*   By: akeryan <akeryan@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 10:18:28 by akeryan           #+#    #+#             */
-/*   Updated: 2023/11/27 15:15:39 by akeryan          ###   ########.fr       */
+/*   Updated: 2023/12/06 16:02:00 by akeryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,9 +64,9 @@ static void	put_values(t_obj_vars *v)
 	v->to->y = v->to->_y;
 	v->to->z = v->to->_z;
 	if (v->to->_z > 0)
-		v->to->color = 0xFF0000;
+		v->to->col = 0xFF0000;
 	else
-		v->to->color = 0xFFFFFF;
+		v->to->col = 0xFFFFFF;
 	if (v->j > 0)
 		v->to->w_ptr = v->to - 1;
 	else
